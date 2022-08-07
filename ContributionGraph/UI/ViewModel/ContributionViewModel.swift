@@ -18,9 +18,18 @@ final class ContributionViewModel: ObservableObject {
     struct Data {
         let items: [Int: ContributionItem]
         let settings: ContributionSettings
+        let metrics: ContributionMetrics
         
         func set(weekCount: Int) -> ContributionSettings {
             ContributionSettings(weekCount: weekCount)
+        }
+        
+        func totalWeekCount() -> Int {
+            metrics.totalWeekCount
+        }
+        
+        func totalContributionCount() -> Int {
+            metrics.totalContributionCount
         }
         
         func weekCount() -> Int {
@@ -45,34 +54,41 @@ final class ContributionViewModel: ObservableObject {
     private let getItemsUseCase: AnyUseCase<Void, [Int: ContributionItem]>
     private let getSettingsUseCase: AnyUseCase<Void, ContributionSettings>
     private let setSettingsUseCase: AnyUseCase<ContributionSettings, ContributionSettings>
+    private let getMetricsUseCase: AnyUseCase<Void, ContributionMetrics>
     private var cancellable: AnyCancellable?
     
+    // TODO: add ContributionUseCase Factory
     init(getItemsUseCase: AnyUseCase<Void, [Int: ContributionItem]>,
          getSettingsUseCase: AnyUseCase<Void, ContributionSettings>,
-         setSettingsUseCase: AnyUseCase<ContributionSettings, ContributionSettings>) {
+         setSettingsUseCase: AnyUseCase<ContributionSettings, ContributionSettings>,
+         getMetricsUseCase: AnyUseCase<Void, ContributionMetrics>) {
         self.getItemsUseCase = getItemsUseCase
         self.getSettingsUseCase = getSettingsUseCase
         self.setSettingsUseCase = setSettingsUseCase
+        self.getMetricsUseCase = getMetricsUseCase
     }
     
     func set(settings: ContributionSettings) {
         state = .loading
         fetch(items: getItemsUseCase.execute(with: ()),
-            settings: setSettingsUseCase.execute(with: settings))
+              settings: setSettingsUseCase.execute(with: settings),
+              metrics: getMetricsUseCase.execute(with: ()))
             .assign(to: &$state)
     }
     
     func fetchContributionData() {
         state = .loading
         fetch(items: getItemsUseCase.execute(with: ()),
-            settings: getSettingsUseCase.execute(with: ()))
+              settings: getSettingsUseCase.execute(with: ()),
+              metrics: getMetricsUseCase.execute(with: ()))
             .assign(to: &$state)
     }
     
     private func fetch(items: AnyPublisher<[Int: ContributionItem], Error>,
-                     settings: AnyPublisher<ContributionSettings, Error>) -> AnyPublisher<State, Never> {
-        items.zip(settings)
-            .map { State.success(Data(items: $0, settings: $1)) }
+                     settings: AnyPublisher<ContributionSettings, Error>,
+                       metrics: AnyPublisher<ContributionMetrics, Error>) -> AnyPublisher<State, Never> {
+        items.zip(settings, metrics)
+            .map { State.success(Data(items: $0, settings: $1, metrics: $2)) }
             .catch { Just(State.failure($0)).eraseToAnyPublisher() }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

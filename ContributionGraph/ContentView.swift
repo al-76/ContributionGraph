@@ -10,7 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: GetContributionUseCase(repository: DefaultContributionRepository())),
                                                        getSettingsUseCase: AnyUseCase(wrapped: GetContributionSettingsUseCase()),
-                                                       setSettingsUseCase: AnyUseCase(wrapped: SetContributionSettingsUseCase()))
+                                                       setSettingsUseCase: AnyUseCase(wrapped: SetContributionSettingsUseCase()),
+                                                       getMetricsUseCase: AnyUseCase(wrapped: GetContributionMetricsUseCase()))
     @State var selectedDay = 0
     
     var body: some View {
@@ -28,6 +29,15 @@ struct ContentView: View {
                 }
                 
             case .success(let data):
+                Label {
+                    Text("Contributions: \(data.totalContributionCount())")
+                        .font(.headline)
+                } icon: {
+                    Image(systemName: "flame")
+                        .foregroundColor(Color.red)
+                }
+                .padding()
+                
                 ContributionGraphView(weeksCount: data.weekCount(),
                                       cellSize: 40.0,
                                       dayToday: Date.now.weekday())
@@ -42,10 +52,9 @@ struct ContentView: View {
                     Button("15 weeks") { viewModel.set(settings: data.set(weekCount: 15)) }
                     Button("25 weeks") { viewModel.set(settings: data.set(weekCount: 25)) }
                     Button("50 weeks") { viewModel.set(settings: data.set(weekCount: 50)) }
-// TODO: Implement data metrics
-//                    Button("All weeks (\(data.totalWeekCount()))") {
-//                        viewModel.set(settings: data.set(weekCount: data.totalWeekCount()))
-//                    }
+                    Button("All weeks (\(data.totalWeekCount()))") {
+                        viewModel.set(settings: data.set(weekCount: data.totalWeekCount()))
+                    }
                 } label: {
                     Label("Weeks count: \(data.weekCount())", systemImage: "slider.horizontal.3")
                 }.padding(.trailing)
