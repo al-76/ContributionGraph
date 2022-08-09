@@ -11,3 +11,8 @@ struct ContributionItem {
     let date: Date
     let notes: [String]
 }
+
+struct NewContributionNote {
+    let day: Int
+    let note: String
+}

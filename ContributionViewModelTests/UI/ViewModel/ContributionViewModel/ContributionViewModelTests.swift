@@ -81,7 +81,7 @@ class ContributionViewModelTests: XCTestCase {
                                                   settings: ContributionSettings(weekCount: 15),
                                                   metrics: ContributionMetrics(totalWeekCount: 50, totalContributionCount: 500))
     
-    func testLoading() {
+    func testInitState() {
         // Arrange
         let getItemsUseCase = FakeGetItemsUseCase(data: data.items)
         let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)

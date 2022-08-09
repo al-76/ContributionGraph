@@ -13,6 +13,7 @@ struct ContentView: View {
                                                        setSettingsUseCase: AnyUseCase(wrapped: SetContributionSettingsUseCase()),
                                                        getMetricsUseCase: AnyUseCase(wrapped: GetContributionMetricsUseCase()))
     @State var selectedDay = 0
+    @State var addContribution = false
     
     var body: some View {
         VStack(alignment: .trailing) {
@@ -75,10 +76,14 @@ struct ContentView: View {
                         }.onDelete { _ in }
                     }
                     .toolbar {
-                        NavigationLink {
-                            AddContributionView()
+                        Button {
+                            addContribution = true
                         } label: { Image(systemName: "plus") }
+                        
                         EditButton()
+                    }
+                    .sheet(isPresented: $addContribution) {
+                        AddContributionView(day: selectedDay, isPresented: $addContribution)
                     }
                     .navigationTitle("Items")
                     .navigationBarTitleDisplayMode(.inline)
