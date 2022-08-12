@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CD0F621828A67A35001F8CD8 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = CD0F621728A67A35001F8CD8 /* Factory */; };
+		CD0F621B28A67CDA001F8CD8 /* UIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F621A28A67CDA001F8CD8 /* UIContainer.swift */; };
+		CD0F621D28A67D51001F8CD8 /* DomainContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F621C28A67D51001F8CD8 /* DomainContainer.swift */; };
+		CD0F621F28A67D5C001F8CD8 /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F621E28A67D5C001F8CD8 /* DataContainer.swift */; };
 		CD2FC9E128A03CA600F1424F /* ContributionMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FC9E028A03CA600F1424F /* ContributionMetrics.swift */; };
 		CD2FC9E428A03D5200F1424F /* GetContributionMetricsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FC9E328A03D5200F1424F /* GetContributionMetricsUseCase.swift */; };
 		CD53600828A18DFD00B4EEE6 /* AddContributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600728A18DFD00B4EEE6 /* AddContributionViewModel.swift */; };
@@ -57,6 +60,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD0F621A28A67CDA001F8CD8 /* UIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIContainer.swift; sourceTree = "<group>"; };
+		CD0F621C28A67D51001F8CD8 /* DomainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainContainer.swift; sourceTree = "<group>"; };
+		CD0F621E28A67D5C001F8CD8 /* DataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataContainer.swift; sourceTree = "<group>"; };
 		CD2FC9E028A03CA600F1424F /* ContributionMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionMetrics.swift; sourceTree = "<group>"; };
 		CD2FC9E328A03D5200F1424F /* GetContributionMetricsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionMetricsUseCase.swift; sourceTree = "<group>"; };
 		CD53600728A18DFD00B4EEE6 /* AddContributionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContributionViewModel.swift; sourceTree = "<group>"; };
@@ -116,6 +122,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD0F621928A67A6D001F8CD8 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				CD0F621A28A67CDA001F8CD8 /* UIContainer.swift */,
+				CD0F621C28A67D51001F8CD8 /* DomainContainer.swift */,
+				CD0F621E28A67D5C001F8CD8 /* DataContainer.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
 		CD2FC9E228A03D4300F1424F /* ContributionMetrics */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +188,7 @@
 		CD538B4A2860C5C0004BA280 /* ContributionGraph */ = {
 			isa = PBXGroup;
 			children = (
+				CD0F621928A67A6D001F8CD8 /* DI */,
 				CDC5BE6F2869F08C00D035FA /* Domain */,
 				CDC5BE692869DA6200D035FA /* Data */,
 				CDC5BE652869DA1700D035FA /* Common */,
@@ -489,6 +506,7 @@
 				CD9BF71A289D9F2D00F75DE6 /* GetContributionUseCase.swift in Sources */,
 				CDC5BE6B2869DA8900D035FA /* DefaultContributionRepository.swift in Sources */,
 				CDC5BE722869F0AB00D035FA /* ContributionItem.swift in Sources */,
+				CD0F621D28A67D51001F8CD8 /* DomainContainer.swift in Sources */,
 				CD53600A28A196AD00B4EEE6 /* AddNoteUseCase.swift in Sources */,
 				CDD3A0F7286906E400878A09 /* View+isHidden.swift in Sources */,
 				CDC5BE5F2869D4DD00D035FA /* ContributionGraphView.swift in Sources */,
@@ -499,10 +517,12 @@
 				CD9BF71E289DA11400F75DE6 /* ContributionSettings.swift in Sources */,
 				CD9BF720289DA1AB00F75DE6 /* SetContributionSettingsUseCase.swift in Sources */,
 				CDC5BE742869F45400D035FA /* View+Alert.swift in Sources */,
+				CD0F621B28A67CDA001F8CD8 /* UIContainer.swift in Sources */,
 				CD53600828A18DFD00B4EEE6 /* AddContributionViewModel.swift in Sources */,
 				CD538B4C2860C5C0004BA280 /* ContributionGraphApp.swift in Sources */,
 				CD2FC9E428A03D5200F1424F /* GetContributionMetricsUseCase.swift in Sources */,
 				CD2FC9E128A03CA600F1424F /* ContributionMetrics.swift in Sources */,
+				CD0F621F28A67D5C001F8CD8 /* DataContainer.swift in Sources */,
 				CD728B202866625C00221B6E /* View+foregroundColor.swift in Sources */,
 				CDC5BE6E2869EECF00D035FA /* ContributionViewModel.swift in Sources */,
 				CDD3A0F52868BA3500878A09 /* ContributionModel.xcdatamodeld in Sources */,

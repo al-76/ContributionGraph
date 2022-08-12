@@ -5,15 +5,13 @@
 //  Created by Vyacheslav Konopkin on 20.06.2022.
 //
 
+import Factory
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: GetContributionUseCase(repository: DefaultContributionRepository())),
-                                                       getSettingsUseCase: AnyUseCase(wrapped: GetContributionSettingsUseCase()),
-                                                       setSettingsUseCase: AnyUseCase(wrapped: SetContributionSettingsUseCase()),
-                                                       getMetricsUseCase: AnyUseCase(wrapped: GetContributionMetricsUseCase()))
-    @State var selectedDay = 0
-    @State var addContribution = false
+    @StateObject private var viewModel = UIContainer.contributionViewModel()
+    @State private var selectedDay = 0
+    @State private var addContribution = false
     
     var body: some View {
         VStack(alignment: .trailing) {

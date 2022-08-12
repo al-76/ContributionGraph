@@ -5,14 +5,14 @@
 //  Created by Vyacheslav Konopkin on 27.07.2022.
 //
 
+import Factory
 import SwiftUI
 
 struct AddContributionView: View {
     let day: Int
     @Binding var isPresented: Bool
     
-    @StateObject var viewModel = AddContributionViewModel( addNoteUseCase: AnyUseCase(wrapped: AddNoteUseCase()))
-    
+    @StateObject private var viewModel = UIContainer.addContributionViewModel()
     @State private var newContribution = ""
     
 //    private static let newCategoryValue = "New Category"
