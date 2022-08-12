@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD0F621828A67A35001F8CD8 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = CD0F621728A67A35001F8CD8 /* Factory */; };
 		CD2FC9E128A03CA600F1424F /* ContributionMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FC9E028A03CA600F1424F /* ContributionMetrics.swift */; };
 		CD2FC9E428A03D5200F1424F /* GetContributionMetricsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FC9E328A03D5200F1424F /* GetContributionMetricsUseCase.swift */; };
 		CD53600828A18DFD00B4EEE6 /* AddContributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600728A18DFD00B4EEE6 /* AddContributionViewModel.swift */; };
@@ -101,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD0F621828A67A35001F8CD8 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +392,9 @@
 			dependencies = (
 			);
 			name = ContributionGraph;
+			packageProductDependencies = (
+				CD0F621728A67A35001F8CD8 /* Factory */,
+			);
 			productName = ContributionGraph;
 			productReference = CD538B482860C5C0004BA280 /* ContributionGraph.app */;
 			productType = "com.apple.product-type.application";
@@ -440,6 +445,9 @@
 				Base,
 			);
 			mainGroup = CD538B3F2860C5C0004BA280;
+			packageReferences = (
+				CD0F621628A67A35001F8CD8 /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			productRefGroup = CD538B492860C5C0004BA280 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -768,6 +776,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CD0F621628A67A35001F8CD8 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CD0F621728A67A35001F8CD8 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD0F621628A67A35001F8CD8 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		CDD3A0F32868BA3500878A09 /* ContributionModel.xcdatamodeld */ = {
