@@ -55,7 +55,6 @@ final class ContributionViewModel: ObservableObject {
     private let getSettingsUseCase: AnyUseCase<Void, ContributionSettings>
     private let setSettingsUseCase: AnyUseCase<ContributionSettings, ContributionSettings>
     private let getMetricsUseCase: AnyUseCase<Void, ContributionMetrics>
-    private var cancellable: AnyCancellable?
     
     // TODO: add ContributionUseCase Factory
     init(getItemsUseCase: AnyUseCase<Void, [Int: ContributionItem]>,
