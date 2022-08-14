@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 final class GetContributionUseCase: UseCase {
     private let repository: ContributionRepository
@@ -15,6 +16,15 @@ final class GetContributionUseCase: UseCase {
     }
     
     func execute(with input: Void) -> AnyPublisher<[Int: ContributionItem], Error> {
-        repository.read()
+        repository.read().map { items in
+            items.reduce(into: [Int: ContributionItem]()) {
+                $0[Date.now.days(to: $1.date)] = $1
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    private static func date(daysAgo: Int) -> Date {
+        Date.now.days(ago: daysAgo)
     }
 }

@@ -17,14 +17,9 @@ final class DefaultContributionRepository: ContributionRepository {
         ContributionItem(date: date(daysAgo: 15), notes: ["Test9", "Test10", "Test11"])
     ]
     
-    func read() -> AnyPublisher<[Int: ContributionItem], Error> {
+    func read() -> AnyPublisher<[ContributionItem], Error> {
         Future { [weak self] promise in
-            guard let self = self else { return promise(.success([:])) }
-            
-            let data = self.dates.reduce(into: [Int: ContributionItem]()) {
-                $0[Date.now.days(to: $1.date)] = $1
-            }
-            promise(.success(data))
+            promise(.success(self?.dates ?? []))
         }.eraseToAnyPublisher()
     }
     
