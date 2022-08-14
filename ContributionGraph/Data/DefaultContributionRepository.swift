@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-struct DefaultContributionRepository: ContributionRepository {
-    private let dates = [
+final class DefaultContributionRepository: ContributionRepository {
+    private var dates = [
         ContributionItem(date: date(daysAgo: 0), notes: ["Test1", "Test2"]),
         ContributionItem(date: date(daysAgo: 1), notes: ["Test3", "Test4"]),
         ContributionItem(date: date(daysAgo: 2), notes: ["Test5"]),
@@ -18,11 +18,22 @@ struct DefaultContributionRepository: ContributionRepository {
     ]
     
     func read() -> AnyPublisher<[Int: ContributionItem], Error> {
-        Future { promise in
-            let data = dates.reduce(into: [Int: ContributionItem]()) {
+        Future { [weak self] promise in
+            guard let self = self else { return promise(.success([:])) }
+            
+            let data = self.dates.reduce(into: [Int: ContributionItem]()) {
                 $0[Date.now.days(to: $1.date)] = $1
             }
             promise(.success(data))
+        }.eraseToAnyPublisher()
+    }
+    
+    func write(item: ContributionItem) -> AnyPublisher<Void, Error> {
+        Future { [weak self] promise in
+            guard let self = self else { return promise(.success(())) }
+            
+            self.dates.append(item)
+            promise(.success(()))
         }.eraseToAnyPublisher()
     }
     
