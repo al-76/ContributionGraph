@@ -13,7 +13,5 @@ jobs:
     name: unit_test iOS
     steps:
     - uses: actions/checkout@v3
-    - name: Select Xcode
-      run: sudo xcode-select -switch /Applications/Xcode_13.4.1.app && /usr/bin/xcodebuild -version
     - name: Run unit tests
       run: xcodebuild test -scheme ContributionGraph -project ContributionGraph.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.5'
