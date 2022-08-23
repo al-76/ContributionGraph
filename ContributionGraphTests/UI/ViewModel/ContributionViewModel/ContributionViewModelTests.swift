@@ -81,7 +81,7 @@ class ContributionViewModelTests: XCTestCase {
                                                   settings: ContributionSettings(weekCount: 15),
                                                   metrics: ContributionMetrics(totalWeekCount: 50, totalContributionCount: 500))
     
-    func testInitState() {
+    func testInitState() throws {
         // Arrange
         let getItemsUseCase = FakeGetItemsUseCase(data: data.items)
         let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)
@@ -92,8 +92,11 @@ class ContributionViewModelTests: XCTestCase {
                                               setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
                                               getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
         
+        // Act
+        let result = try awaitPublisher(viewModel.$state)
+        
         // Assert
-        XCTAssertEqual(viewModel.state, .loading)
+        XCTAssertEqual(result, .loading)
     }
     
     func testFetchDataItemsError() throws {
@@ -106,10 +109,10 @@ class ContributionViewModelTests: XCTestCase {
                                               getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
                                               setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
                                               getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
-
+        
         // Act
         viewModel.fetchContributionData()
-
+        
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .failure(TestError.someError))
@@ -125,10 +128,10 @@ class ContributionViewModelTests: XCTestCase {
                                               getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
                                               setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
                                               getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
-
+        
         // Act
         viewModel.fetchContributionData()
-
+        
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .failure(TestError.someError))
@@ -144,16 +147,16 @@ class ContributionViewModelTests: XCTestCase {
                                               getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
                                               setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
                                               getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
-
+        
         // Act
         viewModel.fetchContributionData()
-
+        
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .failure(TestError.someError))
     }
     
-    func testFetchData() {
+    func testFetchData() throws {
         // Arrange
         let getItemsUseCase = FakeGetItemsUseCase(data: data.items)
         let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)
@@ -163,10 +166,10 @@ class ContributionViewModelTests: XCTestCase {
                                               getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
                                               setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
                                               getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
-
+        
         // Act
         viewModel.fetchContributionData()
-
+        
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .success(data))
@@ -204,10 +207,10 @@ class ContributionViewModelTests: XCTestCase {
                                               getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
                                               setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
                                               getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
-
+        
         // Act
         viewModel.set(settings: ContributionSettings(weekCount: 500))
-
+        
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .failure(TestError.someError))
@@ -223,10 +226,10 @@ class ContributionViewModelTests: XCTestCase {
                                               getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
                                               setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
                                               getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
-
+        
         // Act
         viewModel.set(settings: ContributionSettings(weekCount: 500))
-
+        
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .failure(TestError.someError))
@@ -242,10 +245,10 @@ class ContributionViewModelTests: XCTestCase {
                                               getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
                                               setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
                                               getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
-
+        
         // Act
         viewModel.set(settings: ContributionSettings(weekCount: 500))
-
+        
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .failure(TestError.someError))

@@ -38,6 +38,10 @@
 		CD9BF728289EB2D200F75DE6 /* ContributionSettings+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF727289EB2D200F75DE6 /* ContributionSettings+Equatable.swift */; };
 		CD9BF72A289EB34600F75DE6 /* ContributionViewModelData+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF729289EB34600F75DE6 /* ContributionViewModelData+Equatable.swift */; };
 		CD9BF72C289EB37400F75DE6 /* ContributionViewModelState+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF72B289EB37400F75DE6 /* ContributionViewModelState+Equatable.swift */; };
+		CDBC5B3428AC3146006CD13D /* DefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B3328AC3146006CD13D /* DefaultStorage.swift */; };
+		CDBC5B3728AC3159006CD13D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B3628AC3159006CD13D /* Storage.swift */; };
+		CDBC5B4C28AC5D13006CD13D /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B4B28AC5D13006CD13D /* Mapper.swift */; };
+		CDBC5B4E28AC5D46006CD13D /* ContributionItemMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B4D28AC5D46006CD13D /* ContributionItemMapper.swift */; };
 		CDC48E5B2891B7360062ADE7 /* AddContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC48E5A2891B7360062ADE7 /* AddContributionView.swift */; };
 		CDC5BE5F2869D4DD00D035FA /* ContributionGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE5E2869D4DD00D035FA /* ContributionGraphView.swift */; };
 		CDC5BE682869DA3E00D035FA /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE672869DA3E00D035FA /* Date+Utils.swift */; };
@@ -92,6 +96,10 @@
 		CD9BF727289EB2D200F75DE6 /* ContributionSettings+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContributionSettings+Equatable.swift"; sourceTree = "<group>"; };
 		CD9BF729289EB34600F75DE6 /* ContributionViewModelData+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContributionViewModelData+Equatable.swift"; sourceTree = "<group>"; };
 		CD9BF72B289EB37400F75DE6 /* ContributionViewModelState+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContributionViewModelState+Equatable.swift"; sourceTree = "<group>"; };
+		CDBC5B3328AC3146006CD13D /* DefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorage.swift; sourceTree = "<group>"; };
+		CDBC5B3628AC3159006CD13D /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		CDBC5B4B28AC5D13006CD13D /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
+		CDBC5B4D28AC5D46006CD13D /* ContributionItemMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionItemMapper.swift; sourceTree = "<group>"; };
 		CDC48E5A2891B7360062ADE7 /* AddContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContributionView.swift; sourceTree = "<group>"; };
 		CDC5BE5E2869D4DD00D035FA /* ContributionGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphView.swift; sourceTree = "<group>"; };
 		CDC5BE672869DA3E00D035FA /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
@@ -171,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				CD538B4A2860C5C0004BA280 /* ContributionGraph */,
-				CD9BF702289C231700F75DE6 /* ContributionViewModelTests */,
+				CD9BF702289C231700F75DE6 /* ContributionGraphTests */,
 				CD538B492860C5C0004BA280 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -188,6 +196,7 @@
 		CD538B4A2860C5C0004BA280 /* ContributionGraph */ = {
 			isa = PBXGroup;
 			children = (
+				CDBC5B3228AC30E9006CD13D /* Platform */,
 				CD0F621928A67A6D001F8CD8 /* DI */,
 				CDC5BE6F2869F08C00D035FA /* Domain */,
 				CDC5BE692869DA6200D035FA /* Data */,
@@ -210,14 +219,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		CD9BF702289C231700F75DE6 /* ContributionViewModelTests */ = {
+		CD9BF702289C231700F75DE6 /* ContributionGraphTests */ = {
 			isa = PBXGroup;
 			children = (
 				CD9BF723289EB27400F75DE6 /* Domain */,
 				CD9BF711289D6E5E00F75DE6 /* Common */,
 				CD9BF70A289C234F00F75DE6 /* UI */,
 			);
-			path = ContributionViewModelTests;
+			path = ContributionGraphTests;
 			sourceTree = "<group>";
 		};
 		CD9BF70A289C234F00F75DE6 /* UI */ = {
@@ -300,6 +309,31 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		CDBC5B3228AC30E9006CD13D /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				CDBC5B3328AC3146006CD13D /* DefaultStorage.swift */,
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
+		CDBC5B3528AC314F006CD13D /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				CDBC5B3628AC3159006CD13D /* Storage.swift */,
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
+		CDBC5B4A28AC5CFC006CD13D /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				CDBC5B4B28AC5D13006CD13D /* Mapper.swift */,
+				CDBC5B4D28AC5D46006CD13D /* ContributionItemMapper.swift */,
+			);
+			path = Mapper;
+			sourceTree = "<group>";
+		};
 		CDC5BE602869D4E300D035FA /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +377,8 @@
 		CDC5BE692869DA6200D035FA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CDBC5B4A28AC5CFC006CD13D /* Mapper */,
+				CDBC5B3528AC314F006CD13D /* Platform */,
 				CDC5BE6A2869DA8900D035FA /* DefaultContributionRepository.swift */,
 			);
 			path = Data;
@@ -500,11 +536,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD538B4E2860C5C0004BA280 /* ContentView.swift in Sources */,
+				CDBC5B3428AC3146006CD13D /* DefaultStorage.swift in Sources */,
 				CD9BF718289D9EEA00F75DE6 /* UseCase.swift in Sources */,
 				CDC5BE682869DA3E00D035FA /* Date+Utils.swift in Sources */,
 				CD728B1E2866623800221B6E /* Color+Init.swift in Sources */,
 				CD9BF71A289D9F2D00F75DE6 /* GetContributionUseCase.swift in Sources */,
 				CDC5BE6B2869DA8900D035FA /* DefaultContributionRepository.swift in Sources */,
+				CDBC5B4C28AC5D13006CD13D /* Mapper.swift in Sources */,
 				CDC5BE722869F0AB00D035FA /* ContributionItem.swift in Sources */,
 				CD0F621D28A67D51001F8CD8 /* DomainContainer.swift in Sources */,
 				CD53600A28A196AD00B4EEE6 /* AddNoteUseCase.swift in Sources */,
@@ -521,12 +559,14 @@
 				CD53600828A18DFD00B4EEE6 /* AddContributionViewModel.swift in Sources */,
 				CD538B4C2860C5C0004BA280 /* ContributionGraphApp.swift in Sources */,
 				CD2FC9E428A03D5200F1424F /* GetContributionMetricsUseCase.swift in Sources */,
+				CDBC5B4E28AC5D46006CD13D /* ContributionItemMapper.swift in Sources */,
 				CD2FC9E128A03CA600F1424F /* ContributionMetrics.swift in Sources */,
 				CD0F621F28A67D5C001F8CD8 /* DataContainer.swift in Sources */,
 				CD728B202866625C00221B6E /* View+foregroundColor.swift in Sources */,
 				CDC5BE6E2869EECF00D035FA /* ContributionViewModel.swift in Sources */,
 				CDD3A0F52868BA3500878A09 /* ContributionModel.xcdatamodeld in Sources */,
 				CDC48E5B2891B7360062ADE7 /* AddContributionView.swift in Sources */,
+				CDBC5B3728AC3159006CD13D /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
