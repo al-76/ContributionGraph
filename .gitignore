@@ -25,5 +25,5 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
-# SPM
-Package.resolved
+# CocoaPods
+Pods
