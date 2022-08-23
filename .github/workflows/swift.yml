@@ -17,3 +17,5 @@ jobs:
     #  run: xcodebuild -scheme ContributionGraph -project ContributionGraph.xcodeproj
     - name: Run unit tests
       run: xcodebuild test -scheme ContributionGraph -project ContributionGraph.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.5'
+    - name: Codecov
+      uses: codecov/codecov-action@v3.1.0
