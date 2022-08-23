@@ -1,4 +1,4 @@
-name: unit_tests
+name: Swift
 
 on:
   push:
@@ -7,11 +7,13 @@ on:
     branches: [ "main" ]
 
 jobs:
-  run_unit_tests:
+  build:
     runs-on: macos-12
 
-    name: unit_test iOS
+    name: Build
     steps:
     - uses: actions/checkout@v3
+    - name: Build
+      run: xcodebuild -scheme ContributionGraph -project ContributionGraph.xcodeproj
     - name: Run unit tests
       run: xcodebuild test -scheme ContributionGraph -project ContributionGraph.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.5'
