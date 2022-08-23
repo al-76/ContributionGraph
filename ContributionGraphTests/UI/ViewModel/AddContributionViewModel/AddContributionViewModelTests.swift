@@ -7,52 +7,44 @@
 
 import XCTest
 import Combine
+import Cuckoo
 
 @testable import ContributionGraph
 
-private struct FakeAddNoteUseCase: UseCase {
-    func execute(with input: NewContributionNote) -> AnyPublisher<Void, Error> {
-        Just(())
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
-    }
-}
-
-private struct FakeErrorAddNoteUseCase: UseCase {
-    func execute(with input: NewContributionNote) -> AnyPublisher<Void, Error> {
-        Fail(error: TestError.someError)
-            .eraseToAnyPublisher()
-    }
-}
-
 class AddContributionViewModelTests: XCTestCase {
-    func testInitState() {
+    func testInitState() throws {
         // Arrange
-        let viewModel = AddContributionViewModel(addNoteUseCase: AnyUseCase(wrapped: FakeAddNoteUseCase()))
+        let viewModel = AddContributionViewModel(addNoteUseCase: AnyUseCase(wrapped: MockUseCase()))
+        
+        // Act
+        let result = try awaitPublisher(viewModel.$state)
         
         // Assert
-        XCTAssertEqual(viewModel.state, .success(false))
+        XCTAssertEqual(result, .success(false))
     }
     
     func testAdd() {
         // Arrange
-        let viewModel = AddContributionViewModel(addNoteUseCase: AnyUseCase(wrapped: FakeAddNoteUseCase()))
+        let answer = successAnswer(())
+        let viewModel = AddContributionViewModel(addNoteUseCase: AnyUseCase(wrapped: MockUseCase(answer)))
         
         // Act
         viewModel.add(note: "test", at: 10)
         
         // Assert
-        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()), .success(true))
+        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
+                       .success(true))
     }
     
     func testAddError() {
         // Arrange
-        let viewModel = AddContributionViewModel(addNoteUseCase: AnyUseCase(wrapped: FakeErrorAddNoteUseCase()))
+        let viewModel = AddContributionViewModel(addNoteUseCase: AnyUseCase(wrapped: MockUseCase(failAnswer())))
         
         // Act
         viewModel.add(note: "test", at: 10)
         
         // Assert
-        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()), .failure(TestError.someError))
+        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
+                       .failure(TestError.someError))
     }
 }

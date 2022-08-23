@@ -10,72 +10,6 @@ import Combine
 
 @testable import ContributionGraph
 
-private struct FakeGetItemsUseCase: UseCase {
-    let data: [Int : ContributionItem]
-    
-    func execute(with input: Void) -> AnyPublisher<[Int : ContributionItem], Error> {
-        Just(data)
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
-    }
-}
-
-private struct FakeErrorItemsUseCase: UseCase {
-    func execute(with input: Void) -> AnyPublisher<[Int : ContributionItem], Error> {
-        Fail(error: TestError.someError)
-            .eraseToAnyPublisher()
-    }
-}
-
-private struct FakeGetSettingsUseCase: UseCase {
-    let data: ContributionSettings
-    
-    func execute(with input: Void) -> AnyPublisher<ContributionSettings, Error> {
-        Just(data)
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
-    }
-}
-
-private struct FakeSetSettingsUseCase: UseCase {
-    func execute(with input: ContributionSettings) -> AnyPublisher<ContributionSettings, Error> {
-        Just(input)
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
-    }
-}
-
-private struct FakeErrorSetSettingsUseCase: UseCase {
-    func execute(with input: ContributionSettings) -> AnyPublisher<ContributionSettings, Error> {
-        Fail(error: TestError.someError)
-            .eraseToAnyPublisher()
-    }
-}
-
-private struct FakeErrorGetSettingsUseCase: UseCase {
-    func execute(with input: Void) -> AnyPublisher<ContributionSettings, Error> {
-        Fail(error: TestError.someError)
-            .eraseToAnyPublisher()
-    }
-}
-
-private struct FakeGetMetricsUseCase: UseCase {
-    let data: ContributionMetrics
-    
-    func execute(with input: Void) -> AnyPublisher<ContributionMetrics, Error> {
-        Just(data)
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
-    }
-}
-
-private struct FakeErrorGetMetricsUseCase: UseCase {
-    func execute(with input: Void) -> AnyPublisher<ContributionMetrics, Error> {
-        Fail(error: TestError.someError)
-            .eraseToAnyPublisher()
-    }
-}
-
 class ContributionViewModelTests: XCTestCase {
     private let data = ContributionViewModel.Data(items: [0: ContributionItem(date: Date.now, notes: ["Test"])],
                                                   settings: ContributionSettings(weekCount: 15),
@@ -83,14 +17,10 @@ class ContributionViewModelTests: XCTestCase {
     
     func testInitState() throws {
         // Arrange
-        let getItemsUseCase = FakeGetItemsUseCase(data: data.items)
-        let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)
-        let setSettingsUseCase = FakeSetSettingsUseCase()
-        let getMetricsUseCase = FakeGetMetricsUseCase(data: data.metrics)
-        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: getItemsUseCase),
-                                              getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
-                                              setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
-                                              getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
+        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: MockUseCase()),
+                                              getSettingsUseCase: AnyUseCase(wrapped: MockUseCase()),
+                                              setSettingsUseCase: AnyUseCase(wrapped: MockUseCase()),
+                                              getMetricsUseCase: AnyUseCase(wrapped: MockUseCase()))
         
         // Act
         let result = try awaitPublisher(viewModel.$state)
@@ -101,14 +31,10 @@ class ContributionViewModelTests: XCTestCase {
     
     func testFetchDataItemsError() throws {
         // Arrange
-        let getItemsUseCase = FakeErrorItemsUseCase()
-        let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)
-        let setSettingsUseCase = FakeSetSettingsUseCase()
-        let getMetricsUseCase = FakeGetMetricsUseCase(data: data.metrics)
-        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: getItemsUseCase),
-                                              getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
-                                              setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
-                                              getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
+        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: MockUseCase(failAnswer())),
+                                              getSettingsUseCase: AnyUseCase(wrapped: MockUseCase(noAnswer())),
+                                              setSettingsUseCase: AnyUseCase(wrapped: MockUseCase(noAnswer())),
+                                              getMetricsUseCase: AnyUseCase(wrapped: MockUseCase(noAnswer())))
         
         // Act
         viewModel.fetchContributionData()
@@ -120,14 +46,10 @@ class ContributionViewModelTests: XCTestCase {
     
     func testFetchDataSettingsError() throws {
         // Arrange
-        let getItemsUseCase = FakeGetItemsUseCase(data: data.items)
-        let getSettingsUseCase = FakeErrorGetSettingsUseCase()
-        let setSettingsUseCase = FakeSetSettingsUseCase()
-        let getMetricsUseCase = FakeGetMetricsUseCase(data: data.metrics)
-        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: getItemsUseCase),
-                                              getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
-                                              setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
-                                              getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
+        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.items))),
+                                              getSettingsUseCase: AnyUseCase(wrapped: MockUseCase(failAnswer())),
+                                              setSettingsUseCase: AnyUseCase(wrapped: MockUseCase(noAnswer())),
+                                              getMetricsUseCase: AnyUseCase(wrapped: MockUseCase(noAnswer())))
         
         // Act
         viewModel.fetchContributionData()
@@ -139,14 +61,10 @@ class ContributionViewModelTests: XCTestCase {
     
     func testFetchDataMetricsError() throws {
         // Arrange
-        let getItemsUseCase = FakeGetItemsUseCase(data: data.items)
-        let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)
-        let setSettingsUseCase = FakeSetSettingsUseCase()
-        let getMetricsUseCase = FakeErrorGetMetricsUseCase()
-        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: getItemsUseCase),
-                                              getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
-                                              setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
-                                              getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
+        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.items))),
+                                              getSettingsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.settings))),
+                                              setSettingsUseCase: AnyUseCase(wrapped: MockUseCase(noAnswer())),
+                                              getMetricsUseCase: AnyUseCase(wrapped: MockUseCase(failAnswer())))
         
         // Act
         viewModel.fetchContributionData()
@@ -158,14 +76,10 @@ class ContributionViewModelTests: XCTestCase {
     
     func testFetchData() throws {
         // Arrange
-        let getItemsUseCase = FakeGetItemsUseCase(data: data.items)
-        let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)
-        let setSettingsUseCase = FakeSetSettingsUseCase()
-        let getMetricsUseCase = FakeGetMetricsUseCase(data: data.metrics)
-        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: getItemsUseCase),
-                                              getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
-                                              setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
-                                              getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
+        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.items))),
+                                              getSettingsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.settings))),
+                                              setSettingsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.settings))),
+                                              getMetricsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.metrics))))
         
         // Act
         viewModel.fetchContributionData()
@@ -177,17 +91,14 @@ class ContributionViewModelTests: XCTestCase {
     
     func testSetSettings() {
         // Arrange
-        let getItemsUseCase = FakeGetItemsUseCase(data: data.items)
-        let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)
-        let setSettingsUseCase = FakeSetSettingsUseCase()
-        let getMetricsUseCase = FakeGetMetricsUseCase(data: data.metrics)
-        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: getItemsUseCase),
-                                              getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
-                                              setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
-                                              getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
         let newData = ContributionViewModel.Data(items: data.items,
                                                  settings: ContributionSettings(weekCount: 400),
                                                  metrics: data.metrics)
+        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.items))),
+                                              getSettingsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.settings))),
+                                              setSettingsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(newData.settings))),
+                                              getMetricsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.metrics))))
+        
         
         // Act
         viewModel.set(settings: newData.settings)
@@ -199,14 +110,10 @@ class ContributionViewModelTests: XCTestCase {
     
     func testSetSettingsError() {
         // Arrange
-        let getItemsUseCase = FakeGetItemsUseCase(data: data.items)
-        let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)
-        let setSettingsUseCase = FakeErrorSetSettingsUseCase()
-        let getMetricsUseCase = FakeGetMetricsUseCase(data: data.metrics)
-        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: getItemsUseCase),
-                                              getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
-                                              setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
-                                              getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
+        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.items))),
+                                              getSettingsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.settings))),
+                                              setSettingsUseCase: AnyUseCase(wrapped: MockUseCase(failAnswer())),
+                                              getMetricsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.metrics))))
         
         // Act
         viewModel.set(settings: ContributionSettings(weekCount: 500))
@@ -218,14 +125,10 @@ class ContributionViewModelTests: XCTestCase {
     
     func testSetSettingsItemsError() {
         // Arrange
-        let getItemsUseCase = FakeErrorItemsUseCase()
-        let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)
-        let setSettingsUseCase = FakeErrorSetSettingsUseCase()
-        let getMetricsUseCase = FakeGetMetricsUseCase(data: data.metrics)
-        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: getItemsUseCase),
-                                              getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
-                                              setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
-                                              getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
+        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: MockUseCase(failAnswer())),
+                                              getSettingsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.settings))),
+                                              setSettingsUseCase: AnyUseCase(wrapped: MockUseCase(failAnswer())),
+                                              getMetricsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.metrics))))
         
         // Act
         viewModel.set(settings: ContributionSettings(weekCount: 500))
@@ -237,14 +140,10 @@ class ContributionViewModelTests: XCTestCase {
     
     func testSetSettingsMetricsError() {
         // Arrange
-        let getItemsUseCase = FakeGetItemsUseCase(data: data.items)
-        let getSettingsUseCase = FakeGetSettingsUseCase(data: data.settings)
-        let setSettingsUseCase = FakeSetSettingsUseCase()
-        let getMetricsUseCase = FakeErrorGetMetricsUseCase()
-        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: getItemsUseCase),
-                                              getSettingsUseCase: AnyUseCase(wrapped: getSettingsUseCase),
-                                              setSettingsUseCase: AnyUseCase(wrapped: setSettingsUseCase),
-                                              getMetricsUseCase: AnyUseCase(wrapped: getMetricsUseCase))
+        let viewModel = ContributionViewModel(getItemsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.items))),
+                                              getSettingsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.settings))),
+                                              setSettingsUseCase: AnyUseCase(wrapped: MockUseCase(successAnswer(data.settings))),
+                                              getMetricsUseCase: AnyUseCase(wrapped: MockUseCase(failAnswer())))
         
         // Act
         viewModel.set(settings: ContributionSettings(weekCount: 500))
