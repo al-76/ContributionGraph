@@ -13,7 +13,7 @@ extension MockUseCase {
         self.init()
 
         stub(self) { stub in
-            stub.execute(with: any()).thenReturn(publisher)
+            stub.callAsFunction(any()).thenReturn(publisher)
         }
     }
 }

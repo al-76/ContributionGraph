@@ -8,7 +8,7 @@
 import Combine
 
 final class SetContributionSettingsUseCase: UseCase {
-    func execute(with input: ContributionSettings) -> AnyPublisher<ContributionSettings, Error> {
+    func callAsFunction(_ input: ContributionSettings) -> AnyPublisher<ContributionSettings, Error> {
         Just(input)
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()

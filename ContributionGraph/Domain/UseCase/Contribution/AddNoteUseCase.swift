@@ -8,7 +8,7 @@
 import Combine
 
 final class AddNoteUseCase: UseCase {
-    func execute(with input: NewContributionNote) -> AnyPublisher<Void, Error> {
+    func callAsFunction(_ input: NewContributionNote) -> AnyPublisher<Void, Error> {
         Just(())
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()

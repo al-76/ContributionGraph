@@ -475,11 +475,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD9BF709289C231700F75DE6 /* Build configuration list for PBXNativeTarget "ContributionGraphTests" */;
 			buildPhases = (
+				CD848AD528B561A600A67B38 /* Cuckoo download script */,
+				CD848AD628B561D800A67B38 /* Cuckoo generate mocks */,
 				CD9BF6FD289C231700F75DE6 /* Sources */,
 				CD9BF6FE289C231700F75DE6 /* Frameworks */,
 				CD9BF6FF289C231700F75DE6 /* Resources */,
-				CD848AD528B561A600A67B38 /* Cuckoo download script */,
-				CD848AD628B561D800A67B38 /* Cuckoo generate mocks */,
 			);
 			buildRules = (
 			);

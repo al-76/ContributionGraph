@@ -69,17 +69,17 @@ final class ContributionViewModel: ObservableObject {
     
     func set(settings: ContributionSettings) {
         state = .loading
-        fetch(items: getItemsUseCase.execute(with: ()),
-              settings: setSettingsUseCase.execute(with: settings),
-              metrics: getMetricsUseCase.execute(with: ()))
+        fetch(items: getItemsUseCase(),
+              settings: setSettingsUseCase(settings),
+              metrics: getMetricsUseCase())
             .assign(to: &$state)
     }
     
     func fetchContributionData() {
         state = .loading
-        fetch(items: getItemsUseCase.execute(with: ()),
-              settings: getSettingsUseCase.execute(with: ()),
-              metrics: getMetricsUseCase.execute(with: ()))
+        fetch(items: getItemsUseCase(),
+              settings: getSettingsUseCase(),
+              metrics: getMetricsUseCase())
             .assign(to: &$state)
     }
     

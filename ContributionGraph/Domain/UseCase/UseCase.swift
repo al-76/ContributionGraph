@@ -11,18 +11,24 @@ protocol UseCase {
     associatedtype Input
     associatedtype Output
 
-    func execute(with input: Input) -> AnyPublisher<Output, Error>
+    func callAsFunction(_ input: Input) -> AnyPublisher<Output, Error>
 }
 
 final class AnyUseCase<Input, Output>: UseCase {
-    private let executeObject: (_ input: Input) -> AnyPublisher<Output, Error>
+    private let callAsFunction: (_ input: Input) -> AnyPublisher<Output, Error>
 
     init<TypeUseCase: UseCase>(wrapped: TypeUseCase)
         where TypeUseCase.Input == Input, TypeUseCase.Output == Output {
-        executeObject = wrapped.execute
+        callAsFunction = wrapped.callAsFunction
     }
+    
+    func callAsFunction(_ input: Input) -> AnyPublisher<Output, Error> {
+        callAsFunction(input)
+    }
+}
 
-    func execute(with input: Input) -> AnyPublisher<Output, Error> {
-        executeObject(input)
+extension AnyUseCase where Input == Void {
+    func callAsFunction(_ input: Input = ()) -> AnyPublisher<Output, Error> {
+        callAsFunction(input)
     }
 }

@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: ContributionGraph/Domain/UseCase/UseCase.swift at 2022-08-23 23:04:16 +0000
+// MARK: - Mocks generated from file: ContributionGraph/Domain/UseCase/UseCase.swift at 2022-08-24 14:59:38 +0000
 
 //
 //  UseCase.swift
@@ -36,16 +36,16 @@ import Combine
             self.reference = reference
     
             
-            _storage$1$execute = defaultImpl.pointee.execute
+            _storage$1$callAsFunction = defaultImpl.pointee.callAsFunction
             
         }
         
         
     
         
-        private let _storage$1$execute: (Input) -> AnyPublisher<Output, Error>
-         func execute(with input: Input) -> AnyPublisher<Output, Error> {
-            return _storage$1$execute(input)
+        private let _storage$1$callAsFunction: (Input) -> AnyPublisher<Output, Error>
+         func callAsFunction(_ input: Input) -> AnyPublisher<Output, Error> {
+            return _storage$1$callAsFunction(input)
         }
         
     }
@@ -72,11 +72,11 @@ import Combine
     
     
     
-     func execute(with input: Input) -> AnyPublisher<Output, Error> {
+     func callAsFunction(_ input: Input) -> AnyPublisher<Output, Error> {
         
     return cuckoo_manager.call(
     """
-    execute(with: Input) -> AnyPublisher<Output, Error>
+    callAsFunction(_: Input) -> AnyPublisher<Output, Error>
     """,
             parameters: (input),
             escapingParameters: (input),
@@ -84,7 +84,7 @@ import Combine
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.execute(with: input))
+            defaultCall: __defaultImplStub!.callAsFunction(input))
         
     }
     
@@ -100,11 +100,11 @@ import Combine
         
         
         
-        func execute<M1: Cuckoo.Matchable>(with input: M1) -> Cuckoo.ProtocolStubFunction<(Input), AnyPublisher<Output, Error>> where M1.MatchedType == Input {
+        func callAsFunction<M1: Cuckoo.Matchable>(_ input: M1) -> Cuckoo.ProtocolStubFunction<(Input), AnyPublisher<Output, Error>> where M1.MatchedType == Input {
             let matchers: [Cuckoo.ParameterMatcher<(Input)>] = [wrap(matchable: input) { $0 }]
             return .init(stub: cuckoo_manager.createStub(for: MockUseCase.self, method:
     """
-    execute(with: Input) -> AnyPublisher<Output, Error>
+    callAsFunction(_: Input) -> AnyPublisher<Output, Error>
     """, parameterMatchers: matchers))
         }
         
@@ -128,11 +128,11 @@ import Combine
         
         
         @discardableResult
-        func execute<M1: Cuckoo.Matchable>(with input: M1) -> Cuckoo.__DoNotUse<(Input), AnyPublisher<Output, Error>> where M1.MatchedType == Input {
+        func callAsFunction<M1: Cuckoo.Matchable>(_ input: M1) -> Cuckoo.__DoNotUse<(Input), AnyPublisher<Output, Error>> where M1.MatchedType == Input {
             let matchers: [Cuckoo.ParameterMatcher<(Input)>] = [wrap(matchable: input) { $0 }]
             return cuckoo_manager.verify(
     """
-    execute(with: Input) -> AnyPublisher<Output, Error>
+    callAsFunction(_: Input) -> AnyPublisher<Output, Error>
     """, callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
         }
         
@@ -150,7 +150,7 @@ import Combine
     
     
     
-     func execute(with input: Input) -> AnyPublisher<Output, Error>  {
+     func callAsFunction(_ input: Input) -> AnyPublisher<Output, Error>  {
         return DefaultValueRegistry.defaultValue(for: (AnyPublisher<Output, Error>).self)
     }
     

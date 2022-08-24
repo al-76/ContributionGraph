@@ -15,7 +15,7 @@ final class GetContributionUseCase: UseCase {
         self.repository = repository
     }
     
-    func execute(with input: Void) -> AnyPublisher<[Int: ContributionItem], Error> {
+    func callAsFunction(_ input: Void) -> AnyPublisher<[Int: ContributionItem], Error> {
         repository.read().map { items in
             items.reduce(into: [Int: ContributionItem]()) {
                 $0[Date.now.days(to: $1.date)] = $1

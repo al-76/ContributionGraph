@@ -25,8 +25,7 @@ final class AddContributionViewModel: ObservableObject {
     
     func add(note: String, at day: Int) {
         state = .loading
-        addNoteUseCase
-            .execute(with: NewContributionNote(day: day, note: note))
+        addNoteUseCase(NewContributionNote(day: day, note: note))
             .map { State.success(true) }
             .catch { Just(State.failure($0)).eraseToAnyPublisher() }
             .receive(on: DispatchQueue.main)
