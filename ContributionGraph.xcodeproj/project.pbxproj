@@ -220,7 +220,6 @@
 				CDC5BE602869D4E300D035FA /* UI */,
 				CDD3A0F22868BA0900878A09 /* CoreData */,
 				CD538B4B2860C5C0004BA280 /* ContributionGraphApp.swift */,
-				CD538B4D2860C5C0004BA280 /* ContentView.swift */,
 				CD538B4F2860C5C3004BA280 /* Assets.xcassets */,
 				CD538B512860C5C3004BA280 /* Preview Content */,
 			);
@@ -370,6 +369,7 @@
 				CDC5BE75286FA2AB00D035FA /* ContributionGraph */,
 				CDC5BE732869F45400D035FA /* View+Alert.swift */,
 				CDC48E5A2891B7360062ADE7 /* AddContributionView.swift */,
+				CD538B4D2860C5C0004BA280 /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
