@@ -166,7 +166,7 @@ extension ContributionGraphView {
     }
     
     private func monthName(from day: Int) -> String {
-        let past = Date.now.days(ago: day)
+        let past = Date.neutral.days(ago: day)
         let weekOfMonth = past.weekOfMonth()
         let month = past.month()
         return weekOfMonth == 2 ? Calendar.current.shortMonthSymbols[month] : ""

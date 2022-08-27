@@ -7,9 +7,18 @@
 
 import Foundation
 import CoreData
+import Combine
+
+protocol StorageContext {
+    func newData<T: NSManagedObject>(_ type: T.Type) throws -> T
+    func save() throws
+    func delete<T: NSManagedObject>(object: T) throws
+}
 
 protocol Storage {
-    func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) throws -> [T]
-    func save() throws -> Bool
-    func delete<T: NSManagedObject>(object: T) throws
+    typealias OnCompletion<T> = (Result<(context: StorageContext, items: [T]), Error>) -> Void
+    
+    func fetch<T: NSManagedObject>(predicate: NSPredicate?,
+                                   _ Type: T.Type,
+                                   onCompletion: @escaping OnCompletion<T>)
 }

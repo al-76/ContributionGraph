@@ -7,8 +7,8 @@
 
 @testable import ContributionGraph
 
-extension ContributionItem: Equatable {
-    public static func == (lhs: ContributionItem, rhs: ContributionItem) -> Bool {
+extension Contribution: Equatable {
+    public static func == (lhs: Contribution, rhs: Contribution) -> Bool {
         lhs.notes == rhs.notes && lhs.date == rhs.date
     }
 }

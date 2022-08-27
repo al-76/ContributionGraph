@@ -8,9 +8,13 @@
 import Combine
 
 final class AddNoteUseCase: UseCase {
+    let repository: ContributionRepository
+    
+    init(repository: ContributionRepository) {
+        self.repository = repository
+    }
+    
     func callAsFunction(_ input: NewContributionNote) -> AnyPublisher<Void, Error> {
-        Just(())
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
+        repository.write(note: input)
     }
 }

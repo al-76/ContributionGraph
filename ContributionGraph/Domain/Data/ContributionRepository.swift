@@ -8,6 +8,6 @@
 import Combine
 
 protocol ContributionRepository {
-    func read() -> AnyPublisher<[ContributionItem], Error>
-    func write(item: ContributionItem) -> AnyPublisher<Void, Error>
+    func read() -> AnyPublisher<[Contribution], Error>
+    func write(note: NewContributionNote) -> AnyPublisher<Void, Error>
 }

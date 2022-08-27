@@ -39,7 +39,7 @@ struct ContentView: View {
                 
                 ContributionGraphView(weeksCount: data.weekCount(),
                                       cellSize: 40.0,
-                                      dayToday: Date.now.weekday())
+                                      dayToday: Date.neutral.weekday())
                 .onDataCell {
                     data.notesCount(at: $0)
                 }
@@ -82,6 +82,12 @@ struct ContentView: View {
                     }
                     .sheet(isPresented: $addContribution) {
                         AddContributionView(day: selectedDay, isPresented: $addContribution)
+                    }
+                    .onChange(of: addContribution) { value in
+                        guard !value else { return }
+                        withAnimation {
+                            viewModel.fetchContributionData()
+                        }
                     }
                     .navigationTitle("Items")
                     .navigationBarTitleDisplayMode(.inline)

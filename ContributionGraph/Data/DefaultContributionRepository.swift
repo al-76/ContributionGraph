@@ -9,30 +9,105 @@ import Combine
 import Foundation
 
 final class DefaultContributionRepository: ContributionRepository {
-    private var dates = [
-        ContributionItem(date: date(daysAgo: 0), notes: ["Test1", "Test2"]),
-        ContributionItem(date: date(daysAgo: 1), notes: ["Test3", "Test4"]),
-        ContributionItem(date: date(daysAgo: 2), notes: ["Test5"]),
-        ContributionItem(date: date(daysAgo: 9), notes: ["Test7", "Test8"]),
-        ContributionItem(date: date(daysAgo: 15), notes: ["Test9", "Test10", "Test11"])
-    ]
+    private let storage: Storage
+    private let contributionMapper: AnyMapper<CDContribution, Contribution>
+    private let dtoContributionMapper: AnyMapper<(StorageContext, Contribution), Result<CDContribution, Error>>
+    private let dtoContributionUpdateMapper: AnyMapper<(CDContribution, CDContributionNote), CDContribution>
+    private let contributionNoteMapper: AnyMapper<(StorageContext, NewContributionNote), Result<CDContributionNote, Error>>
     
-    func read() -> AnyPublisher<[ContributionItem], Error> {
-        Future { [weak self] promise in
-            promise(.success(self?.dates ?? []))
-        }.eraseToAnyPublisher()
+    init(storage: Storage,
+         contributionMapper: AnyMapper<CDContribution, Contribution>,
+         dtoContributionMapper: AnyMapper<(StorageContext, Contribution), Result<CDContribution, Error>>,
+         dtoContributionUpdateMapper: AnyMapper<(CDContribution, CDContributionNote), CDContribution>,
+         contributionNoteMapper: AnyMapper<(StorageContext, NewContributionNote), Result<CDContributionNote, Error>>) {
+        self.storage = storage
+        self.contributionMapper = contributionMapper
+        self.dtoContributionMapper = dtoContributionMapper
+        self.dtoContributionUpdateMapper = dtoContributionUpdateMapper
+        self.contributionNoteMapper = contributionNoteMapper
     }
     
-    func write(item: ContributionItem) -> AnyPublisher<Void, Error> {
+    func read() -> AnyPublisher<[Contribution], Error> {
         Future { [weak self] promise in
-            guard let self = self else { return promise(.success(())) }
+            guard let self = self else {
+                promise(.success([]))
+                return
+            }
             
-            self.dates.append(item)
-            promise(.success(()))
-        }.eraseToAnyPublisher()
+            self.storage
+                .fetch(predicate: nil, CDContribution.self) { result in
+                    switch result {
+                    case let .success(data):
+                        promise(.success(data.items
+                            .map {
+                                self.contributionMapper.map(input: $0)
+                            }))
+                        
+                    case let .failure(error):
+                        promise(.failure(error))
+                    }
+                }
+        }
+        .eraseToAnyPublisher()
     }
     
-    private static func date(daysAgo: Int) -> Date {
-        Date.now.days(ago: daysAgo)
+    func write(note: NewContributionNote) -> AnyPublisher<Void, Error> {
+        Future { [weak self] promise in
+            guard let self = self else {
+                promise(.success(()))
+                return
+            }
+            
+            self.storage
+                .fetch(predicate: NSPredicate(format: "date=%@", Date.neutral.days(ago: note.day) as NSDate), CDContribution.self) { result in
+                    switch result {
+                    case let .success(data):
+                        do {
+                            try self.handleWriteResult(for: note,
+                                                  data.context,
+                                                  data.items)
+                            
+                            promise(.success(()))
+                        } catch let error {
+                            promise(.failure(error))
+                        }
+                        
+                    case let .failure(error):
+                        promise(.failure(error))
+                    }
+                }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    private func handleWriteResult(for note: NewContributionNote, _ context: StorageContext, _ items: [CDContribution]) throws {
+        if let contribution = items.first {
+            // add a note to exist contribution
+            let newNote = contributionNoteMapper
+                .map(input: (context, note))
+            switch newNote {
+            case let .success(data):
+                _ = dtoContributionUpdateMapper
+                    .map(input: (contribution, data))
+
+            case let .failure(error):
+                throw error
+            }
+        } else {
+            // create new contribution
+            let contribution = Contribution(date: Date.neutral.days(ago: note.day),
+                                                notes: [note.note])
+            let newContribution = dtoContributionMapper
+                .map(input: (context, contribution))
+            switch newContribution {
+            case .success:
+                break // nothing to do because it's binded to context
+                
+            case let .failure(error):
+                throw error
+            }
+        }
+        
+        try context.save()
     }
 }

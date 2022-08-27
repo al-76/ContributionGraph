@@ -16,7 +16,7 @@ final class ContributionViewModel: ObservableObject {
     }
     
     struct Data {
-        let items: [Int: ContributionItem]
+        let items: [Int: Contribution]
         let settings: ContributionSettings
         let metrics: ContributionMetrics
         
@@ -45,19 +45,19 @@ final class ContributionViewModel: ObservableObject {
         }
         
         func date(at day: Int) -> String {
-            items[day]?.date.string() ?? Date.now.days(ago: day).string()
+            items[day]?.date.string() ?? Date.neutral.days(ago: day).string()
         }
     }
         
     @Published var state = State.loading
     
-    private let getItemsUseCase: AnyUseCase<Void, [Int: ContributionItem]>
+    private let getItemsUseCase: AnyUseCase<Void, [Int: Contribution]>
     private let getSettingsUseCase: AnyUseCase<Void, ContributionSettings>
     private let setSettingsUseCase: AnyUseCase<ContributionSettings, ContributionSettings>
     private let getMetricsUseCase: AnyUseCase<Void, ContributionMetrics>
     
     // TODO: add ContributionUseCase Factory
-    init(getItemsUseCase: AnyUseCase<Void, [Int: ContributionItem]>,
+    init(getItemsUseCase: AnyUseCase<Void, [Int: Contribution]>,
          getSettingsUseCase: AnyUseCase<Void, ContributionSettings>,
          setSettingsUseCase: AnyUseCase<ContributionSettings, ContributionSettings>,
          getMetricsUseCase: AnyUseCase<Void, ContributionMetrics>) {
@@ -83,7 +83,7 @@ final class ContributionViewModel: ObservableObject {
             .assign(to: &$state)
     }
     
-    private func fetch(items: AnyPublisher<[Int: ContributionItem], Error>,
+    private func fetch(items: AnyPublisher<[Int: Contribution], Error>,
                      settings: AnyPublisher<ContributionSettings, Error>,
                        metrics: AnyPublisher<ContributionMetrics, Error>) -> AnyPublisher<State, Never> {
         items.zip(settings, metrics)

@@ -42,6 +42,14 @@ extension Date {
 }
 
 extension Date {
+    static var neutral: Date {
+        get {
+            return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date.now) ?? Date.now
+        }
+    }
+}
+
+extension Date {
     func string() -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -49,3 +57,4 @@ extension Date {
         return formatter.string(from: self)
     }
 }
+

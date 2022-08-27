@@ -11,7 +11,7 @@ import Combine
 @testable import ContributionGraph
 
 class ContributionViewModelTests: XCTestCase {
-    private let data = ContributionViewModel.Data(items: [0: ContributionItem(date: Date.now, notes: ["Test"])],
+    private let data = ContributionViewModel.Data(items: [0: Contribution(date: Date.now, notes: ["Test"])],
                                                   settings: ContributionSettings(weekCount: 15),
                                                   metrics: ContributionMetrics(totalWeekCount: 50, totalContributionCount: 500))
     
