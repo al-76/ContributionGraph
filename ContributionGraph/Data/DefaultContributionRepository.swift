@@ -9,17 +9,23 @@ import Combine
 import Foundation
 
 final class DefaultContributionRepository: ContributionRepository {
+    typealias ContributionMapper = AnyMapper<CDContribution, Contribution>
+    typealias DtoContributionMapper = AnyMapper<(StorageContext, Contribution), Result<CDContribution, Error>>
+    typealias DtoContributionUpdateMapper = AnyMapper<(CDContribution, CDContributionNote), CDContribution>
+    typealias ContributionNoteMapper = AnyMapper<(StorageContext, NewContributionNote), Result<CDContributionNote, Error>>
+
+    
     private let storage: Storage
-    private let contributionMapper: AnyMapper<CDContribution, Contribution>
-    private let dtoContributionMapper: AnyMapper<(StorageContext, Contribution), Result<CDContribution, Error>>
-    private let dtoContributionUpdateMapper: AnyMapper<(CDContribution, CDContributionNote), CDContribution>
-    private let contributionNoteMapper: AnyMapper<(StorageContext, NewContributionNote), Result<CDContributionNote, Error>>
+    private let contributionMapper: ContributionMapper
+    private let dtoContributionMapper: DtoContributionMapper
+    private let dtoContributionUpdateMapper: DtoContributionUpdateMapper
+    private let contributionNoteMapper: ContributionNoteMapper
     
     init(storage: Storage,
-         contributionMapper: AnyMapper<CDContribution, Contribution>,
-         dtoContributionMapper: AnyMapper<(StorageContext, Contribution), Result<CDContribution, Error>>,
-         dtoContributionUpdateMapper: AnyMapper<(CDContribution, CDContributionNote), CDContribution>,
-         contributionNoteMapper: AnyMapper<(StorageContext, NewContributionNote), Result<CDContributionNote, Error>>) {
+         contributionMapper: ContributionMapper,
+         dtoContributionMapper: DtoContributionMapper,
+         dtoContributionUpdateMapper: DtoContributionUpdateMapper,
+         contributionNoteMapper: ContributionNoteMapper) {
         self.storage = storage
         self.contributionMapper = contributionMapper
         self.dtoContributionMapper = dtoContributionMapper
