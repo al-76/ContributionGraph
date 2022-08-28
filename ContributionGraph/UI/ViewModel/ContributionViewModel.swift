@@ -41,7 +41,7 @@ final class ContributionViewModel: ObservableObject {
         }
         
         func notesCount(at day: Int) -> Int {
-            items[day]?.notes.count ?? 0
+            items[day]?.count ?? 0
         }
         
         func date(at day: Int) -> String {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Contribution" representedClassName=".CDContribution" syncable="YES" codeGenerationType="class">
+        <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="contributionNotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ContributionNote" inverseName="contribution" inverseEntity="ContributionNote"/>
     </entity>
@@ -10,7 +11,7 @@
         <relationship name="contribution" maxCount="1" deletionRule="Nullify" destinationEntity="Contribution" inverseName="contributionNotes" inverseEntity="Contribution"/>
     </entity>
     <elements>
-        <element name="Contribution" positionX="-294.4239501953125" positionY="109.608642578125" width="128" height="59"/>
+        <element name="Contribution" positionX="-294.4239501953125" positionY="109.608642578125" width="128" height="74"/>
         <element name="ContributionNote" positionX="-55.7049560546875" positionY="257.0003967285156" width="128" height="74"/>
     </elements>
 </model>

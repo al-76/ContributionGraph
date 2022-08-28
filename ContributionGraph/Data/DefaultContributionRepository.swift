@@ -102,7 +102,8 @@ final class DefaultContributionRepository: ContributionRepository {
         } else {
             // create new contribution
             let contribution = Contribution(date: Date.neutral.days(ago: note.day),
-                                                notes: [note.note])
+                                                notes: [note.note],
+                                            count: 1)
             let newContribution = dtoContributionMapper
                 .map(input: (context, contribution))
             switch newContribution {

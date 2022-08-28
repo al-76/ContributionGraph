@@ -10,6 +10,7 @@ import Foundation
 struct Contribution {
     let date: Date
     let notes: [String]
+    let count: Int
 }
 
 struct NewContributionNote {

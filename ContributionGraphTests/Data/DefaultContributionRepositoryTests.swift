@@ -19,7 +19,7 @@ class DefaultContributionRepositoryTests: XCTestCase {
     
     func testRead() throws {
         // Arrange
-        let testData = Contribution(date: Date.neutral, notes: [])
+        let testData = Contribution(days: 0, notes: [])
         let testDto = CDContribution()
         let storage = MockStorage()
         stub(storage) { stub in

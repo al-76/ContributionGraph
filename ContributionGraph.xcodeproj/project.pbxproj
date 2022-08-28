@@ -17,6 +17,7 @@
 		CD3052D328B57B7E000BE787 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3052D228B57B7E000BE787 /* GeneratedMocks.swift */; };
 		CD3052D628B59257000BE787 /* MockUseCase+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3052D528B59257000BE787 /* MockUseCase+init.swift */; };
 		CD3052D928B59306000BE787 /* XCTestCase+Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3052D828B59306000BE787 /* XCTestCase+Answer.swift */; };
+		CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD51271928BC108100E93508 /* Contribution+Init.swift */; };
 		CD53600828A18DFD00B4EEE6 /* AddContributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600728A18DFD00B4EEE6 /* AddContributionViewModel.swift */; };
 		CD53600A28A196AD00B4EEE6 /* AddNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600928A196AD00B4EEE6 /* AddNoteUseCase.swift */; };
 		CD53600D28A2AFAD00B4EEE6 /* LaunchSideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600C28A2AFAD00B4EEE6 /* LaunchSideEffect.swift */; };
@@ -82,6 +83,7 @@
 		CD3052D228B57B7E000BE787 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		CD3052D528B59257000BE787 /* MockUseCase+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockUseCase+init.swift"; sourceTree = "<group>"; };
 		CD3052D828B59306000BE787 /* XCTestCase+Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Answer.swift"; sourceTree = "<group>"; };
+		CD51271928BC108100E93508 /* Contribution+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+Init.swift"; sourceTree = "<group>"; };
 		CD53600728A18DFD00B4EEE6 /* AddContributionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContributionViewModel.swift; sourceTree = "<group>"; };
 		CD53600928A196AD00B4EEE6 /* AddNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteUseCase.swift; sourceTree = "<group>"; };
 		CD53600C28A2AFAD00B4EEE6 /* LaunchSideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSideEffect.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 			children = (
 				CD9BF725289EB2BA00F75DE6 /* ContributionItem+Equatable.swift */,
 				CD9BF727289EB2D200F75DE6 /* ContributionSettings+Equatable.swift */,
+				CD51271928BC108100E93508 /* Contribution+Init.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9BF715289D6F5A00F75DE6 /* TestError.swift in Sources */,
+				CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */,
 				CD9BF72C289EB37400F75DE6 /* ContributionViewModelState+Equatable.swift in Sources */,
 				CD64EAB328BA5D0D00DA2B1E /* GetContributionUseCaseTests.swift in Sources */,
 				CD9BF704289C231700F75DE6 /* ContributionViewModelTests.swift in Sources */,

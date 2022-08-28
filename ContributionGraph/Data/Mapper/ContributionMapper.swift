@@ -10,7 +10,8 @@ import Foundation
 struct ContributionMapper: Mapper {
     func map(input: CDContribution) -> Contribution {
         Contribution(date: input.date ?? Date.neutral,
-                     notes: input.contributionNotesArray.compactMap { $0.note })
+                     notes: input.contributionNotesArray.compactMap { $0.note },
+                     count: Int(input.count))
     }
 }
 
@@ -21,6 +22,7 @@ struct CDContributionMapper: Mapper {
         do {
             let newData = try input.0.newData(CDContribution.self)
             newData.date = input.1.date
+            newData.count = Int32(input.1.count)
             
             try input.1.notes.forEach {
                 let newNote = try input.0.newData(CDContributionNote.self)
@@ -41,6 +43,7 @@ struct CDContributionUpdateMapper: Mapper {
 
     func map(input: Input) -> CDContribution {
         input.0.addToContributionNotes(input.1)
+        input.0.count += 1
         return input.0
     }
 }

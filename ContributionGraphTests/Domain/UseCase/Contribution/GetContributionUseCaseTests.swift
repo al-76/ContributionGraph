@@ -14,9 +14,9 @@ import Cuckoo
 class GetContributionUseCaseTests: XCTestCase {
     func testExecute() throws {
         // Arrange
-        let testData = [Contribution(date: Date.neutral.days(ago: 0), notes: ["test1"]),
-                        Contribution(date: Date.neutral.days(ago: 1), notes: ["test2"]),
-                        Contribution(date: Date.neutral.days(ago: 3), notes: ["test3"])]
+        let testData = [Contribution(days: 0, notes: ["test1"]),
+                        Contribution(days: 1, notes: ["test2"]),
+                        Contribution(days: 2, notes: ["test3"])]
         let repository = MockContributionRepository()
         stub(repository) { stub in
             when(stub).read().thenReturn(successAnswer(testData))
