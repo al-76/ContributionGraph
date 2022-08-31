@@ -11,26 +11,25 @@ import Factory
 final class DataContainer: SharedContainer {
     static let contributionRepository = Factory<ContributionRepository>(scope: .singleton) {
         DefaultContributionRepository(storage: PlatformContainer.storage(),
-                                      contributionMapper: DataContainer.contributionMapper(),
-                                      dtoContributionMapper: DataContainer.dtoContributionMapper(),
-                                      dtoContributionUpdateMapper: DataContainer.dtoContributionUpdateMapper(),
-                                      contributionNoteMapper: DataContainer.contributionNoteMapper())
+                                      mapper: DataContainer.contributionMapper())
                                       
     }
     
-    static let contributionMapper = Factory<AnyMapper<CDContribution, Contribution>>(scope: .singleton) {
+    static let contributionMapper = Factory(scope: .singleton) {
         AnyMapper(wrapped: ContributionMapper())
     }
     
-    static let dtoContributionMapper = Factory<AnyMapper<(StorageContext, Contribution), CDContributionMapper.Output>>(scope: .singleton) {
-        AnyMapper(wrapped: CDContributionMapper())
+    static let contributionDetailsMapper = Factory(scope: .singleton) {
+        AnyMapper(wrapped: ContributionDetailsMapper())
     }
     
-    static let dtoContributionUpdateMapper = Factory<AnyMapper<(CDContribution, CDContributionNote), CDContribution>>(scope: .singleton) {
-        AnyMapper(wrapped: CDContributionUpdateMapper())
+    static let dtoContributionNoteMapper = Factory(scope: .singleton) {
+        AnyMapper(wrapped: DtoContributionNoteMapper())
     }
     
-    static let contributionNoteMapper = Factory<AnyMapper<(StorageContext, NewContributionNote), CDContributionNoteMapper.Output>>(scope: .singleton) {
-        AnyMapper(wrapped: CDContributionNoteMapper())
+    static let contributionDetailsRepository =  Factory<ContributionDetailsRepository>(scope: .singleton) {
+        DefaultContributionDetailsRepository(storage: PlatformContainer.storage(),
+                                             mapper: DataContainer.contributionDetailsMapper(),
+                                             dtoMapper: DataContainer.dtoContributionNoteMapper())
     }
 }

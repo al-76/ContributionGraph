@@ -6,7 +6,7 @@
         <relationship name="contributionNotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ContributionNote" inverseName="contribution" inverseEntity="ContributionNote"/>
     </entity>
     <entity name="ContributionNote" representedClassName=".CDContributionNote" syncable="YES" codeGenerationType="class">
-        <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="changed" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="note" attributeType="String"/>
         <relationship name="contribution" maxCount="1" deletionRule="Nullify" destinationEntity="Contribution" inverseName="contributionNotes" inverseEntity="Contribution"/>
     </entity>

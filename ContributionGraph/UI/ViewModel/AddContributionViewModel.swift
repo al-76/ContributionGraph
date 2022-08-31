@@ -9,23 +9,20 @@ import Combine
 import Foundation
 
 final class AddContributionViewModel: ObservableObject {
-    enum State {
-        case loading
-        case failure(Error)
-        case success(Bool)
-    }
+    typealias State = ViewModelState<Bool>
+    typealias AddNoteUseCase = AnyUseCase<(Date, ContributionNote), Void>
     
     @Published var state = State.success(false)
     
-    private let addNoteUseCase: AnyUseCase<NewContributionNote, Void>
+    private let addNote: AddNoteUseCase
     
-    init(addNoteUseCase: AnyUseCase<NewContributionNote, Void>) {
-        self.addNoteUseCase = addNoteUseCase
+    init(addNote: AddNoteUseCase) {
+        self.addNote = addNote
     }
     
     func add(note: String, at day: Int) {
         state = .loading
-        addNoteUseCase(NewContributionNote(day: day, note: note))
+        addNote((Date.neutral.days(ago: day), ContributionNote(changed: Date.now, note: note)))
             .map { State.success(true) }
             .catch { Just(State.failure($0)).eraseToAnyPublisher() }
             .receive(on: DispatchQueue.main)

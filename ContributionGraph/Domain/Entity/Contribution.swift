@@ -9,11 +9,17 @@ import Foundation
 
 struct Contribution {
     let date: Date
-    let notes: [String]
     let count: Int
 }
 
-struct NewContributionNote {
-    let day: Int
+struct ContributionDetails {
+    let date: Date
+    let notes: [ContributionNote]
+}
+
+struct ContributionNote {
+    let changed: Date
     let note: String
 }
+
+extension ContributionNote: Hashable {}

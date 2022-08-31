@@ -5,16 +5,17 @@
 //  Created by Vyacheslav Konopkin on 08.08.2022.
 //
 
+import Foundation
 import Combine
 
 final class AddNoteUseCase: UseCase {
-    let repository: ContributionRepository
+    let repository: ContributionDetailsRepository
     
-    init(repository: ContributionRepository) {
+    init(repository: ContributionDetailsRepository) {
         self.repository = repository
     }
     
-    func callAsFunction(_ input: NewContributionNote) -> AnyPublisher<Void, Error> {
-        repository.write(note: input)
+    func callAsFunction(_ input: (Date, ContributionNote)) -> AnyPublisher<Void, Error> {
+        repository.write(input.1, at: input.0)
     }
 }

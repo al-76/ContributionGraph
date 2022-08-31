@@ -9,6 +9,6 @@
 
 extension Contribution: Equatable {
     public static func == (lhs: Contribution, rhs: Contribution) -> Bool {
-        lhs.notes == rhs.notes && lhs.date == rhs.date
+        lhs.count == rhs.count && lhs.date == rhs.date
     }
 }

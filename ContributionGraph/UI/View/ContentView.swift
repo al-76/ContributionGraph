@@ -46,6 +46,9 @@ struct ContentView: View {
                 .onTapCell { day in
                     selectedDay = day
                 }
+                .onChange(of: selectedDay) { newDay in
+                    viewModel.fetchContribtuionDetails(at: newDay)
+                }
                 
                 Menu {
                     Button("15 weeks") { viewModel.set(settings: data.set(weekCount: 15)) }
@@ -69,8 +72,10 @@ struct ContentView: View {
 
                 NavigationView {
                     List {
-                        ForEach(data.notes(at: selectedDay), id: \.self) {
-                            Text($0)
+                        ForEach(data.notes(), id: \.self) {
+                            Text("\($0.changed.format())\n")
+                                .font(.caption) +
+                            Text($0.note)
                         }.onDelete { _ in }
                     }
                     .toolbar {
@@ -85,8 +90,8 @@ struct ContentView: View {
                     }
                     .onChange(of: addContribution) { value in
                         guard !value else { return }
-                        withAnimation {
-                            viewModel.fetchContributionData()
+                        withAnimation(.spring()) {
+                            viewModel.fetchContributionData(at: selectedDay)
                         }
                     }
                     .navigationTitle("Items")

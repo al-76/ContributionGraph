@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: ContributionGraph/Data/Mapper/Mapper.swift at 2022-08-27 21:41:43 +0000
+// MARK: - Mocks generated from file: ContributionGraph/Data/Mapper/Mapper.swift at 2022-08-31 11:15:08 +0000
 
 //
 //  Mapper.swift
@@ -161,7 +161,7 @@ import Foundation
 
 
 
-// MARK: - Mocks generated from file: ContributionGraph/Data/Platform/Storage.swift at 2022-08-27 21:41:43 +0000
+// MARK: - Mocks generated from file: ContributionGraph/Data/Platform/Storage.swift at 2022-08-31 11:15:08 +0000
 
 //
 //  Storage.swift
@@ -519,7 +519,193 @@ import Foundation
 
 
 
-// MARK: - Mocks generated from file: ContributionGraph/Domain/Data/ContributionRepository.swift at 2022-08-27 21:41:43 +0000
+// MARK: - Mocks generated from file: ContributionGraph/Domain/Data/ContributionDetailsRepository.swift at 2022-08-31 11:15:08 +0000
+
+//
+//  ContributionDetailsRepository.swift
+//  ContributionGraph
+//
+//  Created by Vyacheslav Konopkin on 29.08.2022.
+//
+
+import Cuckoo
+@testable import ContributionGraph
+
+import Combine
+import Foundation
+
+
+
+
+
+
+ class MockContributionDetailsRepository: ContributionDetailsRepository, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = ContributionDetailsRepository
+    
+     typealias Stubbing = __StubbingProxy_ContributionDetailsRepository
+     typealias Verification = __VerificationProxy_ContributionDetailsRepository
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: ContributionDetailsRepository?
+
+     func enableDefaultImplementation(_ stub: ContributionDetailsRepository) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+    
+     func read(date: Date) -> AnyPublisher<ContributionDetails?, Error> {
+        
+    return cuckoo_manager.call(
+    """
+    read(date: Date) -> AnyPublisher<ContributionDetails?, Error>
+    """,
+            parameters: (date),
+            escapingParameters: (date),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.read(date: date))
+        
+    }
+    
+    
+    
+    
+    
+     func write(_ note: ContributionNote, at date: Date) -> AnyPublisher<Void, Error> {
+        
+    return cuckoo_manager.call(
+    """
+    write(_: ContributionNote, at: Date) -> AnyPublisher<Void, Error>
+    """,
+            parameters: (note, date),
+            escapingParameters: (note, date),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.write(note, at: date))
+        
+    }
+    
+    
+
+     struct __StubbingProxy_ContributionDetailsRepository: Cuckoo.StubbingProxy {
+        private let cuckoo_manager: Cuckoo.MockManager
+    
+         init(manager: Cuckoo.MockManager) {
+            self.cuckoo_manager = manager
+        }
+        
+        
+        
+        
+        func read<M1: Cuckoo.Matchable>(date: M1) -> Cuckoo.ProtocolStubFunction<(Date), AnyPublisher<ContributionDetails?, Error>> where M1.MatchedType == Date {
+            let matchers: [Cuckoo.ParameterMatcher<(Date)>] = [wrap(matchable: date) { $0 }]
+            return .init(stub: cuckoo_manager.createStub(for: MockContributionDetailsRepository.self, method:
+    """
+    read(date: Date) -> AnyPublisher<ContributionDetails?, Error>
+    """, parameterMatchers: matchers))
+        }
+        
+        
+        
+        
+        func write<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ note: M1, at date: M2) -> Cuckoo.ProtocolStubFunction<(ContributionNote, Date), AnyPublisher<Void, Error>> where M1.MatchedType == ContributionNote, M2.MatchedType == Date {
+            let matchers: [Cuckoo.ParameterMatcher<(ContributionNote, Date)>] = [wrap(matchable: note) { $0.0 }, wrap(matchable: date) { $0.1 }]
+            return .init(stub: cuckoo_manager.createStub(for: MockContributionDetailsRepository.self, method:
+    """
+    write(_: ContributionNote, at: Date) -> AnyPublisher<Void, Error>
+    """, parameterMatchers: matchers))
+        }
+        
+        
+    }
+
+     struct __VerificationProxy_ContributionDetailsRepository: Cuckoo.VerificationProxy {
+        private let cuckoo_manager: Cuckoo.MockManager
+        private let callMatcher: Cuckoo.CallMatcher
+        private let sourceLocation: Cuckoo.SourceLocation
+    
+         init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+            self.cuckoo_manager = manager
+            self.callMatcher = callMatcher
+            self.sourceLocation = sourceLocation
+        }
+    
+        
+    
+        
+        
+        
+        @discardableResult
+        func read<M1: Cuckoo.Matchable>(date: M1) -> Cuckoo.__DoNotUse<(Date), AnyPublisher<ContributionDetails?, Error>> where M1.MatchedType == Date {
+            let matchers: [Cuckoo.ParameterMatcher<(Date)>] = [wrap(matchable: date) { $0 }]
+            return cuckoo_manager.verify(
+    """
+    read(date: Date) -> AnyPublisher<ContributionDetails?, Error>
+    """, callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+        }
+        
+        
+        
+        
+        @discardableResult
+        func write<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ note: M1, at date: M2) -> Cuckoo.__DoNotUse<(ContributionNote, Date), AnyPublisher<Void, Error>> where M1.MatchedType == ContributionNote, M2.MatchedType == Date {
+            let matchers: [Cuckoo.ParameterMatcher<(ContributionNote, Date)>] = [wrap(matchable: note) { $0.0 }, wrap(matchable: date) { $0.1 }]
+            return cuckoo_manager.verify(
+    """
+    write(_: ContributionNote, at: Date) -> AnyPublisher<Void, Error>
+    """, callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+        }
+        
+        
+    }
+}
+
+
+ class ContributionDetailsRepositoryStub: ContributionDetailsRepository {
+    
+
+    
+
+    
+    
+    
+    
+     func read(date: Date) -> AnyPublisher<ContributionDetails?, Error>  {
+        return DefaultValueRegistry.defaultValue(for: (AnyPublisher<ContributionDetails?, Error>).self)
+    }
+    
+    
+    
+    
+    
+     func write(_ note: ContributionNote, at date: Date) -> AnyPublisher<Void, Error>  {
+        return DefaultValueRegistry.defaultValue(for: (AnyPublisher<Void, Error>).self)
+    }
+    
+    
+}
+
+
+
+
+
+// MARK: - Mocks generated from file: ContributionGraph/Domain/Data/ContributionRepository.swift at 2022-08-31 11:15:08 +0000
 
 //
 //  ContributionRepository.swift
@@ -581,26 +767,6 @@ import Combine
     }
     
     
-    
-    
-    
-     func write(note: NewContributionNote) -> AnyPublisher<Void, Error> {
-        
-    return cuckoo_manager.call(
-    """
-    write(note: NewContributionNote) -> AnyPublisher<Void, Error>
-    """,
-            parameters: (note),
-            escapingParameters: (note),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.write(note: note))
-        
-    }
-    
-    
 
      struct __StubbingProxy_ContributionRepository: Cuckoo.StubbingProxy {
         private let cuckoo_manager: Cuckoo.MockManager
@@ -617,17 +783,6 @@ import Combine
             return .init(stub: cuckoo_manager.createStub(for: MockContributionRepository.self, method:
     """
     read() -> AnyPublisher<[Contribution], Error>
-    """, parameterMatchers: matchers))
-        }
-        
-        
-        
-        
-        func write<M1: Cuckoo.Matchable>(note: M1) -> Cuckoo.ProtocolStubFunction<(NewContributionNote), AnyPublisher<Void, Error>> where M1.MatchedType == NewContributionNote {
-            let matchers: [Cuckoo.ParameterMatcher<(NewContributionNote)>] = [wrap(matchable: note) { $0 }]
-            return .init(stub: cuckoo_manager.createStub(for: MockContributionRepository.self, method:
-    """
-    write(note: NewContributionNote) -> AnyPublisher<Void, Error>
     """, parameterMatchers: matchers))
         }
         
@@ -660,18 +815,6 @@ import Combine
         }
         
         
-        
-        
-        @discardableResult
-        func write<M1: Cuckoo.Matchable>(note: M1) -> Cuckoo.__DoNotUse<(NewContributionNote), AnyPublisher<Void, Error>> where M1.MatchedType == NewContributionNote {
-            let matchers: [Cuckoo.ParameterMatcher<(NewContributionNote)>] = [wrap(matchable: note) { $0 }]
-            return cuckoo_manager.verify(
-    """
-    write(note: NewContributionNote) -> AnyPublisher<Void, Error>
-    """, callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-        }
-        
-        
     }
 }
 
@@ -690,21 +833,13 @@ import Combine
     }
     
     
-    
-    
-    
-     func write(note: NewContributionNote) -> AnyPublisher<Void, Error>  {
-        return DefaultValueRegistry.defaultValue(for: (AnyPublisher<Void, Error>).self)
-    }
-    
-    
 }
 
 
 
 
 
-// MARK: - Mocks generated from file: ContributionGraph/Domain/UseCase/UseCase.swift at 2022-08-27 21:41:43 +0000
+// MARK: - Mocks generated from file: ContributionGraph/Domain/UseCase/UseCase.swift at 2022-08-31 11:15:08 +0000
 
 //
 //  UseCase.swift

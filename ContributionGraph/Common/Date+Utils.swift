@@ -50,7 +50,7 @@ extension Date {
 }
 
 extension Date {
-    func string() -> String {
+    func format() -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none

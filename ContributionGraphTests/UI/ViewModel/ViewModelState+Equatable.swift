@@ -1,16 +1,14 @@
 //
-//  AddContributionViewModelState+Equatable.swift
-//  ContributionGraph
+//  ViewModelState+Equatable.swift
+//  ContributionGraphTests
 //
-//  Created by Vyacheslav Konopkin on 10.08.2022.
+//  Created by Vyacheslav Konopkin on 30.08.2022.
 //
-
-import Foundation
 
 @testable import ContributionGraph
 
-extension AddContributionViewModel.State: Equatable {
-    public static func == (lhs: AddContributionViewModel.State, rhs: AddContributionViewModel.State) -> Bool {
+extension ViewModelState: Equatable where T: Equatable  {
+    public static func == (lhs: ViewModelState, rhs: ViewModelState) -> Bool {
         switch (lhs, rhs) {
         case (.loading, .loading):
             return true

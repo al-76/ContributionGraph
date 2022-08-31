@@ -10,49 +10,15 @@ import Foundation
 struct ContributionMapper: Mapper {
     func map(input: CDContribution) -> Contribution {
         Contribution(date: input.date ?? Date.neutral,
-                     notes: input.contributionNotesArray.compactMap { $0.note },
                      count: Int(input.count))
     }
 }
 
-struct CDContributionMapper: Mapper {
-    typealias Input = (StorageContext, Contribution)
-
-    func map(input: Input) -> Result<CDContribution, Error> {
-        do {
-            let newData = try input.0.newData(CDContribution.self)
-            newData.date = input.1.date
-            newData.count = Int32(input.1.count)
-            
-            try input.1.notes.forEach {
-                let newNote = try input.0.newData(CDContributionNote.self)
-                newNote.created = Date.now
-                newNote.note = $0
-                newData.addToContributionNotes(newNote)
-            }
-            
-            return .success(newData)
-        } catch let error {
-            return .failure(error)
-        }
-    }
-}
-
-struct CDContributionUpdateMapper: Mapper {
-    typealias Input = (CDContribution, CDContributionNote)
-
-    func map(input: Input) -> CDContribution {
-        input.0.addToContributionNotes(input.1)
-        input.0.count += 1
-        return input.0
-    }
-}
-
-private extension CDContribution {
+extension CDContribution {
     var contributionNotesArray: [CDContributionNote] {
         get {
             (contributionNotes?.allObjects as? [CDContributionNote] ?? [])
-                .sorted { $0.created ?? Date.now > $1.created ?? Date.now }
+                .sorted { $0.changed ?? Date.now > $1.changed ?? Date.now }
         }
     }
 }

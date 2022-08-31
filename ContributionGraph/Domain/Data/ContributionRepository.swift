@@ -9,5 +9,4 @@ import Combine
 
 protocol ContributionRepository {
     func read() -> AnyPublisher<[Contribution], Error>
-    func write(note: NewContributionNote) -> AnyPublisher<Void, Error>
 }

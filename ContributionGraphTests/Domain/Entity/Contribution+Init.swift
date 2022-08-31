@@ -10,7 +10,7 @@ import Foundation
 @testable import ContributionGraph
 
 extension Contribution {
-    init(days: Int, notes: [String]) {
-        self.init(date: Date.neutral.days(ago: days), notes: notes, count: 2)
+    init(days: Int) {
+        self.init(date: Date.neutral.days(ago: days), count: 2)
     }
 }

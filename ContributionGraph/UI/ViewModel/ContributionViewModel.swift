@@ -9,14 +9,11 @@ import Combine
 import Foundation
 
 final class ContributionViewModel: ObservableObject {
-    enum State {
-        case loading
-        case failure(Error)
-        case success(Data)
-    }
+    typealias State = ViewModelState<Data>
     
     struct Data {
         let items: [Int: Contribution]
+        let details: ContributionDetails?
         let settings: ContributionSettings
         let metrics: ContributionMetrics
         
@@ -36,8 +33,8 @@ final class ContributionViewModel: ObservableObject {
             settings.weekCount
         }
         
-        func notes(at day: Int) -> [String] {
-            items[day]?.notes ?? []
+        func notes() -> [ContributionNote] {
+            details?.notes ?? []
         }
         
         func notesCount(at day: Int) -> Int {
@@ -45,50 +42,82 @@ final class ContributionViewModel: ObservableObject {
         }
         
         func date(at day: Int) -> String {
-            items[day]?.date.string() ?? Date.neutral.days(ago: day).string()
+            (items[day]?.date ?? Date.neutral.days(ago: day))
+                .format()
+        }
+        
+        func update(details: ContributionDetails?) -> Data {
+            Data(items: items,
+                 details: details,
+                 settings: settings,
+                 metrics: metrics)
         }
     }
         
     @Published var state = State.loading
     
-    private let getItemsUseCase: AnyUseCase<Void, [Int: Contribution]>
-    private let getSettingsUseCase: AnyUseCase<Void, ContributionSettings>
-    private let setSettingsUseCase: AnyUseCase<ContributionSettings, ContributionSettings>
-    private let getMetricsUseCase: AnyUseCase<Void, ContributionMetrics>
+    private let getItems: AnyUseCase<Void, [Int: Contribution]>
+    private let getDetails: AnyUseCase<Date, ContributionDetails?>
+    private let getSettings: AnyUseCase<Void, ContributionSettings>
+    private let setSettings: AnyUseCase<ContributionSettings, ContributionSettings>
+    private let getMetrics: AnyUseCase<Void, ContributionMetrics>
     
     // TODO: add ContributionUseCase Factory
-    init(getItemsUseCase: AnyUseCase<Void, [Int: Contribution]>,
-         getSettingsUseCase: AnyUseCase<Void, ContributionSettings>,
-         setSettingsUseCase: AnyUseCase<ContributionSettings, ContributionSettings>,
-         getMetricsUseCase: AnyUseCase<Void, ContributionMetrics>) {
-        self.getItemsUseCase = getItemsUseCase
-        self.getSettingsUseCase = getSettingsUseCase
-        self.setSettingsUseCase = setSettingsUseCase
-        self.getMetricsUseCase = getMetricsUseCase
+    init(getItems: AnyUseCase<Void, [Int: Contribution]>,
+         getDetails: AnyUseCase<Date, ContributionDetails?>,
+         getSettings: AnyUseCase<Void, ContributionSettings>,
+         setSettings: AnyUseCase<ContributionSettings, ContributionSettings>,
+         getMetrics: AnyUseCase<Void, ContributionMetrics>) {
+        self.getItems = getItems
+        self.getDetails = getDetails
+        self.getSettings = getSettings
+        self.setSettings = setSettings
+        self.getMetrics = getMetrics
     }
     
     func set(settings: ContributionSettings) {
         state = .loading
-        fetch(items: getItemsUseCase(),
-              settings: setSettingsUseCase(settings),
-              metrics: getMetricsUseCase())
+        fetch(items: getItems(),
+              details: getDetails(Date.neutral),
+              settings: setSettings(settings),
+              metrics: getMetrics())
             .assign(to: &$state)
     }
     
-    func fetchContributionData() {
+    func fetchContributionData(at day: Int = 0) {
         state = .loading
-        fetch(items: getItemsUseCase(),
-              settings: getSettingsUseCase(),
-              metrics: getMetricsUseCase())
+        fetch(items: getItems(),
+              details: getDetails(Date.neutral.days(ago: day)),
+              settings: getSettings(),
+              metrics: getMetrics())
             .assign(to: &$state)
+    }
+    
+    func fetchContribtuionDetails(at day: Int) {
+        switch state {
+        case .success(let data):
+            getDetails(Date.neutral.days(ago: day))
+                .map { .success(data.update(details: $0)) }
+                .catch { Just(.failure($0)).eraseToAnyPublisher() }
+                .receive(on: DispatchQueue.main)
+                .print()
+                .assign(to: &$state)
+            
+        default: // nothing to do here
+            break
+        }
     }
     
     private func fetch(items: AnyPublisher<[Int: Contribution], Error>,
+                       details: AnyPublisher<ContributionDetails?, Error>,
                      settings: AnyPublisher<ContributionSettings, Error>,
                        metrics: AnyPublisher<ContributionMetrics, Error>) -> AnyPublisher<State, Never> {
-        items.zip(settings, metrics)
-            .map { State.success(Data(items: $0, settings: $1, metrics: $2)) }
-            .catch { Just(State.failure($0)).eraseToAnyPublisher() }
+        items.zip(details, settings, metrics)
+            .map { .success(Data(items: $0,
+                                 details: $1,
+                                 settings: $2,
+                                 metrics: $3)) }
+            .catch { Just(.failure($0)).eraseToAnyPublisher() }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

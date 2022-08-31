@@ -10,13 +10,14 @@ import Factory
 
 final class UIContainer: SharedContainer {
     static let contributionViewModel = Factory(scope: .shared) {
-        ContributionViewModel(getItemsUseCase: DomainContainer.getContributionUseCase(),
-                              getSettingsUseCase: DomainContainer.getContributionSettingsUseCase(),
-                              setSettingsUseCase: DomainContainer.setContributionSettingsUseCase(),
-                              getMetricsUseCase: DomainContainer.getContributionMetricsUseCase())
+        ContributionViewModel(getItems: DomainContainer.getContributionUseCase(),
+                              getDetails: DomainContainer.getContributionDetailsUseCase(),
+                              getSettings: DomainContainer.getContributionSettingsUseCase(),
+                              setSettings: DomainContainer.setContributionSettingsUseCase(),
+                              getMetrics: DomainContainer.getContributionMetricsUseCase())
     }
     
     static let addContributionViewModel = Factory(scope: .shared) {
-        AddContributionViewModel(addNoteUseCase: DomainContainer.addNoteUseCase())
+        AddContributionViewModel(addNote: DomainContainer.addNoteUseCase())
     }
 }

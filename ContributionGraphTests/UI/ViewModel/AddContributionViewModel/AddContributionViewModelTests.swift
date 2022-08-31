@@ -14,7 +14,7 @@ import Cuckoo
 class AddContributionViewModelTests: XCTestCase {
     func testInitState() throws {
         // Arrange
-        let viewModel = AddContributionViewModel(addNoteUseCase: AnyUseCase(wrapped: MockUseCase()))
+        let viewModel = AddContributionViewModel(addNote: MockAnyUseCase())
         
         // Act
         let result = try awaitPublisher(viewModel.$state)
@@ -26,7 +26,7 @@ class AddContributionViewModelTests: XCTestCase {
     func testAdd() {
         // Arrange
         let answer = successAnswer(())
-        let viewModel = AddContributionViewModel(addNoteUseCase: AnyUseCase(wrapped: MockUseCase(answer)))
+        let viewModel = AddContributionViewModel(addNote: MockAnyUseCase(answer))
         
         // Act
         viewModel.add(note: "test", at: 10)
@@ -38,7 +38,7 @@ class AddContributionViewModelTests: XCTestCase {
     
     func testAddError() {
         // Arrange
-        let viewModel = AddContributionViewModel(addNoteUseCase: AnyUseCase(wrapped: MockUseCase(failAnswer())))
+        let viewModel = AddContributionViewModel(addNote: MockAnyUseCase(failAnswer()))
         
         // Act
         viewModel.add(note: "test", at: 10)
