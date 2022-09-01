@@ -12,13 +12,13 @@ struct ContentView: View {
     @StateObject private var viewModel = UIContainer.contributionViewModel()
     @State private var selectedDay = 0
     @State private var addContribution = false
-    
+
     var body: some View {
         VStack(alignment: .trailing) {
             switch viewModel.state {
             case .loading:
                 ProgressView("Loading... Loa...")
-                
+
             case .failure(let error):
                 Label {
                     Text("Error: \(error.localizedDescription)")
@@ -26,7 +26,7 @@ struct ContentView: View {
                     Image(systemName: "xmark.app")
                             .foregroundColor(Color.red)
                 }
-                
+
             case .success(let data):
                 Label {
                     Text("Contributions: \(data.totalContributionCount())")
@@ -36,7 +36,7 @@ struct ContentView: View {
                         .foregroundColor(Color.red)
                 }
                 .padding()
-                
+
                 ContributionGraphView(weeksCount: data.weekCount(),
                                       cellSize: 40.0,
                                       dayToday: Date.neutral.weekday())
@@ -49,7 +49,7 @@ struct ContentView: View {
                 .onChange(of: selectedDay) { newDay in
                     viewModel.fetchContribtuionDetails(at: newDay)
                 }
-                
+
                 Menu {
                     Button("15 weeks") { viewModel.set(settings: data.set(weekCount: 15)) }
                     Button("25 weeks") { viewModel.set(settings: data.set(weekCount: 25)) }
@@ -60,7 +60,7 @@ struct ContentView: View {
                 } label: {
                     Label("Weeks count: \(data.weekCount())", systemImage: "slider.horizontal.3")
                 }.padding(.trailing)
-                
+
                 Label {
                     Text(data.date(at: selectedDay))
                         .font(.headline)
@@ -82,7 +82,7 @@ struct ContentView: View {
                         Button {
                             addContribution = true
                         } label: { Image(systemName: "plus") }
-                        
+
                         EditButton()
                     }
                     .sheet(isPresented: $addContribution) {

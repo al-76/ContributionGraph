@@ -10,7 +10,7 @@ import Foundation
 protocol Mapper {
     associatedtype Input
     associatedtype Output
-    
+
     func map(input: Input) -> Output
 }
 

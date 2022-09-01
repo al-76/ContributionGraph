@@ -17,7 +17,7 @@ extension Date {
     func weekday() -> Int {
         (Calendar.current.dateComponents([.weekday], from: self).weekday ?? 1)
     }
-    
+
     func weekOfMonth() -> Int {
         (Calendar.current.dateComponents([.weekOfMonth], from: self).weekOfMonth ?? 1)
     }
@@ -43,9 +43,7 @@ extension Date {
 
 extension Date {
     static var neutral: Date {
-        get {
-            return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date.now) ?? Date.now
-        }
+        Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date.now) ?? Date.now
     }
 }
 
@@ -57,4 +55,3 @@ extension Date {
         return formatter.string(from: self)
     }
 }
-

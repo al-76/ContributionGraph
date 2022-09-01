@@ -14,35 +14,35 @@ import Cuckoo
 class AddContributionViewModelTests: XCTestCase {
     func testInitState() throws {
         // Arrange
-        let viewModel = AddContributionViewModel(addNote: MockAnyUseCase())
-        
+        let viewModel = AddContributionViewModel(addNote: mockAnyUseCase())
+
         // Act
         let result = try awaitPublisher(viewModel.$state)
-        
+
         // Assert
         XCTAssertEqual(result, .success(false))
     }
-    
+
     func testAdd() {
         // Arrange
         let answer = successAnswer(())
-        let viewModel = AddContributionViewModel(addNote: MockAnyUseCase(answer))
-        
+        let viewModel = AddContributionViewModel(addNote: mockAnyUseCase(answer))
+
         // Act
         viewModel.add(note: "test", at: 10)
-        
+
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .success(true))
     }
-    
+
     func testAddError() {
         // Arrange
-        let viewModel = AddContributionViewModel(addNote: MockAnyUseCase(failAnswer()))
-        
+        let viewModel = AddContributionViewModel(addNote: mockAnyUseCase(failAnswer()))
+
         // Act
         viewModel.add(note: "test", at: 10)
-        
+
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .failure(TestError.someError))

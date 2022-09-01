@@ -10,11 +10,11 @@ import Combine
 
 final class AddNoteUseCase: UseCase {
     let repository: ContributionDetailsRepository
-    
+
     init(repository: ContributionDetailsRepository) {
         self.repository = repository
     }
-    
+
     func callAsFunction(_ input: (Date, ContributionNote)) -> AnyPublisher<Void, Error> {
         repository.write(input.1, at: input.0)
     }

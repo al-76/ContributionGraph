@@ -10,10 +10,10 @@ import SwiftUI
 
 public struct ViewError: Identifiable {
     private let error: Error
-    
+
     public var id: String { self.localizedDescription }
     public var localizedDescription: String { self.error.localizedDescription }
-    
+
     init(_ error: Error) {
         self.error = error
     }

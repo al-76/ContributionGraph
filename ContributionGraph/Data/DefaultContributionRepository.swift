@@ -11,20 +11,20 @@ import Foundation
 final class DefaultContributionRepository: ContributionRepository {
     private let storage: Storage
     private let mapper: AnyMapper<CDContribution, Contribution>
-    
+
     init(storage: Storage,
          mapper: AnyMapper<CDContribution, Contribution>) {
         self.storage = storage
         self.mapper = mapper
     }
-    
+
     func read() -> AnyPublisher<[Contribution], Error> {
         Future { [weak self] promise in
             guard let self = self else {
                 promise(.success([]))
                 return
             }
-            
+
             self.storage
                 .fetch(predicate: nil, CDContribution.self) { result in
                     switch result {
@@ -33,7 +33,7 @@ final class DefaultContributionRepository: ContributionRepository {
                             .map {
                                 self.mapper.map(input: $0)
                             }))
-                        
+
                     case .failure(let error):
                         promise(.failure(error))
                     }

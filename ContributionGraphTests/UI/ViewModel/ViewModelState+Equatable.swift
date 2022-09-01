@@ -7,12 +7,12 @@
 
 @testable import ContributionGraph
 
-extension ViewModelState: Equatable where T: Equatable  {
+extension ViewModelState: Equatable where T: Equatable {
     public static func == (lhs: ViewModelState, rhs: ViewModelState) -> Bool {
         switch (lhs, rhs) {
         case (.loading, .loading):
             return true
-        case (.failure(_), .failure(_)):
+        case (.failure, .failure):
             return true
         case let (.success(a), .success(b)):
             return a == b

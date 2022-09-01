@@ -11,15 +11,15 @@ import Foundation
 final class AddContributionViewModel: ObservableObject {
     typealias State = ViewModelState<Bool>
     typealias AddNoteUseCase = AnyUseCase<(Date, ContributionNote), Void>
-    
+
     @Published var state = State.success(false)
-    
+
     private let addNote: AddNoteUseCase
-    
+
     init(addNote: AddNoteUseCase) {
         self.addNote = addNote
     }
-    
+
     func add(note: String, at day: Int) {
         state = .loading
         addNote((Date.neutral.days(ago: day), ContributionNote(changed: Date.now, note: note)))

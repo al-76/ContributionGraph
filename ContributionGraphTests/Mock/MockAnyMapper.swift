@@ -9,10 +9,10 @@ import Foundation
 
 @testable import ContributionGraph
 
-func MockAnyMapper<Input, Output>() -> AnyMapper<Input, Output> {
+func mockAnyMapper<Input, Output>() -> AnyMapper<Input, Output> {
     AnyMapper(wrapped: MockMapper())
 }
 
-func MockAnyMapper<Input, Output>(_ mock: MockMapper<Input, Output>) -> AnyMapper<Input, Output> {
+func mockAnyMapper<Input, Output>(_ mock: MockMapper<Input, Output>) -> AnyMapper<Input, Output> {
     AnyMapper(wrapped: mock)
 }

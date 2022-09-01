@@ -16,11 +16,11 @@ struct ContributionGraphView: View {
     private let cellCornerRadius: CGFloat = 4.0
     private let cellBorderWidth: CGFloat = 2.0
     private let cellSelectedBorderWidth: CGFloat = 4.0
-    
-    private var onDataCellAction: ((Int) -> Int)? = nil
-    private var onTapCellAction: ((Int) -> Void)? = nil
+
+    private var onDataCellAction: ((Int) -> Int)?
+    private var onTapCellAction: ((Int) -> Void)?
     @State private var selectedCell: Int = 0
-        
+
     init(weeksCount: Int,
          cellSize: CGFloat,
          dayToday: Int) {
@@ -28,11 +28,11 @@ struct ContributionGraphView: View {
         self.cellSize = cellSize
         self.dayToday = dayToday
     }
-    
+
     var body: some View {
         HStack {
             dayHeaders()
-            
+
             ScrollViewReader { scrollProxy in
                 ScrollView(.horizontal) {
                     grid(cellCount: weeksCount * 7)
@@ -47,23 +47,23 @@ struct ContributionGraphView: View {
             }
         }
     }
-    
+
     func onDataCell(perform action: @escaping (Int) -> Int) -> ContributionGraphView {
         var view = self
         view.onDataCellAction = action
         return view
     }
-    
+
     func onTapCell(perform action: @escaping (Int) -> Void) -> ContributionGraphView {
         var view = self
         view.onTapCellAction = action
         return view
     }
-    
+
     private func scroll(_ proxy: ScrollViewProxy) {
         proxy.scrollTo(0, anchor: .bottomTrailing)
     }
-    
+
     private func dayHeaders() -> some View {
         VStack(spacing: cellSpacing) {
             Text("").frame(height: cellSize * 2)
@@ -77,7 +77,7 @@ struct ContributionGraphView: View {
             }.frame(height: cellSize)
         }.padding([.leading])
     }
-    
+
     private func rows() -> [GridItem] {
         [GridItem(.fixed(2 * cellSize), spacing: cellSpacing),
          GridItem(.fixed(cellSize), spacing: cellSpacing),
@@ -87,7 +87,7 @@ struct ContributionGraphView: View {
          GridItem(.fixed(cellSize), spacing: cellSpacing),
          GridItem(.fixed(cellSize), spacing: cellSpacing)]
     }
-    
+
     private func grid(cellCount: Int) -> some View {
         LazyHGrid(rows: rows(), spacing: cellSpacing) {
             ForEach((0..<cellCount).reversed(), id: \.self) { day in
@@ -110,24 +110,24 @@ struct ContributionGraphView: View {
                                    monthLabel: Bool,
                                    selected: Bool) -> some View {
         if monthLabel {
-            Cell(vLabel: monthName(from: day), count: count, selected: selected)
+            cell(vLabel: monthName(from: day), count: count, selected: selected)
         } else {
-            Cell(count: count, selected: selected)
+            cell(count: count, selected: selected)
         }
     }
 }
 
 // MARK: - Cell
 extension ContributionGraphView {
-    private func Cell(vLabel: String, count: Int, selected: Bool) -> some View {
-        VStack (spacing: 0) {
-            VText(vLabel)
-            Cell(count: count, selected: selected)
+    private func cell(vLabel: String, count: Int, selected: Bool) -> some View {
+        VStack(spacing: 0) {
+            vText(vLabel)
+            cell(count: count, selected: selected)
         }.frame(width: cellSize, height: cellSize * 2,
                 alignment: .bottom)
     }
-    
-    private func Cell(count: Int, selected: Bool) -> some View {
+
+    private func cell(count: Int, selected: Bool) -> some View {
         RoundedRectangle(cornerRadius: cellCornerRadius)
             .strokeBorder(selected ? .orange : .black,
                           lineWidth: selected ? cellSelectedBorderWidth : cellBorderWidth)
@@ -135,8 +135,8 @@ extension ContributionGraphView {
             .background(RoundedRectangle(cornerRadius: cellCornerRadius)
                 .foregroundColor(light: getColor(count), dark: getColor(count)))
     }
-    
-    private func VText(_ text: String) -> some View {
+
+    private func vText(_ text: String) -> some View {
         VStack {
             Text("").padding(.bottom, 12.0)
         }.overlay {
@@ -152,19 +152,19 @@ extension ContributionGraphView {
     private func isFirstDayOfWeek(_ day: Int) -> Bool {
         return (day > 0 && (day + 1) % 7 == 0)
     }
-    
+
     private func week(from day: Int) -> Int {
         (day + 1) / 7
     }
-    
+
     private func absoluteDay(from day: Int, _ today: Int) -> Int {
         day - (7 - today)
     }
-    
+
     private func dayName(from day: Int) -> String {
         Calendar.current.shortWeekdaySymbols[day - 1]
     }
-    
+
     private func monthName(from day: Int) -> String {
         let past = Date.neutral.days(ago: day)
         let weekOfMonth = past.weekOfMonth()
@@ -176,7 +176,7 @@ extension ContributionGraphView {
 // MARK: - Color
 extension ContributionGraphView {
     private func getColor(_ count: Int) -> Color {
-        switch (count) {
+        switch count {
         case 0:
             return Color(red: 0.9, green: 0.9, blue: 0.9)
         default:

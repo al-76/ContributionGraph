@@ -20,10 +20,10 @@ extension MockUseCase {
     }
 }
 
-func MockAnyUseCase<Input, Output>() -> AnyUseCase<Input, Output> {
+func mockAnyUseCase<Input, Output>() -> AnyUseCase<Input, Output> {
     AnyUseCase(wrapped: MockUseCase())
 }
 
-func MockAnyUseCase<Input, Output>(_ publisher: AnyPublisher<Output, Error>) -> AnyUseCase<Input, Output> {
+func mockAnyUseCase<Input, Output>(_ publisher: AnyPublisher<Output, Error>) -> AnyUseCase<Input, Output> {
     AnyUseCase(wrapped: MockUseCase(publisher))
 }

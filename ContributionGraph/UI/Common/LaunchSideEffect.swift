@@ -11,7 +11,7 @@ struct LaunchSideEffect: View {
     init(sideEffect: () -> Void) {
         sideEffect()
     }
-    
+
     var body: some View {
         EmptyView()
     }

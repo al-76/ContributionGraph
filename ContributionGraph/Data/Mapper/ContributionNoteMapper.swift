@@ -12,7 +12,7 @@ struct DtoContributionNoteMapper: Mapper {
                        ContributionNote,
                        CDContribution?,
                        StorageContext)
-    
+
     func map(input: Input) -> Result<CDContributionNote, Error> {
         do {
             // Create DTO note
@@ -21,7 +21,7 @@ struct DtoContributionNoteMapper: Mapper {
             let note = input.1
             dtoNote.changed = note.changed
             dtoNote.note = note.note
-            
+
             if let dtoContribution = input.2 {
                 // Update exist contribution
                 dtoContribution.addToContributionNotes(dtoNote)
@@ -33,7 +33,7 @@ struct DtoContributionNoteMapper: Mapper {
                 dtoContribution.addToContributionNotes(dtoNote)
                 dtoContribution.count = 1
             }
-            
+
             return .success(dtoNote)
         } catch let error {
             return .failure(error)

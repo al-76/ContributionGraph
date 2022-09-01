@@ -16,7 +16,7 @@ extension CDContributionNote: Matchable {}
 
 class DefaultContributionRepositoryTests: XCTestCase {
     typealias StorageResult = Result<(context: StorageContext, items: [CDContribution]), Error>
-    
+
     func testRead() throws {
         // Arrange
         let test = (data: Contribution(days: 0),
@@ -33,11 +33,11 @@ class DefaultContributionRepositoryTests: XCTestCase {
                 .thenReturn(test.data)
         }
         let repository = DefaultContributionRepository(storage: storage,
-                                                       mapper: MockAnyMapper(mapper))
-        
+                                                       mapper: mockAnyMapper(mapper))
+
         // Act
         let result = try awaitPublisher(repository.read())
-        
+
         // Assert
         XCTAssertEqual(result, [test.data])
         verify(mapper).map(input: test.dto)
@@ -53,11 +53,11 @@ class DefaultContributionRepositoryTests: XCTestCase {
             }
         }
         let repository = DefaultContributionRepository(storage: storage,
-                                                       mapper: MockAnyMapper())
-        
+                                                       mapper: mockAnyMapper())
+
         // Act
         let result = try awaitError(repository.read())
-        
+
         // Assert
         XCTAssertEqual(result as? TestError, testError)
     }

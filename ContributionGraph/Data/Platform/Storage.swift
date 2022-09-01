@@ -17,8 +17,8 @@ protocol StorageContext {
 
 protocol Storage {
     typealias OnCompletion<T> = (Result<(context: StorageContext, items: [T]), Error>) -> Void
-    
+
     func fetch<T: NSManagedObject>(predicate: NSPredicate?,
-                                   _ Type: T.Type,
+                                   _ type: T.Type,
                                    onCompletion: @escaping OnCompletion<T>)
 }

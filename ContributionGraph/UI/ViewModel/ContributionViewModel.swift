@@ -10,42 +10,42 @@ import Foundation
 
 final class ContributionViewModel: ObservableObject {
     typealias State = ViewModelState<Data>
-    
+
     struct Data {
         let items: [Int: Contribution]
         let details: ContributionDetails?
         let settings: ContributionSettings
         let metrics: ContributionMetrics
-        
+
         func set(weekCount: Int) -> ContributionSettings {
             ContributionSettings(weekCount: weekCount)
         }
-        
+
         func totalWeekCount() -> Int {
             metrics.totalWeekCount
         }
-        
+
         func totalContributionCount() -> Int {
             metrics.totalContributionCount
         }
-        
+
         func weekCount() -> Int {
             settings.weekCount
         }
-        
+
         func notes() -> [ContributionNote] {
             details?.notes ?? []
         }
-        
+
         func notesCount(at day: Int) -> Int {
             items[day]?.count ?? 0
         }
-        
+
         func date(at day: Int) -> String {
             (items[day]?.date ?? Date.neutral.days(ago: day))
                 .format()
         }
-        
+
         func update(details: ContributionDetails?) -> Data {
             Data(items: items,
                  details: details,
@@ -53,15 +53,15 @@ final class ContributionViewModel: ObservableObject {
                  metrics: metrics)
         }
     }
-        
+
     @Published var state = State.loading
-    
+
     private let getItems: AnyUseCase<Void, [Int: Contribution]>
     private let getDetails: AnyUseCase<Date, ContributionDetails?>
     private let getSettings: AnyUseCase<Void, ContributionSettings>
     private let setSettings: AnyUseCase<ContributionSettings, ContributionSettings>
     private let getMetrics: AnyUseCase<Void, ContributionMetrics>
-    
+
     // TODO: add ContributionUseCase Factory
     init(getItems: AnyUseCase<Void, [Int: Contribution]>,
          getDetails: AnyUseCase<Date, ContributionDetails?>,
@@ -74,7 +74,7 @@ final class ContributionViewModel: ObservableObject {
         self.setSettings = setSettings
         self.getMetrics = getMetrics
     }
-    
+
     func set(settings: ContributionSettings) {
         state = .loading
         fetch(items: getItems(),
@@ -83,7 +83,7 @@ final class ContributionViewModel: ObservableObject {
               metrics: getMetrics())
             .assign(to: &$state)
     }
-    
+
     func fetchContributionData(at day: Int = 0) {
         state = .loading
         fetch(items: getItems(),
@@ -92,7 +92,7 @@ final class ContributionViewModel: ObservableObject {
               metrics: getMetrics())
             .assign(to: &$state)
     }
-    
+
     func fetchContribtuionDetails(at day: Int) {
         switch state {
         case .success(let data):
@@ -102,15 +102,15 @@ final class ContributionViewModel: ObservableObject {
                 .receive(on: DispatchQueue.main)
                 .print()
                 .assign(to: &$state)
-            
+
         default: // nothing to do here
             break
         }
     }
-    
+
     private func fetch(items: AnyPublisher<[Int: Contribution], Error>,
                        details: AnyPublisher<ContributionDetails?, Error>,
-                     settings: AnyPublisher<ContributionSettings, Error>,
+                       settings: AnyPublisher<ContributionSettings, Error>,
                        metrics: AnyPublisher<ContributionMetrics, Error>) -> AnyPublisher<State, Never> {
         items.zip(details, settings, metrics)
             .map { .success(Data(items: $0,
@@ -121,5 +121,4 @@ final class ContributionViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
-
 }

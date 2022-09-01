@@ -16,12 +16,13 @@ extension ContributionDetails: Equatable {
     }
 }
 
+// swiftlint:disable type_name
 class DefaultContributionDetailsRepositoryTests: XCTestCase {
     typealias DtoMockMapperInput = (Date, ContributionNote, CDContribution?, StorageContext)
     typealias DtoMockMapper = MockMapper<DtoMockMapperInput,
                                      Result<CDContributionNote, Error>>
     typealias StorageResult = Result<(context: StorageContext, items: [CDContribution]), Error>
-    
+
     func testRead() throws {
         // Arrange
         let test = (dto: CDContribution(),
@@ -39,17 +40,17 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
                 .thenReturn(test.details)
         }
         let repository = DefaultContributionDetailsRepository(storage: storage,
-                                                              mapper: MockAnyMapper(mapper),
-                                                              dtoMapper: MockAnyMapper())
-        
+                                                              mapper: mockAnyMapper(mapper),
+                                                              dtoMapper: mockAnyMapper())
+
         // Act
         let result = try awaitPublisher(repository.read(date: Date.neutral))
-        
+
         // Assert
         XCTAssertEqual(result, test.details)
         verify(mapper).map(input: test.dto)
     }
-    
+
     func testReadNoDetails() throws {
         // Arrange
         let testDto = CDContribution()
@@ -65,17 +66,17 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
                 .thenReturn(nil)
         }
         let repository = DefaultContributionDetailsRepository(storage: storage,
-                                                              mapper: MockAnyMapper(mapper),
-                                                              dtoMapper: MockAnyMapper())
-        
+                                                              mapper: mockAnyMapper(mapper),
+                                                              dtoMapper: mockAnyMapper())
+
         // Act
         let result = try awaitPublisher(repository.read(date: Date.neutral))
-        
+
         // Assert
         XCTAssertNil(result)
         verify(mapper).map(input: testDto)
     }
-    
+
     func testReadError() throws {
         // Arrange
         let testError = TestError.someError
@@ -86,12 +87,12 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
             }
         }
         let repository = DefaultContributionDetailsRepository(storage: storage,
-                                                              mapper: MockAnyMapper(),
-                                                              dtoMapper: MockAnyMapper())
-        
+                                                              mapper: mockAnyMapper(),
+                                                              dtoMapper: mockAnyMapper())
+
         // Act
         let result = try awaitError(repository.read(date: Date.neutral))
-        
+
         // Assert
         XCTAssertEqual(result as? TestError, testError)
     }
@@ -118,12 +119,12 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
             when(stub).save().thenDoNothing()
         }
         let repository = DefaultContributionDetailsRepository(storage: storage,
-                                                              mapper: MockAnyMapper(),
-                                                              dtoMapper: MockAnyMapper(dtoMapper))
-        
+                                                              mapper: mockAnyMapper(),
+                                                              dtoMapper: mockAnyMapper(dtoMapper))
+
         // Act
         try awaitPublisher(repository.write(test.note, at: test.date))
-        
+
         // Assert
         let dtoMapperArguments = ArgumentCaptor<DtoMockMapperInput>()
         verify(dtoMapper).map(input: dtoMapperArguments.capture())
@@ -131,7 +132,7 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
         XCTAssert((value?.0, value?.1, value?.2) == (test.date, test.note, test.dto))
         verify(context).save()
     }
-    
+
     func testWriteStorageError() throws {
         // Arrange
         let testError = TestError.someError
@@ -142,17 +143,17 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
             }
         }
         let repository = DefaultContributionDetailsRepository(storage: storage,
-                                                              mapper: MockAnyMapper(),
-                                                              dtoMapper: MockAnyMapper())
-        
+                                                              mapper: mockAnyMapper(),
+                                                              dtoMapper: mockAnyMapper())
+
         // Act
         let result = try awaitError(repository.write(ContributionNote(changed: Date.now, note: "Test"),
                                                      at: Date.neutral))
-        
+
         // Assert
         XCTAssertEqual(result as? TestError, testError)
     }
-    
+
     func testWriteMapperError() throws {
         // Arrange
         let testError = TestError.someError
@@ -169,18 +170,18 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
                 .thenReturn(.failure(TestError.someError))
         }
         let repository = DefaultContributionDetailsRepository(storage: storage,
-                                                              mapper: MockAnyMapper(),
-                                                              dtoMapper: MockAnyMapper(dtoMapper))
-        
+                                                              mapper: mockAnyMapper(),
+                                                              dtoMapper: mockAnyMapper(dtoMapper))
+
         // Act
         let result = try awaitError(repository.write(ContributionNote(changed: Date.now, note: "Test"),
                                                      at: Date.neutral))
-        
+
         // Assert
         XCTAssertEqual(result as? TestError, testError)
         verify(dtoMapper).map(input: any())
     }
-    
+
     func testWriteContextSaveError() throws {
         // Arrange
         let testError = TestError.someError
@@ -200,13 +201,13 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
             when(stub).save().thenThrow(testError)
         }
         let repository = DefaultContributionDetailsRepository(storage: storage,
-                                                              mapper: MockAnyMapper(),
-                                                              dtoMapper: MockAnyMapper(dtoMapper))
-        
+                                                              mapper: mockAnyMapper(),
+                                                              dtoMapper: mockAnyMapper(dtoMapper))
+
         // Act
         let result = try awaitError(repository.write(ContributionNote(changed: Date.now, note: "Test"),
                                                      at: Date.neutral))
-        
+
         // Assert
         XCTAssertEqual(result as? TestError, testError)
         verify(context).save()

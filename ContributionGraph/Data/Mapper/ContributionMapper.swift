@@ -16,9 +16,7 @@ struct ContributionMapper: Mapper {
 
 extension CDContribution {
     var contributionNotesArray: [CDContributionNote] {
-        get {
-            (contributionNotes?.allObjects as? [CDContributionNote] ?? [])
-                .sorted { $0.changed ?? Date.now > $1.changed ?? Date.now }
-        }
+        (contributionNotes?.allObjects as? [CDContributionNote] ?? [])
+            .sorted { $0.changed ?? Date.now > $1.changed ?? Date.now }
     }
 }

@@ -17,7 +17,7 @@ extension Date: Matchable {}
 class AddNoteUseCaseTests: XCTestCase {
     private let testDate = Date.now
     private let testNote = ContributionNote(changed: Date.now, note: "test")
-    
+
     func testExecute() throws {
         // Arrange
         let repository = MockContributionDetailsRepository()

@@ -11,17 +11,17 @@ import SwiftUI
 struct AddContributionView: View {
     let day: Int
     @Binding var isPresented: Bool
-    
+
     @StateObject private var viewModel = UIContainer.addContributionViewModel()
     @State private var newContribution = ""
-    
+
 //    private static let newCategoryValue = "New Category"
-    
+
 //    @State private var newCategory = ""
 
 //    @State private var selectedCategory = ""
 //    @State private var testData = ["Test2", "Test", newCategoryValue]
-    
+
     var body: some View {
         VStack {
 //            Picker("Category", selection: $selectedCategory) {
@@ -33,9 +33,9 @@ struct AddContributionView: View {
 //                TextField("New Category", text: $newCategory)
 //            }
 //            Divider()
-            
+
             Text("Add contribution").font(.headline)
-            
+
             switch viewModel.state {
             case .loading:
                 ProgressView("Loading...")

@@ -12,23 +12,23 @@ final class DomainContainer: SharedContainer {
     static let getContributionMetricsUseCase = Factory {
         AnyUseCase(wrapped: GetContributionMetricsUseCase())
     }
-        
+
     static let getContributionSettingsUseCase = Factory {
         AnyUseCase(wrapped: GetContributionSettingsUseCase())
     }
-    
+
     static let setContributionSettingsUseCase = Factory {
         AnyUseCase(wrapped: SetContributionSettingsUseCase())
     }
-    
+
     static let getContributionUseCase = Factory {
         AnyUseCase(wrapped: GetContributionUseCase(repository: DataContainer.contributionRepository()))
     }
-    
+
     static let addNoteUseCase = Factory {
         AnyUseCase(wrapped: AddNoteUseCase(repository: DataContainer.contributionDetailsRepository()))
     }
-    
+
     static let getContributionDetailsUseCase = Factory {
         AnyUseCase(wrapped: GetContributionDetailsUseCase(repository: DataContainer.contributionDetailsRepository()))
     }

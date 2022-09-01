@@ -16,7 +16,7 @@ final class UIContainer: SharedContainer {
                               setSettings: DomainContainer.setContributionSettingsUseCase(),
                               getMetrics: DomainContainer.getContributionMetricsUseCase())
     }
-    
+
     static let addContributionViewModel = Factory(scope: .shared) {
         AddContributionViewModel(addNote: DomainContainer.addNoteUseCase())
     }

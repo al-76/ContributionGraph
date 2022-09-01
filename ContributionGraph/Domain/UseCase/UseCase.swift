@@ -21,7 +21,7 @@ final class AnyUseCase<Input, Output>: UseCase {
         where TypeUseCase.Input == Input, TypeUseCase.Output == Output {
         callAsFunction = wrapped.callAsFunction
     }
-    
+
     func callAsFunction(_ input: Input) -> AnyPublisher<Output, Error> {
         callAsFunction(input)
     }

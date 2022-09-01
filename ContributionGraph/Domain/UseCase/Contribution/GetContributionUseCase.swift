@@ -10,11 +10,11 @@ import Foundation
 
 final class GetContributionUseCase: UseCase {
     private let repository: ContributionRepository
-    
+
     init(repository: ContributionRepository) {
         self.repository = repository
     }
-    
+
     func callAsFunction(_ input: Void) -> AnyPublisher<[Int: Contribution], Error> {
         repository.read().map { items in
             items.reduce(into: [Int: Contribution]()) {
