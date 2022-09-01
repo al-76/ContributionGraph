@@ -100,7 +100,6 @@ final class ContributionViewModel: ObservableObject {
                 .map { .success(data.update(details: $0)) }
                 .catch { Just(.failure($0)).eraseToAnyPublisher() }
                 .receive(on: DispatchQueue.main)
-                .print()
                 .assign(to: &$state)
 
         default: // nothing to do here
