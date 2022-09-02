@@ -7,11 +7,13 @@
     </entity>
     <entity name="ContributionNote" representedClassName=".CDContributionNote" syncable="YES" codeGenerationType="class">
         <attribute name="changed" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="note" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
         <relationship name="contribution" maxCount="1" deletionRule="Nullify" destinationEntity="Contribution" inverseName="contributionNotes" inverseEntity="Contribution"/>
     </entity>
     <elements>
         <element name="Contribution" positionX="-294.4239501953125" positionY="109.608642578125" width="128" height="74"/>
-        <element name="ContributionNote" positionX="-55.7049560546875" positionY="257.0003967285156" width="128" height="74"/>
+        <element name="ContributionNote" positionX="-55.7049560546875" positionY="257.0003967285156" width="128" height="104"/>
     </elements>
 </model>

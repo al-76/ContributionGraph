@@ -19,6 +19,8 @@ struct DtoContributionNoteMapper: Mapper {
             let context = input.3
             let dtoNote = try context.newData(CDContributionNote.self)
             let note = input.1
+            dtoNote.id = note.id
+            dtoNote.title = note.title
             dtoNote.changed = note.changed
             dtoNote.note = note.note
 

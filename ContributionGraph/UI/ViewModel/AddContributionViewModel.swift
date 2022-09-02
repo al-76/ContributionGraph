@@ -22,7 +22,10 @@ final class AddContributionViewModel: ObservableObject {
 
     func add(note: String, at day: Int) {
         state = .loading
-        addNote((Date.neutral.days(ago: day), ContributionNote(changed: Date.now, note: note)))
+        addNote((Date.neutral.days(ago: day), ContributionNote(id: UUID(),
+                                                               title: "",
+                                                               changed: Date.now,
+                                                               note: note)))
             .map { State.success(true) }
             .catch { Just(State.failure($0)).eraseToAnyPublisher() }
             .receive(on: DispatchQueue.main)

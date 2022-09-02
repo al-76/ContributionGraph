@@ -13,7 +13,7 @@ import Combine
 class ContributionViewModelTests: XCTestCase {
     // swiftlint:disable line_length
     private let data = ContributionViewModel.Data(items: [0: Contribution(days: 0)],
-                                                  details: ContributionDetails(date: Date.neutral, notes: [ContributionNote(changed: Date.now, note: "Test")]),
+                                                  details: ContributionDetails(date: Date.neutral, notes: [ContributionNote("test")]),
                                                   settings: ContributionSettings(weekCount: 15),
                                                   metrics: ContributionMetrics(totalWeekCount: 50, totalContributionCount: 500))
 

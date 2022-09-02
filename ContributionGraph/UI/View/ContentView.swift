@@ -72,7 +72,7 @@ struct ContentView: View {
 
                 NavigationView {
                     List {
-                        ForEach(data.notes(), id: \.self) {
+                        ForEach(data.notes()) {
                             Text("\($0.changed.format())\n")
                                 .font(.caption) +
                             Text($0.note)

@@ -18,8 +18,11 @@ struct ContributionDetails {
 }
 
 struct ContributionNote {
+    let id: UUID
+    let title: String
     let changed: Date
     let note: String
 }
 
 extension ContributionNote: Hashable {}
+extension ContributionNote: Identifiable {}

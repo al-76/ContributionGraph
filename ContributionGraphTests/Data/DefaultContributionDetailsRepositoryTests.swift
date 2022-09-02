@@ -27,7 +27,7 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
         // Arrange
         let test = (dto: CDContribution(),
                     details: ContributionDetails(date: Date.neutral,
-                                                 notes: [ContributionNote(changed: Date.now, note: "test")]))
+                                                 notes: [ContributionNote("test")]))
         let storage = MockStorage()
         stub(storage) { stub in
             when(stub).fetch(predicate: any(), any(), onCompletion: any()).then { args in
@@ -100,7 +100,7 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
     func testWrite() throws {
         // Arrange
         let test = (date: Date.neutral,
-                    note: ContributionNote(changed: Date.now, note: "Test"),
+                    note: ContributionNote("test"),
                     dto: CDContribution(),
                     dtoNote: CDContributionNote())
         let storage = MockStorage()
@@ -147,7 +147,7 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
                                                               dtoMapper: mockAnyMapper())
 
         // Act
-        let result = try awaitError(repository.write(ContributionNote(changed: Date.now, note: "Test"),
+        let result = try awaitError(repository.write(ContributionNote("test"),
                                                      at: Date.neutral))
 
         // Assert
@@ -174,7 +174,7 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
                                                               dtoMapper: mockAnyMapper(dtoMapper))
 
         // Act
-        let result = try awaitError(repository.write(ContributionNote(changed: Date.now, note: "Test"),
+        let result = try awaitError(repository.write(ContributionNote("test"),
                                                      at: Date.neutral))
 
         // Assert
@@ -205,7 +205,7 @@ class DefaultContributionDetailsRepositoryTests: XCTestCase {
                                                               dtoMapper: mockAnyMapper(dtoMapper))
 
         // Act
-        let result = try awaitError(repository.write(ContributionNote(changed: Date.now, note: "Test"),
+        let result = try awaitError(repository.write(ContributionNote("test"),
                                                      at: Date.neutral))
 
         // Assert
