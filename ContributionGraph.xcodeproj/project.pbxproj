@@ -42,6 +42,8 @@
 		CD728B1E2866623800221B6E /* Color+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD728B1D2866623800221B6E /* Color+Init.swift */; };
 		CD728B202866625C00221B6E /* View+foregroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD728B1F2866625C00221B6E /* View+foregroundColor.swift */; };
 		CD84C1EA28C258C100165C0F /* ContributionNote+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD84C1E928C258C100165C0F /* ContributionNote+Init.swift */; };
+		CD84C1EF28C28F4E00165C0F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD84C1EE28C28F4E00165C0F /* ErrorView.swift */; };
+		CD84C1F228C290F000165C0F /* ContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD84C1F128C290F000165C0F /* ContributionView.swift */; };
 		CD9BF704289C231700F75DE6 /* ContributionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF703289C231700F75DE6 /* ContributionViewModelTests.swift */; };
 		CD9BF70E289C262600F75DE6 /* ContributionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */; };
 		CD9BF714289D6F5000F75DE6 /* XCTestCase+Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF712289D6E6E00F75DE6 /* XCTestCase+Await.swift */; };
@@ -115,6 +117,8 @@
 		CD728B1D2866623800221B6E /* Color+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Init.swift"; sourceTree = "<group>"; };
 		CD728B1F2866625C00221B6E /* View+foregroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+foregroundColor.swift"; sourceTree = "<group>"; };
 		CD84C1E928C258C100165C0F /* ContributionNote+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContributionNote+Init.swift"; sourceTree = "<group>"; };
+		CD84C1EE28C28F4E00165C0F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		CD84C1F128C290F000165C0F /* ContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionView.swift; sourceTree = "<group>"; };
 		CD9BF701289C231700F75DE6 /* ContributionGraphTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContributionGraphTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9BF703289C231700F75DE6 /* ContributionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionViewModelTests.swift; sourceTree = "<group>"; };
 		CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionRepository.swift; sourceTree = "<group>"; };
@@ -294,6 +298,31 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		CD84C1EB28C28F1200165C0F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CD84C1EE28C28F4E00165C0F /* ErrorView.swift */,
+				CDC5BE732869F45400D035FA /* View+Alert.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		CD84C1F028C290DA00165C0F /* Contribution */ = {
+			isa = PBXGroup;
+			children = (
+				CD84C1F128C290F000165C0F /* ContributionView.swift */,
+			);
+			path = Contribution;
+			sourceTree = "<group>";
+		};
+		CD84C1F328C291B300165C0F /* AddEditContribution */ = {
+			isa = PBXGroup;
+			children = (
+				CDC48E5A2891B7360062ADE7 /* AddEditContributionView.swift */,
+			);
+			path = AddEditContribution;
+			sourceTree = "<group>";
+		};
 		CD9BF702289C231700F75DE6 /* ContributionGraphTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,9 +464,10 @@
 		CDC5BE632869D50300D035FA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CD84C1F328C291B300165C0F /* AddEditContribution */,
+				CD84C1EB28C28F1200165C0F /* Common */,
+				CD84C1F028C290DA00165C0F /* Contribution */,
 				CDC5BE75286FA2AB00D035FA /* ContributionGraph */,
-				CDC5BE732869F45400D035FA /* View+Alert.swift */,
-				CDC48E5A2891B7360062ADE7 /* AddEditContributionView.swift */,
 				CD538B4D2860C5C0004BA280 /* ContentView.swift */,
 			);
 			path = View;
@@ -704,11 +734,13 @@
 				CD0F621D28A67D51001F8CD8 /* DomainContainer.swift in Sources */,
 				CD53600A28A196AD00B4EEE6 /* AddNoteUseCase.swift in Sources */,
 				CDD3A0F7286906E400878A09 /* View+isHidden.swift in Sources */,
+				CD84C1EF28C28F4E00165C0F /* ErrorView.swift in Sources */,
 				CDC5BE5F2869D4DD00D035FA /* ContributionGraphView.swift in Sources */,
 				CD9BF71C289D9F5000F75DE6 /* GetContributionSettingsUseCase.swift in Sources */,
 				CD728B1C2866602300221B6E /* UIColor+Init.swift in Sources */,
 				CD9BF70E289C262600F75DE6 /* ContributionRepository.swift in Sources */,
 				CD602BC728BE196800E1A63C /* ContributionDetailsMapper.swift in Sources */,
+				CD84C1F228C290F000165C0F /* ContributionView.swift in Sources */,
 				CD53600D28A2AFAD00B4EEE6 /* LaunchSideEffect.swift in Sources */,
 				CD9BF71E289DA11400F75DE6 /* ContributionSettings.swift in Sources */,
 				CD9BF720289DA1AB00F75DE6 /* SetContributionSettingsUseCase.swift in Sources */,

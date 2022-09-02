@@ -52,17 +52,15 @@ struct AddEditContributionView: View {
                 }
 
             case .failure(let error):
-                Label {
-                    Text("Error: \(error.localizedDescription)")
-                } icon: {
-                    Image(systemName: "xmark.app")
-                        .foregroundColor(Color.red)
-                }
+                ErrorView(error: error)
             }
         }
         .padding()
     }
+}
 
+// MARK: - Components
+extension AddEditContributionView {
     private func header() -> String {
         "\((contributionNote == nil) ? "Add" : "Edit") contribution"
     }
