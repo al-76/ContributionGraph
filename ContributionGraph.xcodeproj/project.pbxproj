@@ -22,10 +22,10 @@
 		CD49109528BCDECA00D1A421 /* ContributionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */; };
 		CD49109728BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */; };
 		CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD51271928BC108100E93508 /* Contribution+Init.swift */; };
-		CD53600828A18DFD00B4EEE6 /* AddContributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600728A18DFD00B4EEE6 /* AddContributionViewModel.swift */; };
+		CD53600828A18DFD00B4EEE6 /* AddEditContributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600728A18DFD00B4EEE6 /* AddEditContributionViewModel.swift */; };
 		CD53600A28A196AD00B4EEE6 /* AddNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600928A196AD00B4EEE6 /* AddNoteUseCase.swift */; };
 		CD53600D28A2AFAD00B4EEE6 /* LaunchSideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600C28A2AFAD00B4EEE6 /* LaunchSideEffect.swift */; };
-		CD53601028A3049100B4EEE6 /* AddContributionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600E28A2F24400B4EEE6 /* AddContributionViewModelTests.swift */; };
+		CD53601028A3049100B4EEE6 /* AddEditContributionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600E28A2F24400B4EEE6 /* AddEditContributionViewModelTests.swift */; };
 		CD538B4C2860C5C0004BA280 /* ContributionGraphApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD538B4B2860C5C0004BA280 /* ContributionGraphApp.swift */; };
 		CD538B4E2860C5C0004BA280 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD538B4D2860C5C0004BA280 /* ContentView.swift */; };
 		CD538B502860C5C3004BA280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD538B4F2860C5C3004BA280 /* Assets.xcassets */; };
@@ -59,7 +59,7 @@
 		CDBC5B3728AC3159006CD13D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B3628AC3159006CD13D /* Storage.swift */; };
 		CDBC5B4C28AC5D13006CD13D /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B4B28AC5D13006CD13D /* Mapper.swift */; };
 		CDBC5B4E28AC5D46006CD13D /* ContributionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */; };
-		CDC48E5B2891B7360062ADE7 /* AddContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC48E5A2891B7360062ADE7 /* AddContributionView.swift */; };
+		CDC48E5B2891B7360062ADE7 /* AddEditContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC48E5A2891B7360062ADE7 /* AddEditContributionView.swift */; };
 		CDC5BE5F2869D4DD00D035FA /* ContributionGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE5E2869D4DD00D035FA /* ContributionGraphView.swift */; };
 		CDC5BE682869DA3E00D035FA /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE672869DA3E00D035FA /* Date+Utils.swift */; };
 		CDC5BE6B2869DA8900D035FA /* DefaultContributionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE6A2869DA8900D035FA /* DefaultContributionRepository.swift */; };
@@ -94,10 +94,10 @@
 		CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionDetailsRepository.swift; sourceTree = "<group>"; };
 		CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionDetailsRepository.swift; sourceTree = "<group>"; };
 		CD51271928BC108100E93508 /* Contribution+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+Init.swift"; sourceTree = "<group>"; };
-		CD53600728A18DFD00B4EEE6 /* AddContributionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContributionViewModel.swift; sourceTree = "<group>"; };
+		CD53600728A18DFD00B4EEE6 /* AddEditContributionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditContributionViewModel.swift; sourceTree = "<group>"; };
 		CD53600928A196AD00B4EEE6 /* AddNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteUseCase.swift; sourceTree = "<group>"; };
 		CD53600C28A2AFAD00B4EEE6 /* LaunchSideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSideEffect.swift; sourceTree = "<group>"; };
-		CD53600E28A2F24400B4EEE6 /* AddContributionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContributionViewModelTests.swift; sourceTree = "<group>"; };
+		CD53600E28A2F24400B4EEE6 /* AddEditContributionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditContributionViewModelTests.swift; sourceTree = "<group>"; };
 		CD538B482860C5C0004BA280 /* ContributionGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContributionGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD538B4B2860C5C0004BA280 /* ContributionGraphApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphApp.swift; sourceTree = "<group>"; };
 		CD538B4D2860C5C0004BA280 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 		CDBC5B3628AC3159006CD13D /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		CDBC5B4B28AC5D13006CD13D /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
 		CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionMapper.swift; sourceTree = "<group>"; };
-		CDC48E5A2891B7360062ADE7 /* AddContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContributionView.swift; sourceTree = "<group>"; };
+		CDC48E5A2891B7360062ADE7 /* AddEditContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditContributionView.swift; sourceTree = "<group>"; };
 		CDC5BE5E2869D4DD00D035FA /* ContributionGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphView.swift; sourceTree = "<group>"; };
 		CDC5BE672869DA3E00D035FA /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		CDC5BE6A2869DA8900D035FA /* DefaultContributionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionRepository.swift; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 		CD53601428A306C500B4EEE6 /* AddContributionViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CD53600E28A2F24400B4EEE6 /* AddContributionViewModelTests.swift */,
+				CD53600E28A2F24400B4EEE6 /* AddEditContributionViewModelTests.swift */,
 			);
 			path = AddContributionViewModel;
 			sourceTree = "<group>";
@@ -437,7 +437,7 @@
 			children = (
 				CDC5BE75286FA2AB00D035FA /* ContributionGraph */,
 				CDC5BE732869F45400D035FA /* View+Alert.swift */,
-				CDC48E5A2891B7360062ADE7 /* AddContributionView.swift */,
+				CDC48E5A2891B7360062ADE7 /* AddEditContributionView.swift */,
 				CD538B4D2860C5C0004BA280 /* ContentView.swift */,
 			);
 			path = View;
@@ -477,7 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				CDC5BE6D2869EECF00D035FA /* ContributionViewModel.swift */,
-				CD53600728A18DFD00B4EEE6 /* AddContributionViewModel.swift */,
+				CD53600728A18DFD00B4EEE6 /* AddEditContributionViewModel.swift */,
 				CD49109028BCDA1E00D1A421 /* ViewModelState.swift */,
 			);
 			path = ViewModel;
@@ -714,7 +714,7 @@
 				CD9BF720289DA1AB00F75DE6 /* SetContributionSettingsUseCase.swift in Sources */,
 				CDC5BE742869F45400D035FA /* View+Alert.swift in Sources */,
 				CD0F621B28A67CDA001F8CD8 /* UIContainer.swift in Sources */,
-				CD53600828A18DFD00B4EEE6 /* AddContributionViewModel.swift in Sources */,
+				CD53600828A18DFD00B4EEE6 /* AddEditContributionViewModel.swift in Sources */,
 				CD538B4C2860C5C0004BA280 /* ContributionGraphApp.swift in Sources */,
 				CD2FC9E428A03D5200F1424F /* GetContributionMetricsUseCase.swift in Sources */,
 				CD49109128BCDA1E00D1A421 /* ViewModelState.swift in Sources */,
@@ -726,7 +726,7 @@
 				CD728B202866625C00221B6E /* View+foregroundColor.swift in Sources */,
 				CDC5BE6E2869EECF00D035FA /* ContributionViewModel.swift in Sources */,
 				CDD3A0F52868BA3500878A09 /* ContributionModel.xcdatamodeld in Sources */,
-				CDC48E5B2891B7360062ADE7 /* AddContributionView.swift in Sources */,
+				CDC48E5B2891B7360062ADE7 /* AddEditContributionView.swift in Sources */,
 				CDBC5B3728AC3159006CD13D /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -747,7 +747,7 @@
 				CD9BF72A289EB34600F75DE6 /* ContributionViewModelData+Equatable.swift in Sources */,
 				CD3052D628B59257000BE787 /* MockUseCase+init.swift in Sources */,
 				CD9BF726289EB2BA00F75DE6 /* ContributionItem+Equatable.swift in Sources */,
-				CD53601028A3049100B4EEE6 /* AddContributionViewModelTests.swift in Sources */,
+				CD53601028A3049100B4EEE6 /* AddEditContributionViewModelTests.swift in Sources */,
 				CD3052D928B59306000BE787 /* XCTestCase+Answer.swift in Sources */,
 				CD9BF714289D6F5000F75DE6 /* XCTestCase+Await.swift in Sources */,
 				CD602BCB28BE368B00E1A63C /* ViewModelState+Equatable.swift in Sources */,

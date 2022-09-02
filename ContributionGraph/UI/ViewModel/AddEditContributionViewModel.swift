@@ -1,5 +1,5 @@
 //
-//  AddContributionViewModel.swift
+//  AddEditContributionViewModel.swift
 //  ContributionGraph
 //
 //  Created by Vyacheslav Konopkin on 08.08.2022.
@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-final class AddContributionViewModel: ObservableObject {
+final class AddEditContributionViewModel: ObservableObject {
     typealias State = ViewModelState<Bool>
     typealias AddNoteUseCase = AnyUseCase<(Date, ContributionNote), Void>
 

@@ -1,5 +1,5 @@
 //
-//  AddContributionView.swift
+//  AddEditContributionView.swift
 //  ContributionGraph
 //
 //  Created by Vyacheslav Konopkin on 27.07.2022.
@@ -8,11 +8,11 @@
 import Factory
 import SwiftUI
 
-struct AddContributionView: View {
+struct AddEditContributionView: View {
     let day: Int
     @Binding var isPresented: Bool
 
-    @StateObject private var viewModel = UIContainer.addContributionViewModel()
+    @StateObject private var viewModel = UIContainer.addEditContributionViewModel()
     @State private var newContribution = ""
 
 //    private static let newCategoryValue = "New Category"
@@ -68,7 +68,7 @@ struct AddContributionView: View {
 
 struct AddContributionView_Previews: PreviewProvider {
     static var previews: some View {
-        AddContributionView(day: 0, isPresented: .constant(true))
+        AddEditContributionView(day: 0, isPresented: .constant(true))
             .preferredColorScheme(.light)
             .previewInterfaceOrientation(.portrait)
     }

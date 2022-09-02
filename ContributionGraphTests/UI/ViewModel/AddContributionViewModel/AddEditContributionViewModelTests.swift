@@ -11,10 +11,10 @@ import Cuckoo
 
 @testable import ContributionGraph
 
-class AddContributionViewModelTests: XCTestCase {
+class AddEditContributionViewModelTests: XCTestCase {
     func testInitState() throws {
         // Arrange
-        let viewModel = AddContributionViewModel(addNote: mockAnyUseCase())
+        let viewModel = AddEditContributionViewModel(addNote: mockAnyUseCase())
 
         // Act
         let result = try awaitPublisher(viewModel.$state)
@@ -26,7 +26,7 @@ class AddContributionViewModelTests: XCTestCase {
     func testAdd() {
         // Arrange
         let answer = successAnswer(())
-        let viewModel = AddContributionViewModel(addNote: mockAnyUseCase(answer))
+        let viewModel = AddEditContributionViewModel(addNote: mockAnyUseCase(answer))
 
         // Act
         viewModel.add(note: "test", at: 10)
@@ -38,7 +38,7 @@ class AddContributionViewModelTests: XCTestCase {
 
     func testAddError() {
         // Arrange
-        let viewModel = AddContributionViewModel(addNote: mockAnyUseCase(failAnswer()))
+        let viewModel = AddEditContributionViewModel(addNote: mockAnyUseCase(failAnswer()))
 
         // Act
         viewModel.add(note: "test", at: 10)

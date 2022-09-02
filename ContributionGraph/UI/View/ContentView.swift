@@ -86,7 +86,7 @@ struct ContentView: View {
                         EditButton()
                     }
                     .sheet(isPresented: $addContribution) {
-                        AddContributionView(day: selectedDay, isPresented: $addContribution)
+                        AddEditContributionView(day: selectedDay, isPresented: $addContribution)
                     }
                     .onChange(of: addContribution) { value in
                         guard !value else { return }
