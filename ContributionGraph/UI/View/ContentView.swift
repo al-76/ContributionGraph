@@ -11,7 +11,8 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var viewModel = UIContainer.contributionViewModel()
     @State private var selectedDay = 0
-    @State private var addContribution = false
+    @State private var addEditContribution = false
+    @State private var editingNote: ContributionNote?
 
     var body: some View {
         VStack(alignment: .trailing) {
@@ -72,23 +73,36 @@ struct ContentView: View {
 
                 NavigationView {
                     List {
-                        ForEach(data.notes()) {
-                            Text("\($0.changed.format())\n")
-                                .font(.caption) +
-                            Text($0.note)
-                        }.onDelete { _ in }
+                        ForEach(data.notes()) { note in
+                            HStack {
+                                Text("\(note.changed.format())\n")
+                                    .font(.caption) +
+                                Text(note.title)
+                                Spacer()
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                editingNote = note
+                                addEditContribution = true
+                            }
+                        }
+                        .onDelete { _ in }
+                        .onTapGesture { addEditContribution = true }
                     }
                     .toolbar {
                         Button {
-                            addContribution = true
+                            editingNote = nil
+                            addEditContribution = true
                         } label: { Image(systemName: "plus") }
 
                         EditButton()
                     }
-                    .sheet(isPresented: $addContribution) {
-                        AddEditContributionView(day: selectedDay, isPresented: $addContribution)
+                    .sheet(isPresented: $addEditContribution) {
+                        AddEditContributionView(day: selectedDay,
+                                                contributionNote: editingNote,
+                                                isPresented: $addEditContribution)
                     }
-                    .onChange(of: addContribution) { value in
+                    .onChange(of: addEditContribution) { value in
                         guard !value else { return }
                         withAnimation(.spring()) {
                             viewModel.fetchContributionData(at: selectedDay)
@@ -104,7 +118,6 @@ struct ContentView: View {
             viewModel.fetchContributionData()
         }
     }
-
 }
 
 struct ContentView_Previews: PreviewProvider {
