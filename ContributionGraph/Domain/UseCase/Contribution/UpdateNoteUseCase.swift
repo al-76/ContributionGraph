@@ -1,5 +1,5 @@
 //
-//  AddNoteUseCase.swift
+//  UpdateNoteUseCase.swift
 //  ContributionGraph
 //
 //  Created by Vyacheslav Konopkin on 08.08.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class AddNoteUseCase: UseCase {
+final class UpdateNoteUseCase: UseCase {
     let repository: ContributionDetailsRepository
 
     init(repository: ContributionDetailsRepository) {

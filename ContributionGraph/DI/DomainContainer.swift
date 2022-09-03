@@ -25,8 +25,8 @@ final class DomainContainer: SharedContainer {
         AnyUseCase(wrapped: GetContributionUseCase(repository: DataContainer.contributionRepository()))
     }
 
-    static let addNoteUseCase = Factory {
-        AnyUseCase(wrapped: AddNoteUseCase(repository: DataContainer.contributionDetailsRepository()))
+    static let updateNoteUseCase = Factory {
+        AnyUseCase(wrapped: UpdateNoteUseCase(repository: DataContainer.contributionDetailsRepository()))
     }
 
     static let getContributionDetailsUseCase = Factory {

@@ -18,6 +18,6 @@ final class UIContainer: SharedContainer {
     }
 
     static let addEditContributionViewModel = Factory(scope: .shared) {
-        AddEditContributionViewModel(addNote: DomainContainer.addNoteUseCase())
+        AddEditContributionViewModel(updateNote: DomainContainer.updateNoteUseCase())
     }
 }

@@ -67,7 +67,11 @@ extension AddEditContributionView {
 
     private func doneButton() -> some View {
         Button {
-            viewModel.add(note: note, at: day)
+            viewModel.set(data: AddEditContributionViewModel
+                .Data(day: day,
+                      title: title,
+                      note: note,
+                      contributionNote: contributionNote))
         } label: {
             Label {
                 Text("Done")

@@ -1,5 +1,5 @@
 //
-//  AddNoteUseCaseTests.swift
+//  UpdateNoteUseCaseTests.swift
 //  ContributionGraphTests
 //
 //  Created by Vyacheslav Konopkin on 27.08.2022.
@@ -14,7 +14,7 @@ import Cuckoo
 extension ContributionNote: Matchable {}
 extension Date: Matchable {}
 
-class AddNoteUseCaseTests: XCTestCase {
+class UpdateNoteUseCaseTests: XCTestCase {
     private let testDate = Date.now
     private let testNote = ContributionNote(id: UUID(), title: "", changed: Date.now, note: "test")
 
@@ -24,7 +24,7 @@ class AddNoteUseCaseTests: XCTestCase {
         stub(repository) { stub in
             when(stub.write(testNote, at: testDate)).thenReturn(successAnswer(()))
         }
-        let addNote = AddNoteUseCase(repository: repository)
+        let addNote = UpdateNoteUseCase(repository: repository)
 
         // Act
         try awaitPublisher(addNote((testDate, testNote)))
@@ -39,7 +39,7 @@ class AddNoteUseCaseTests: XCTestCase {
         stub(repository) { stub in
             when(stub.write(testNote, at: testDate)).thenReturn(failAnswer())
         }
-        let addNote = AddNoteUseCase(repository: repository)
+        let addNote = UpdateNoteUseCase(repository: repository)
 
         // Act
         let result = try awaitError(addNote((testDate, testNote)))

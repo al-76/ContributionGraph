@@ -15,7 +15,7 @@ struct ContributionDetailsMapper: Mapper {
         return ContributionDetails(date: date,
                                    notes: notes.map {
             ContributionNote(id: $0.id ?? UUID(),
-                             title: $0.note ?? "",
+                             title: $0.title ?? "",
                              changed: $0.changed ?? Date.now,
                              note: $0.note ?? "")
         })

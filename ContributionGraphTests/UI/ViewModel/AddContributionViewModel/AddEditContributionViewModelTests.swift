@@ -12,9 +12,22 @@ import Cuckoo
 @testable import ContributionGraph
 
 class AddEditContributionViewModelTests: XCTestCase {
+    let testDataNew = AddEditContributionViewModel.Data(day: 10,
+                                                        title: "title",
+                                                        note: "note",
+                                                        contributionNote: nil)
+    let testData = AddEditContributionViewModel.Data(day: 10,
+                                                     title: "title",
+                                                     note: "note",
+                                                     contributionNote:
+                                                        ContributionNote(id: UUID(),
+                                                                         title: "test",
+                                                                         changed: Date.now,
+                                                                         note: "old_note"))
+
     func testInitState() throws {
         // Arrange
-        let viewModel = AddEditContributionViewModel(addNote: mockAnyUseCase())
+        let viewModel = AddEditContributionViewModel(updateNote: mockAnyUseCase())
 
         // Act
         let result = try awaitPublisher(viewModel.$state)
@@ -23,25 +36,38 @@ class AddEditContributionViewModelTests: XCTestCase {
         XCTAssertEqual(result, .success(false))
     }
 
-    func testAdd() {
+    func testSetData() {
         // Arrange
         let answer = successAnswer(())
-        let viewModel = AddEditContributionViewModel(addNote: mockAnyUseCase(answer))
+        let viewModel = AddEditContributionViewModel(updateNote: mockAnyUseCase(answer))
 
         // Act
-        viewModel.add(note: "test", at: 10)
+        viewModel.set(data: testData)
 
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .success(true))
     }
 
-    func testAddError() {
+    func testSetDataNew() {
         // Arrange
-        let viewModel = AddEditContributionViewModel(addNote: mockAnyUseCase(failAnswer()))
+        let answer = successAnswer(())
+        let viewModel = AddEditContributionViewModel(updateNote: mockAnyUseCase(answer))
 
         // Act
-        viewModel.add(note: "test", at: 10)
+        viewModel.set(data: testDataNew)
+
+        // Assert
+        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
+                       .success(true))
+    }
+
+    func testSetDataError() {
+        // Arrange
+        let viewModel = AddEditContributionViewModel(updateNote: mockAnyUseCase(failAnswer()))
+
+        // Act
+        viewModel.set(data: testData)
 
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
