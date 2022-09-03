@@ -16,6 +16,7 @@ final class ContributionViewModel: ObservableObject {
         let details: ContributionDetails?
         let settings: ContributionSettings
         let metrics: ContributionMetrics
+        let selectedDay: Int
 
         func set(weekCount: Int) -> ContributionSettings {
             ContributionSettings(weekCount: weekCount)
@@ -50,7 +51,16 @@ final class ContributionViewModel: ObservableObject {
             Data(items: items,
                  details: details,
                  settings: settings,
-                 metrics: metrics)
+                 metrics: metrics,
+                 selectedDay: selectedDay)
+        }
+
+        func update(selectedDay: Int) -> Data {
+            Data(items: items,
+                 details: details,
+                 settings: settings,
+                 metrics: metrics,
+                 selectedDay: selectedDay)
         }
     }
 
@@ -76,21 +86,36 @@ final class ContributionViewModel: ObservableObject {
     }
 
     func set(settings: ContributionSettings) {
-        state = .loading
-        fetch(items: getItems(),
-              details: getDetails(Date.neutral),
-              settings: setSettings(settings),
-              metrics: getMetrics())
-            .assign(to: &$state)
+        switch state {
+        case .success(let data):
+            state = .loading
+            setAction(settings: settings, at: data.selectedDay)
+
+        default: // nothing to do here
+            break
+        }
     }
 
-    func fetchContributionData(at day: Int = 0) {
-        state = .loading
-        fetch(items: getItems(),
-              details: getDetails(Date.neutral.days(ago: day)),
-              settings: getSettings(),
-              metrics: getMetrics())
-            .assign(to: &$state)
+    func set(selectedDay day: Int) {
+        switch state {
+        case .success(let data):
+            state = .success(data.update(selectedDay: day))
+
+        default: // nothing to do here
+            break
+        }
+    }
+
+    func fetchContributionData() {
+        switch state {
+        case .success(let data):
+            state = .loading
+            fetchContributionDataAction(at: data.selectedDay)
+
+        default:
+            state = .loading
+            fetchContributionDataAction(at: 0)
+        }
     }
 
     func fetchContribtuionDetails(at day: Int) {
@@ -107,15 +132,35 @@ final class ContributionViewModel: ObservableObject {
         }
     }
 
+    private func fetchContributionDataAction(at day: Int) {
+        fetch(items: getItems(),
+              details: getDetails(Date.neutral.days(ago: day)),
+              settings: getSettings(),
+              metrics: getMetrics(),
+              selectedDay: day)
+            .assign(to: &$state)
+    }
+
+    private func setAction(settings: ContributionSettings, at day: Int) {
+        fetch(items: getItems(),
+              details: getDetails(Date.neutral),
+              settings: setSettings(settings),
+              metrics: getMetrics(),
+              selectedDay: day)
+            .assign(to: &$state)
+    }
+
     private func fetch(items: AnyPublisher<[Int: Contribution], Error>,
                        details: AnyPublisher<ContributionDetails?, Error>,
                        settings: AnyPublisher<ContributionSettings, Error>,
-                       metrics: AnyPublisher<ContributionMetrics, Error>) -> AnyPublisher<State, Never> {
+                       metrics: AnyPublisher<ContributionMetrics, Error>,
+                       selectedDay day: Int) -> AnyPublisher<State, Never> {
         items.zip(details, settings, metrics)
             .map { .success(Data(items: $0,
                                  details: $1,
                                  settings: $2,
-                                 metrics: $3)) }
+                                 metrics: $3,
+                                 selectedDay: day)) }
             .catch { Just(.failure($0)).eraseToAnyPublisher() }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

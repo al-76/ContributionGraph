@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContributionView: View {
     @StateObject private var viewModel = UIContainer.contributionViewModel()
-    @State private var selectedDay = 0
     @State private var addEditContribution = false
     @State private var editingNote: ContributionNote?
 
@@ -32,16 +31,16 @@ struct ContributionView: View {
                     data.notesCount(at: $0)
                 }
                 .onTapCell { day in
-                    selectedDay = day
+                    viewModel.set(selectedDay: day)
                 }
-                .onChange(of: selectedDay) { newDay in
+                .onChange(of: data.selectedDay) { newDay in
                     viewModel.fetchContribtuionDetails(at: newDay)
                 }
 
                 settingsView(data)
 
                 Label {
-                    Text(data.date(at: selectedDay))
+                    Text(data.date(at: data.selectedDay))
                         .font(.headline)
                 } icon: {
                     Image(systemName: "calendar")
@@ -54,6 +53,7 @@ struct ContributionView: View {
                         ForEach(data.notes()) { note in
                             notesRow(note)
                             .onTapGesture {
+//                                add.set(editingNote: note)
                                 editingNote = note
                                 addEditContribution = true
                             }
@@ -70,14 +70,14 @@ struct ContributionView: View {
                         EditButton()
                     }
                     .sheet(isPresented: $addEditContribution) {
-                        AddEditContributionView(day: selectedDay,
+                        AddEditContributionView(day: data.selectedDay,
                                                 contributionNote: editingNote,
                                                 isPresented: $addEditContribution)
                     }
                     .onChange(of: addEditContribution) { value in
                         guard !value else { return }
                         withAnimation(.spring()) {
-                            viewModel.fetchContributionData(at: selectedDay)
+                            viewModel.fetchContributionData()
                         }
                     }
                     .navigationTitle("Items")
