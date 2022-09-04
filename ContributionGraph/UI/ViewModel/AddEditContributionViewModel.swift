@@ -10,7 +10,6 @@ import Foundation
 
 final class AddEditContributionViewModel: ObservableObject {
     typealias State = ViewModelState<Bool>
-    typealias UpdateNoteUseCase = AnyUseCase<(Date, ContributionNote), Void>
 
     @Published var state = State.success(false)
 

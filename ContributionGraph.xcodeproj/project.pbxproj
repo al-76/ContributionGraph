@@ -47,7 +47,6 @@
 		CD9BF70E289C262600F75DE6 /* ContributionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */; };
 		CD9BF714289D6F5000F75DE6 /* XCTestCase+Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF712289D6E6E00F75DE6 /* XCTestCase+Await.swift */; };
 		CD9BF715289D6F5A00F75DE6 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF70F289D6A9100F75DE6 /* TestError.swift */; };
-		CD9BF718289D9EEA00F75DE6 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF717289D9EEA00F75DE6 /* UseCase.swift */; };
 		CD9BF71A289D9F2D00F75DE6 /* GetContributionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF719289D9F2D00F75DE6 /* GetContributionUseCase.swift */; };
 		CD9BF71C289D9F5000F75DE6 /* GetContributionSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF71B289D9F5000F75DE6 /* GetContributionSettingsUseCase.swift */; };
 		CD9BF71E289DA11400F75DE6 /* ContributionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF71D289DA11400F75DE6 /* ContributionSettings.swift */; };
@@ -123,7 +122,6 @@
 		CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionRepository.swift; sourceTree = "<group>"; };
 		CD9BF70F289D6A9100F75DE6 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		CD9BF712289D6E6E00F75DE6 /* XCTestCase+Await.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Await.swift"; sourceTree = "<group>"; };
-		CD9BF717289D9EEA00F75DE6 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		CD9BF719289D9F2D00F75DE6 /* GetContributionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionUseCase.swift; sourceTree = "<group>"; };
 		CD9BF71B289D9F5000F75DE6 /* GetContributionSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionSettingsUseCase.swift; sourceTree = "<group>"; };
 		CD9BF71D289DA11400F75DE6 /* ContributionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionSettings.swift; sourceTree = "<group>"; };
@@ -378,7 +376,6 @@
 				CD2FC9E228A03D4300F1424F /* ContributionMetrics */,
 				CD9BF722289EAA1200F75DE6 /* ContributionSettings */,
 				CD9BF721289EAA0A00F75DE6 /* Contribution */,
-				CD9BF717289D9EEA00F75DE6 /* UseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -700,7 +697,6 @@
 				CD538B4E2860C5C0004BA280 /* ContentView.swift in Sources */,
 				CD49109328BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift in Sources */,
 				CDBC5B3428AC3146006CD13D /* DefaultStorage.swift in Sources */,
-				CD9BF718289D9EEA00F75DE6 /* UseCase.swift in Sources */,
 				CDC5BE682869DA3E00D035FA /* Date+Utils.swift in Sources */,
 				CD728B1E2866623800221B6E /* Color+Init.swift in Sources */,
 				CD9BF71A289D9F2D00F75DE6 /* GetContributionUseCase.swift in Sources */,

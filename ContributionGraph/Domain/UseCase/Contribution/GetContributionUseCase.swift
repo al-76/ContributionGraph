@@ -8,14 +8,19 @@
 import Combine
 import Foundation
 
-final class GetContributionUseCase: UseCase {
+/// @mockable
+protocol GetContributionUseCase {
+    func callAsFunction() -> AnyPublisher<[Int: Contribution], Error>
+}
+
+final class DefaultGetContributionUseCase: GetContributionUseCase {
     private let repository: ContributionRepository
 
     init(repository: ContributionRepository) {
         self.repository = repository
     }
 
-    func callAsFunction(_ input: Void) -> AnyPublisher<[Int: Contribution], Error> {
+    func callAsFunction() -> AnyPublisher<[Int: Contribution], Error> {
         repository.read().map { items in
             items.reduce(into: [Int: Contribution]()) {
                 $0[Date.neutral.days(to: $1.date)] = $1

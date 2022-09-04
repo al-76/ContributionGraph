@@ -8,7 +8,12 @@
 import Foundation
 import Combine
 
-final class UpdateNoteUseCase: UseCase {
+/// @mockable
+protocol UpdateNoteUseCase {
+    func callAsFunction(_ input: (Date, ContributionNote)) -> AnyPublisher<Void, Error>
+}
+
+final class DefaultUpdateNoteUseCase: UpdateNoteUseCase {
     let repository: ContributionDetailsRepository
 
     init(repository: ContributionDetailsRepository) {
