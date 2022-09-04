@@ -13,8 +13,6 @@
 		CD0F621F28A67D5C001F8CD8 /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0F621E28A67D5C001F8CD8 /* DataContainer.swift */; };
 		CD2FC9E128A03CA600F1424F /* ContributionMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FC9E028A03CA600F1424F /* ContributionMetrics.swift */; };
 		CD2FC9E428A03D5200F1424F /* GetContributionMetricsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FC9E328A03D5200F1424F /* GetContributionMetricsUseCase.swift */; };
-		CD3052D128B57ABF000BE787 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = CD3052D028B57ABF000BE787 /* Cuckoo */; };
-		CD3052D328B57B7E000BE787 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3052D228B57B7E000BE787 /* GeneratedMocks.swift */; };
 		CD3052D628B59257000BE787 /* MockUseCase+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3052D528B59257000BE787 /* MockUseCase+init.swift */; };
 		CD3052D928B59306000BE787 /* XCTestCase+Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3052D828B59306000BE787 /* XCTestCase+Answer.swift */; };
 		CD49109128BCDA1E00D1A421 /* ViewModelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109028BCDA1E00D1A421 /* ViewModelState.swift */; };
@@ -44,6 +42,7 @@
 		CD84C1EA28C258C100165C0F /* ContributionNote+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD84C1E928C258C100165C0F /* ContributionNote+Init.swift */; };
 		CD84C1EF28C28F4E00165C0F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD84C1EE28C28F4E00165C0F /* ErrorView.swift */; };
 		CD84C1F228C290F000165C0F /* ContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD84C1F128C290F000165C0F /* ContributionView.swift */; };
+		CD8D9DA828C5320C00DF9A6E /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8D9DA728C5320C00DF9A6E /* GeneratedMocks.swift */; };
 		CD9BF704289C231700F75DE6 /* ContributionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF703289C231700F75DE6 /* ContributionViewModelTests.swift */; };
 		CD9BF70E289C262600F75DE6 /* ContributionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */; };
 		CD9BF714289D6F5000F75DE6 /* XCTestCase+Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF712289D6E6E00F75DE6 /* XCTestCase+Await.swift */; };
@@ -88,7 +87,6 @@
 		CD0F621E28A67D5C001F8CD8 /* DataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataContainer.swift; sourceTree = "<group>"; };
 		CD2FC9E028A03CA600F1424F /* ContributionMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionMetrics.swift; sourceTree = "<group>"; };
 		CD2FC9E328A03D5200F1424F /* GetContributionMetricsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionMetricsUseCase.swift; sourceTree = "<group>"; };
-		CD3052D228B57B7E000BE787 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		CD3052D528B59257000BE787 /* MockUseCase+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockUseCase+init.swift"; sourceTree = "<group>"; };
 		CD3052D828B59306000BE787 /* XCTestCase+Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Answer.swift"; sourceTree = "<group>"; };
 		CD49109028BCDA1E00D1A421 /* ViewModelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelState.swift; sourceTree = "<group>"; };
@@ -119,6 +117,7 @@
 		CD84C1E928C258C100165C0F /* ContributionNote+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContributionNote+Init.swift"; sourceTree = "<group>"; };
 		CD84C1EE28C28F4E00165C0F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		CD84C1F128C290F000165C0F /* ContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionView.swift; sourceTree = "<group>"; };
+		CD8D9DA728C5320C00DF9A6E /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		CD9BF701289C231700F75DE6 /* ContributionGraphTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContributionGraphTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9BF703289C231700F75DE6 /* ContributionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionViewModelTests.swift; sourceTree = "<group>"; };
 		CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionRepository.swift; sourceTree = "<group>"; };
@@ -161,7 +160,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD3052D128B57ABF000BE787 /* Cuckoo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,7 +324,7 @@
 		CD9BF702289C231700F75DE6 /* ContributionGraphTests */ = {
 			isa = PBXGroup;
 			children = (
-				CD3052D228B57B7E000BE787 /* GeneratedMocks.swift */,
+				CD8D9DA728C5320C00DF9A6E /* GeneratedMocks.swift */,
 				CD3052D728B592A6000BE787 /* Mock */,
 				CD64EAB428BA610800DA2B1E /* Data */,
 				CD9BF723289EB27400F75DE6 /* Domain */,
@@ -577,8 +575,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD9BF709289C231700F75DE6 /* Build configuration list for PBXNativeTarget "ContributionGraphTests" */;
 			buildPhases = (
-				CD848AD528B561A600A67B38 /* Cuckoo download */,
-				CD848AD628B561D800A67B38 /* Cuckoo generate mocks */,
+				CD39214428C5261500E95E75 /* Mockolo */,
 				CD9BF6FD289C231700F75DE6 /* Sources */,
 				CD9BF6FE289C231700F75DE6 /* Frameworks */,
 				CD9BF6FF289C231700F75DE6 /* Resources */,
@@ -590,7 +587,6 @@
 			);
 			name = ContributionGraphTests;
 			packageProductDependencies = (
-				CD3052D028B57ABF000BE787 /* Cuckoo */,
 			);
 			productName = ContributionViewModelTests;
 			productReference = CD9BF701289C231700F75DE6 /* ContributionGraphTests.xctest */;
@@ -626,7 +622,6 @@
 			mainGroup = CD538B3F2860C5C0004BA280;
 			packageReferences = (
 				CD0F621628A67A35001F8CD8 /* XCRemoteSwiftPackageReference "Factory" */,
-				CD3052CF28B57ABF000BE787 /* XCRemoteSwiftPackageReference "Cuckoo" */,
 			);
 			productRefGroup = CD538B492860C5C0004BA280 /* Products */;
 			projectDirPath = "";
@@ -658,7 +653,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CD848AD528B561A600A67B38 /* Cuckoo download */ = {
+		CD39214428C5261500E95E75 /* Mockolo */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -667,32 +662,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Cuckoo download";
+			name = Mockolo;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#mkdir -p Cuckoo\n#cd Cuckoo/\n#curl -Lo run https://raw.githubusercontent.com/Brightify/Cuckoo/master/run && chmod +x run\n";
-		};
-		CD848AD628B561D800A67B38 /* Cuckoo generate mocks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Cuckoo generate mocks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ $ACTION == \"indexbuild\" ]; then\n  echo \"Not running Cuckoo generator during indexing.\"\n  exit 0 \nfi\n\n# Skip for preview builds\nif [ \"${ENABLE_PREVIEWS}\" = \"YES\" ]; then\n  echo \"Not running Cuckoo generator during preview builds.\"\n  exit 0\nfi\n\n# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n#\"${PROJECT_DIR}/Cuckoo/run\" --download\n\"${PROJECT_DIR}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Domain/UseCase/UseCase.swift\" \\\n\"${INPUT_DIR}/Domain/Data/ContributionRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/ContributionDetailsRepository.swift\" \\\n\"${INPUT_DIR}/Data/Platform/Storage.swift\" \\\n\"${INPUT_DIR}/Data/Mapper/Mapper.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
+			shellScript = "if which mockolo > /dev/null; then\n  mockolo -s ${PROJECT_NAME} -d ContributionGraphTests/GeneratedMocks.swift --header \"@testable import ${PROJECT_NAME}\"\nfi\n";
 		};
 		CDD950A728C0127F0071516B /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -780,10 +757,10 @@
 				CD3052D628B59257000BE787 /* MockUseCase+init.swift in Sources */,
 				CD9BF726289EB2BA00F75DE6 /* ContributionItem+Equatable.swift in Sources */,
 				CD53601028A3049100B4EEE6 /* AddEditContributionViewModelTests.swift in Sources */,
+				CD8D9DA828C5320C00DF9A6E /* GeneratedMocks.swift in Sources */,
 				CD3052D928B59306000BE787 /* XCTestCase+Answer.swift in Sources */,
 				CD9BF714289D6F5000F75DE6 /* XCTestCase+Await.swift in Sources */,
 				CD602BCB28BE368B00E1A63C /* ViewModelState+Equatable.swift in Sources */,
-				CD3052D328B57B7E000BE787 /* GeneratedMocks.swift in Sources */,
 				CD84C1EA28C258C100165C0F /* ContributionNote+Init.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1048,14 +1025,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		CD3052CF28B57ABF000BE787 /* XCRemoteSwiftPackageReference "Cuckoo" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Brightify/Cuckoo.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1063,11 +1032,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CD0F621628A67A35001F8CD8 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
-		};
-		CD3052D028B57ABF000BE787 /* Cuckoo */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CD3052CF28B57ABF000BE787 /* XCRemoteSwiftPackageReference "Cuckoo" */;
-			productName = Cuckoo;
 		};
 /* End XCSwiftPackageProductDependency section */
 

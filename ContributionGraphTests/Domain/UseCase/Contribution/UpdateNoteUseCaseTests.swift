@@ -1,51 +1,47 @@
+////
+////  UpdateNoteUseCaseTests.swift
+////  ContributionGraphTests
+////
+////  Created by Vyacheslav Konopkin on 27.08.2022.
+////
 //
-//  UpdateNoteUseCaseTests.swift
-//  ContributionGraphTests
+//import XCTest
+//import Combine
+//import Mockingbird
 //
-//  Created by Vyacheslav Konopkin on 27.08.2022.
+//@testable import ContributionGraph
 //
-
-import XCTest
-import Combine
-import Cuckoo
-
-@testable import ContributionGraph
-
-extension ContributionNote: Matchable {}
-extension Date: Matchable {}
-
-class UpdateNoteUseCaseTests: XCTestCase {
-    private let testDate = Date.now
-    private let testNote = ContributionNote(id: UUID(), title: "", changed: Date.now, note: "test")
-
-    func testExecute() throws {
-        // Arrange
-        let repository = MockContributionDetailsRepository()
-        stub(repository) { stub in
-            when(stub.write(testNote, at: testDate)).thenReturn(successAnswer(()))
-        }
-        let addNote = UpdateNoteUseCase(repository: repository)
-
-        // Act
-        try awaitPublisher(addNote((testDate, testNote)))
-
-        // Assert
-        verify(repository).write(testNote, at: testDate)
-    }
-
-    func testExecuteError() throws {
-        // Arrange
-        let repository = MockContributionDetailsRepository()
-        stub(repository) { stub in
-            when(stub.write(testNote, at: testDate)).thenReturn(failAnswer())
-        }
-        let addNote = UpdateNoteUseCase(repository: repository)
-
-        // Act
-        let result = try awaitError(addNote((testDate, testNote)))
-
-        // Assert
-        XCTAssertEqual(result as? TestError, TestError.someError)
-        verify(repository).write(testNote, at: testDate)
-    }
-}
+////extension ContributionNote: Matchable {}
+////extension Date: Matchable {}
+//
+//class UpdateNoteUseCaseTests: XCTestCase {
+//    private let testDate = Date.now
+//    private let testNote = ContributionNote(id: UUID(), title: "", changed: Date.now, note: "test")
+//
+//    func testExecute() throws {
+//        // Arrange
+//        let repository = mock(ContributionDetailsRepository.self)
+//        given(repository.write(testNote, at: testDate)).willReturn(successAnswer(()))
+//        let addNote = UpdateNoteUseCase(repository: repository)
+//
+//        // Act
+//        try awaitPublisher(addNote((testDate, testNote)))
+//
+//        // Assert
+//        verify(repository.write(testNote, at: testDate)).wasCalled()
+//    }
+//
+//    func testExecuteError() throws {
+//        // Arrange
+//        let repository = mock(ContributionDetailsRepository.self)
+//        given(repository.write(testNote, at: testDate)).willReturn(failAnswer())
+//        let addNote = UpdateNoteUseCase(repository: repository)
+//
+//        // Act
+//        let result = try awaitError(addNote((testDate, testNote)))
+//
+//        // Assert
+//        XCTAssertEqual(result as? TestError, TestError.someError)
+//        verify(repository.write(testNote, at: testDate)).wasCalled()
+//    }
+//}

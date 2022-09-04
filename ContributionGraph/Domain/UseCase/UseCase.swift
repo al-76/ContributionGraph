@@ -7,6 +7,7 @@
 
 import Combine
 
+/// @mockable
 protocol UseCase {
     associatedtype Input
     associatedtype Output
@@ -14,7 +15,7 @@ protocol UseCase {
     func callAsFunction(_ input: Input) -> AnyPublisher<Output, Error>
 }
 
-final class AnyUseCase<Input, Output>: UseCase {
+class AnyUseCase<Input, Output>: UseCase {
     private let callAsFunction: (_ input: Input) -> AnyPublisher<Output, Error>
 
     init<TypeUseCase: UseCase>(wrapped: TypeUseCase)

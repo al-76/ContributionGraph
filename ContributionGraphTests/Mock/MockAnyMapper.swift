@@ -1,18 +1,36 @@
+////
+////  MockAnyMapper.swift
+////  ContributionGraphTests
+////
+////  Created by Vyacheslav Konopkin on 30.08.2022.
+////
 //
-//  MockAnyMapper.swift
-//  ContributionGraphTests
+//import Mockingbird
 //
-//  Created by Vyacheslav Konopkin on 30.08.2022.
+//@testable import ContributionGraph
 //
-
-import Foundation
-
-@testable import ContributionGraph
-
-func mockAnyMapper<Input, Output>() -> AnyMapper<Input, Output> {
-    AnyMapper(wrapped: MockMapper())
-}
-
-func mockAnyMapper<Input, Output>(_ mock: MockMapper<Input, Output>) -> AnyMapper<Input, Output> {
-    AnyMapper(wrapped: mock)
-}
+////protocol TestMapper: Mapper where Input == Any, Output == Any {
+////    func map(input: Input) -> Output
+////}
+////
+////func mockAnyMapper<Input, Output>() -> AnyMapper<Input, Output> {
+////    let m = mock(TestMapper.self)
+//////    AnyMapper(wrapped: mock(TestMapper.self))
+////}
+////
+//
+//func mockAnyMapper<Input, Output>(_ mock: MockAnyMapper<Input, Output>) -> AnyMapper<Input, Output> {
+//    AnyMapper(wrapped: mock)
+//}
+//
+//class MockAnyMapper<Input, Output>: Mapper {
+//    let output: Output
+//
+//    init(output: Output) {
+//        self.output = output
+//    }
+//
+//    func map(input: Input) -> Output {
+//        return output
+//    }
+//}
