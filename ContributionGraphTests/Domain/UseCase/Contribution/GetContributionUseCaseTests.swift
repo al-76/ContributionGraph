@@ -1,46 +1,51 @@
-////
-////  GetContributionUseCaseTests.swift
-////  ContributionGraphTests
-////
-////  Created by Vyacheslav Konopkin on 27.08.2022.
-////
 //
-//import XCTest
-//import Combine
-//import Mockingbird
+//  GetContributionUseCaseTests.swift
+//  ContributionGraphTests
 //
-//@testable import ContributionGraph
+//  Created by Vyacheslav Konopkin on 27.08.2022.
 //
-//class GetContributionUseCaseTests: XCTestCase {
-//    func testExecute() throws {
-//        // Arrange
-//        let testData = [Contribution(days: 0),
-//                        Contribution(days: 1),
-//                        Contribution(days: 2)]
-//        let repository = mock(ContributionRepository.self)
-//        given(repository.read()).willReturn(successAnswer(testData))
-//        let getContrubtion = GetContributionUseCase(repository: repository)
-//
-//        // Act
-//        let result = try awaitPublisher(getContrubtion(()))
-//
-//        // Assert
-//        XCTAssertEqual(result.map { $0.value }.sorted { $0.date > $1.date },
-//                       testData)
-//        verify(repository.read()).wasCalled()
-//    }
-//
-//    func testExecuteError() throws {
-//        // Arrange
-//        let repository = mock(ContributionRepository.self)
-//        given(repository.read()).willReturn(failAnswer())
-//        let getContrubtion = GetContributionUseCase(repository: repository)
-//
-//        // Act
-//        let result = try awaitError(getContrubtion(()))
-//
-//        // Assert
-//        XCTAssertEqual(result as? TestError, TestError.someError)
-//        verify(repository.read()).wasCalled()
-//    }
-//}
+
+import XCTest
+import Combine
+
+@testable import ContributionGraph
+
+class GetContributionUseCaseTests: XCTestCase {
+    private var repository: ContributionRepositoryMock!
+    private var useCase: DefaultGetContributionUseCase!
+
+    override func setUp() {
+        super.setUp()
+
+        repository = ContributionRepositoryMock()
+        useCase = DefaultGetContributionUseCase(repository: repository)
+    }
+
+    func testExecute() throws {
+        // Arrange
+        let testData = [Contribution(days: 0),
+                        Contribution(days: 1),
+                        Contribution(days: 2)]
+        repository.readHandler = { successAnswer(testData) }
+
+        // Act
+        let result = try awaitPublisher(useCase())
+
+        // Assert
+        XCTAssertEqual(result.map { $0.value }.sorted { $0.date > $1.date },
+                       testData)
+        XCTAssertEqual(repository.readCallCount, 1)
+    }
+
+    func testExecuteError() throws {
+        // Arrange
+        repository.readHandler = { failAnswer() }
+
+        // Act
+        let result = try awaitError(useCase())
+
+        // Assert
+        XCTAssertEqual(result as? TestError, TestError.someError)
+        XCTAssertEqual(repository.readCallCount, 1)
+    }
+}

@@ -1,47 +1,48 @@
-////
-////  UpdateNoteUseCaseTests.swift
-////  ContributionGraphTests
-////
-////  Created by Vyacheslav Konopkin on 27.08.2022.
-////
 //
-//import XCTest
-//import Combine
-//import Mockingbird
+//  UpdateNoteUseCaseTests.swift
+//  ContributionGraphTests
 //
-//@testable import ContributionGraph
+//  Created by Vyacheslav Konopkin on 27.08.2022.
 //
-////extension ContributionNote: Matchable {}
-////extension Date: Matchable {}
-//
-//class UpdateNoteUseCaseTests: XCTestCase {
-//    private let testDate = Date.now
-//    private let testNote = ContributionNote(id: UUID(), title: "", changed: Date.now, note: "test")
-//
-//    func testExecute() throws {
-//        // Arrange
-//        let repository = mock(ContributionDetailsRepository.self)
-//        given(repository.write(testNote, at: testDate)).willReturn(successAnswer(()))
-//        let addNote = UpdateNoteUseCase(repository: repository)
-//
-//        // Act
-//        try awaitPublisher(addNote((testDate, testNote)))
-//
-//        // Assert
-//        verify(repository.write(testNote, at: testDate)).wasCalled()
-//    }
-//
-//    func testExecuteError() throws {
-//        // Arrange
-//        let repository = mock(ContributionDetailsRepository.self)
-//        given(repository.write(testNote, at: testDate)).willReturn(failAnswer())
-//        let addNote = UpdateNoteUseCase(repository: repository)
-//
-//        // Act
-//        let result = try awaitError(addNote((testDate, testNote)))
-//
-//        // Assert
-//        XCTAssertEqual(result as? TestError, TestError.someError)
-//        verify(repository.write(testNote, at: testDate)).wasCalled()
-//    }
-//}
+
+import XCTest
+import Combine
+
+@testable import ContributionGraph
+
+class DefaultUpdateNoteUseCaseTests: XCTestCase {
+    private let testDate = Date.now
+    private let testNote = ContributionNote(id: UUID(), title: "", changed: Date.now, note: "test")
+    private var useCase: DefaultUpdateNoteUseCase!
+    private var repository: ContributionDetailsRepositoryMock!
+
+    override func setUp() {
+        super.setUp()
+
+        repository = ContributionDetailsRepositoryMock()
+        useCase = DefaultUpdateNoteUseCase(repository: repository)
+    }
+
+    func testExecute() throws {
+        // Arrange
+        repository.writeHandler = { _, _ in successAnswer(()) }
+
+        // Act
+        try awaitPublisher(useCase((testDate, testNote)))
+
+        // Assert
+        XCTAssertEqual(repository.writeCallCount, 1)
+    }
+
+    func testExecuteError() throws {
+        // Arrange
+        repository.writeHandler = { _, _ in failAnswer() }
+
+        // Act
+        let result = try awaitError(useCase((testDate, testNote)))
+
+        // Assert
+        XCTAssertEqual(result as? TestError, TestError.someError)
+        XCTAssertEqual(repository.writeCallCount, 1)
+    }
+}
