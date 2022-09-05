@@ -9,18 +9,13 @@ import Foundation
 import Combine
 
 final class DefaultContributionDetailsRepository: ContributionDetailsRepository {
-    typealias Mapper = AnyMapper<CDContribution, ContributionDetails?>
-    typealias DtoMapper =
-    AnyMapper<(Date, ContributionNote, CDContribution?, StorageContext),
-              Result<CDContributionNote, Error>>
-
     private let storage: Storage
-    private let mapper: Mapper
-    private let dtoMapper: DtoMapper
+    private let mapper: ContributionDetailsMapper
+    private let dtoMapper: DefaultDtoContributionNoteMapper
 
     init(storage: Storage,
-         mapper: Mapper,
-         dtoMapper: DtoMapper) {
+         mapper: ContributionDetailsMapper,
+         dtoMapper: DefaultDtoContributionNoteMapper) {
         self.storage = storage
         self.mapper = mapper
         self.dtoMapper = dtoMapper

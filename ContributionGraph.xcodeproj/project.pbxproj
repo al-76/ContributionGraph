@@ -55,7 +55,6 @@
 		CD9D1D5828B92CEB0023A8D1 /* PlatformContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D1D5728B92CEB0023A8D1 /* PlatformContainer.swift */; };
 		CDBC5B3428AC3146006CD13D /* DefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B3328AC3146006CD13D /* DefaultStorage.swift */; };
 		CDBC5B3728AC3159006CD13D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B3628AC3159006CD13D /* Storage.swift */; };
-		CDBC5B4C28AC5D13006CD13D /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B4B28AC5D13006CD13D /* Mapper.swift */; };
 		CDBC5B4E28AC5D46006CD13D /* ContributionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */; };
 		CDC48E5B2891B7360062ADE7 /* AddEditContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC48E5A2891B7360062ADE7 /* AddEditContributionView.swift */; };
 		CDC5BE5F2869D4DD00D035FA /* ContributionGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE5E2869D4DD00D035FA /* ContributionGraphView.swift */; };
@@ -128,7 +127,6 @@
 		CD9D1D5728B92CEB0023A8D1 /* PlatformContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformContainer.swift; sourceTree = "<group>"; };
 		CDBC5B3328AC3146006CD13D /* DefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorage.swift; sourceTree = "<group>"; };
 		CDBC5B3628AC3159006CD13D /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		CDBC5B4B28AC5D13006CD13D /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
 		CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionMapper.swift; sourceTree = "<group>"; };
 		CDC48E5A2891B7360062ADE7 /* AddEditContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditContributionView.swift; sourceTree = "<group>"; };
 		CDC5BE5E2869D4DD00D035FA /* ContributionGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphView.swift; sourceTree = "<group>"; };
@@ -423,7 +421,6 @@
 		CDBC5B4A28AC5CFC006CD13D /* Mapper */ = {
 			isa = PBXGroup;
 			children = (
-				CDBC5B4B28AC5D13006CD13D /* Mapper.swift */,
 				CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */,
 				CD602BC628BE196800E1A63C /* ContributionDetailsMapper.swift */,
 				CD602BC828BE1C2200E1A63C /* ContributionNoteMapper.swift */,
@@ -688,7 +685,6 @@
 				CD9BF71A289D9F2D00F75DE6 /* GetContributionUseCase.swift in Sources */,
 				CDC5BE6B2869DA8900D035FA /* DefaultContributionRepository.swift in Sources */,
 				CD602BC928BE1C2200E1A63C /* ContributionNoteMapper.swift in Sources */,
-				CDBC5B4C28AC5D13006CD13D /* Mapper.swift in Sources */,
 				CDC5BE722869F0AB00D035FA /* Contribution.swift in Sources */,
 				CD0F621D28A67D51001F8CD8 /* DomainContainer.swift in Sources */,
 				CD53600A28A196AD00B4EEE6 /* UpdateNoteUseCase.swift in Sources */,

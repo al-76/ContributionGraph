@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct ContributionMapper: Mapper {
+protocol ContributionMapper {
+    func map(input: CDContribution) -> Contribution
+}
+
+struct DefaultContributionMapper: ContributionMapper {
     func map(input: CDContribution) -> Contribution {
         Contribution(date: input.date ?? Date.neutral,
                      count: Int(input.count))
