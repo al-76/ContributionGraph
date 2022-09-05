@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// @mockable
 protocol ContributionMapper {
     func map(input: CDContribution) -> Contribution
 }
