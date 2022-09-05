@@ -11,8 +11,6 @@ import Combine
 @testable import ContributionGraph
 
 class ContributionRepositoryTests: XCTestCase {
-    typealias OnCompletion = StorageMock.OnCompletion<CDContribution>
-
     private var storage: StorageMock!
     private var mapper: ContributionMapperMock!
     private var repository: ContributionRepository!
@@ -31,11 +29,8 @@ class ContributionRepositoryTests: XCTestCase {
         let test = (data: Contribution(days: 0),
                     dto: CDContribution())
         storage.fetchHandler = { _, _, completion in
-            guard let completion = completion as? OnCompletion else {
-                return
-            }
-            completion(.success((context: StorageContextMock(),
-                                     items: [test.dto])))
+            storageMockHandler(completion,
+                               .success((context: StorageContextMock(), items: [test.dto])))
         }
         mapper.mapHandler = { _ in test.data }
 
@@ -52,10 +47,9 @@ class ContributionRepositoryTests: XCTestCase {
         // Arrange
         let testError = TestError.someError
         storage.fetchHandler = { _, _, completion in
-            guard let completion = completion as? OnCompletion else {
-                return
-            }
-            completion(.failure(TestError.someError))
+            storageMockHandler(completion,
+                               .failure(TestError.someError),
+                               CDContribution.self)
         }
 
         // Act

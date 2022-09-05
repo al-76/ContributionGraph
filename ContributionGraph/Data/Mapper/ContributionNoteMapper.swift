@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// @mockable
+/// @mockable(history: map = true)
 protocol DtoContributionNoteMapper {
     typealias Input = (Date,
                        ContributionNote,

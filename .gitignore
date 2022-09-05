@@ -28,5 +28,5 @@ xcuserdata/
 # CocoaPods
 Pods
 
-# Cuckoo mocks
-ContributionGraphTests/GeneratedMocks.swift
+# Generated mocks
+#ContributionGraphTests/GeneratedMocks.swift

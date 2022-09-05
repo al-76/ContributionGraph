@@ -65,6 +65,7 @@
 		CDD3A0F52868BA3500878A09 /* ContributionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDD3A0F32868BA3500878A09 /* ContributionModel.xcdatamodeld */; };
 		CDD3A0F7286906E400878A09 /* View+isHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD3A0F6286906E400878A09 /* View+isHidden.swift */; };
 		CDD8EC3E28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */; };
+		CDD8EC4028C67D1D000BB47B /* StorageMockHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,7 @@
 		CDD3A0F42868BA3500878A09 /* ContributionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContributionModel.xcdatamodel; sourceTree = "<group>"; };
 		CDD3A0F6286906E400878A09 /* View+isHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+isHidden.swift"; sourceTree = "<group>"; };
 		CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCaseTests.swift; sourceTree = "<group>"; };
+		CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMockHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +277,7 @@
 			children = (
 				CD64EAB528BA617B00DA2B1E /* ContributionRepositoryTests.swift */,
 				CD602BCE28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift */,
+				CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -738,6 +741,7 @@
 				CD9BF714289D6F5000F75DE6 /* XCTestCase+Await.swift in Sources */,
 				CD602BCB28BE368B00E1A63C /* ViewModelState+Equatable.swift in Sources */,
 				CD84C1EA28C258C100165C0F /* ContributionNote+Init.swift in Sources */,
+				CDD8EC4028C67D1D000BB47B /* StorageMockHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
