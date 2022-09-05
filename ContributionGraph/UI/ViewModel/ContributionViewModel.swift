@@ -17,6 +17,7 @@ final class ContributionViewModel: ObservableObject {
         let settings: ContributionSettings
         let metrics: ContributionMetrics
         let selectedDay: Int
+        let editingNote: ContributionNote?
 
         func set(weekCount: Int) -> ContributionSettings {
             ContributionSettings(weekCount: weekCount)
@@ -47,20 +48,18 @@ final class ContributionViewModel: ObservableObject {
                 .format()
         }
 
-        func update(details: ContributionDetails?) -> Data {
-            Data(items: items,
-                 details: details,
-                 settings: settings,
-                 metrics: metrics,
-                 selectedDay: selectedDay)
-        }
-
-        func update(selectedDay: Int) -> Data {
-            Data(items: items,
-                 details: details,
-                 settings: settings,
-                 metrics: metrics,
-                 selectedDay: selectedDay)
+        func copy(items: [Int: Contribution]? = nil,
+                  details: ContributionDetails? = nil,
+                  settings: ContributionSettings? = nil,
+                  metrics: ContributionMetrics? = nil,
+                  selectedDay: Int? = nil,
+                  editingNote: ContributionNote? = nil) -> Data {
+            Data(items: items ?? self.items,
+                 details: details ?? self.details,
+                 settings: settings ?? self.settings,
+                 metrics: metrics ?? self.metrics,
+                 selectedDay: selectedDay ?? self.selectedDay,
+                 editingNote: editingNote ?? self.editingNote)
         }
     }
 
@@ -89,7 +88,7 @@ final class ContributionViewModel: ObservableObject {
         switch state {
         case .success(let data):
             state = .loading
-            setAction(settings: settings, at: data.selectedDay)
+            setSettingsAction(settings, data)
 
         default: // nothing to do here
             break
@@ -99,7 +98,17 @@ final class ContributionViewModel: ObservableObject {
     func set(selectedDay day: Int) {
         switch state {
         case .success(let data):
-            state = .success(data.update(selectedDay: day))
+            state = .success(data.copy(selectedDay: day))
+
+        default: // nothing to do here
+            break
+        }
+    }
+
+    func set(editingNote note: ContributionNote?) {
+        switch state {
+        case .success(let data):
+            state = .success(data.copy(editingNote: note))
 
         default: // nothing to do here
             break
@@ -110,11 +119,11 @@ final class ContributionViewModel: ObservableObject {
         switch state {
         case .success(let data):
             state = .loading
-            fetchContributionDataAction(at: data.selectedDay)
+            fetchContributionDataAction(data)
 
         default:
             state = .loading
-            fetchContributionDataAction(at: 0)
+            fetchContributionDataAction()
         }
     }
 
@@ -122,7 +131,7 @@ final class ContributionViewModel: ObservableObject {
         switch state {
         case .success(let data):
             getDetails(Date.neutral.days(ago: day))
-                .map { .success(data.update(details: $0)) }
+                .map { .success(data.copy(details: $0)) }
                 .catch { Just(.failure($0)).eraseToAnyPublisher() }
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$state)
@@ -132,21 +141,21 @@ final class ContributionViewModel: ObservableObject {
         }
     }
 
-    private func fetchContributionDataAction(at day: Int) {
+    private func fetchContributionDataAction(_ data: Data? = nil) {
         fetch(items: getItems(),
-              details: getDetails(Date.neutral.days(ago: day)),
+              details: getDetails(Date.neutral.days(ago: data?.selectedDay ?? 0)),
               settings: getSettings(),
               metrics: getMetrics(),
-              selectedDay: day)
+              data: data)
             .assign(to: &$state)
     }
 
-    private func setAction(settings: ContributionSettings, at day: Int) {
+    private func setSettingsAction(_ settings: ContributionSettings, _ data: Data?) {
         fetch(items: getItems(),
               details: getDetails(Date.neutral),
               settings: setSettings(settings),
               metrics: getMetrics(),
-              selectedDay: day)
+              data: data)
             .assign(to: &$state)
     }
 
@@ -154,13 +163,11 @@ final class ContributionViewModel: ObservableObject {
                        details: AnyPublisher<ContributionDetails?, Error>,
                        settings: AnyPublisher<ContributionSettings, Error>,
                        metrics: AnyPublisher<ContributionMetrics, Error>,
-                       selectedDay day: Int) -> AnyPublisher<State, Never> {
+                       data: Data?) -> AnyPublisher<State, Never> {
         items.zip(details, settings, metrics)
-            .map { .success(Data(items: $0,
-                                 details: $1,
-                                 settings: $2,
-                                 metrics: $3,
-                                 selectedDay: day)) }
+            .map { .success(data?.copy(items: $0, details: $1, settings: $2, metrics: $3) ??
+                            Data(items: $0, details: $1, settings: $2, metrics: $3,
+                                 selectedDay: 0, editingNote: nil)) }
             .catch { Just(.failure($0)).eraseToAnyPublisher() }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

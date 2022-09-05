@@ -10,7 +10,6 @@ import SwiftUI
 struct ContributionView: View {
     @StateObject private var viewModel = UIContainer.contributionViewModel()
     @State private var addEditContribution = false
-    @State private var editingNote: ContributionNote?
 
     var body: some View {
         VStack(alignment: .trailing) {
@@ -53,8 +52,7 @@ struct ContributionView: View {
                         ForEach(data.notes()) { note in
                             notesRow(note)
                             .onTapGesture {
-//                                add.set(editingNote: note)
-                                editingNote = note
+                                viewModel.set(editingNote: note)
                                 addEditContribution = true
                             }
                         }
@@ -63,7 +61,7 @@ struct ContributionView: View {
                     }
                     .toolbar {
                         Button {
-                            editingNote = nil
+                            viewModel.set(editingNote: nil)
                             addEditContribution = true
                         } label: { Image(systemName: "plus") }
 
@@ -71,7 +69,7 @@ struct ContributionView: View {
                     }
                     .sheet(isPresented: $addEditContribution) {
                         AddEditContributionView(day: data.selectedDay,
-                                                contributionNote: editingNote,
+                                                contributionNote: data.editingNote,
                                                 isPresented: $addEditContribution)
                     }
                     .onChange(of: addEditContribution) { value in

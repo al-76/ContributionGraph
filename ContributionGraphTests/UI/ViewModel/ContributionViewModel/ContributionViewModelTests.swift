@@ -16,7 +16,8 @@ class ContributionViewModelTests: XCTestCase {
                                                   details: ContributionDetails(date: Date.neutral, notes: [ContributionNote("test")]),
                                                   settings: ContributionSettings(weekCount: 15),
                                                   metrics: ContributionMetrics(totalWeekCount: 50, totalContributionCount: 500),
-                                                  selectedDay: 0)
+                                                  selectedDay: 0,
+                                                  editingNote: ContributionNote("test"))
     private var getItems: GetContributionUseCaseMock!
     private var getDetails: GetContributionDetailsUseCaseMock!
     private var getSettings: GetContributionSettingsUseCaseMock!
@@ -153,7 +154,8 @@ class ContributionViewModelTests: XCTestCase {
                                                  details: nil,
                                                  settings: ContributionSettings(weekCount: 400),
                                                  metrics: data.metrics,
-                                                 selectedDay: 0)
+                                                 selectedDay: 0,
+                                                 editingNote: data.editingNote)
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
         getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
@@ -232,18 +234,35 @@ class ContributionViewModelTests: XCTestCase {
     func testSetSelectedDay() throws {
         // Arrange
         let testDay = 10
-        let testData = data.update(selectedDay: testDay)
+        let testData = data.copy(selectedDay: testDay)
         let data = data
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
         getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        setSettings.callAsFunctionHandler = { _ in successAnswer(data.settings) }
         getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
 
         // Act
         viewModel.set(selectedDay: testDay)
+
+        // Answer
+        XCTAssertEqual(try awaitPublisher(viewModel.$state), .success(testData))
+    }
+
+    func testSetEditingNote() throws {
+        let testNote = ContributionNote("editingTest")
+        let testData = data.copy(editingNote: testNote)
+        let data = data
+        getItems.callAsFunctionHandler = { successAnswer(data.items) }
+        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
+        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
+        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
+        viewModel.fetchContributionData()
+        try awaitPublisher(viewModel.$state.dropFirst())
+
+        // Act
+        viewModel.set(editingNote: testNote)
 
         // Answer
         XCTAssertEqual(try awaitPublisher(viewModel.$state), .success(testData))
