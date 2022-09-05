@@ -9,12 +9,14 @@ import Foundation
 import CoreData
 import Combine
 
+/// @mockable
 protocol StorageContext {
     func newData<T: NSManagedObject>(_ type: T.Type) throws -> T
     func save() throws
     func delete<T: NSManagedObject>(object: T) throws
 }
 
+/// @mockable
 protocol Storage {
     typealias OnCompletion<T> = (Result<(context: StorageContext, items: [T]), Error>) -> Void
 

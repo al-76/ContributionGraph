@@ -30,9 +30,9 @@
 		CD602BC728BE196800E1A63C /* ContributionDetailsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD602BC628BE196800E1A63C /* ContributionDetailsMapper.swift */; };
 		CD602BC928BE1C2200E1A63C /* ContributionNoteMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD602BC828BE1C2200E1A63C /* ContributionNoteMapper.swift */; };
 		CD602BCB28BE368B00E1A63C /* ViewModelState+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD602BCA28BE368B00E1A63C /* ViewModelState+Equatable.swift */; };
-		CD602BCF28BEB6B800E1A63C /* DefaultContributionDetailsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD602BCE28BEB6B800E1A63C /* DefaultContributionDetailsRepositoryTests.swift */; };
+		CD602BCF28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD602BCE28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift */; };
 		CD64EAB328BA5D0D00DA2B1E /* GetContributionUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD64EAB228BA5D0D00DA2B1E /* GetContributionUseCaseTests.swift */; };
-		CD64EAB628BA617B00DA2B1E /* DefaultContributionRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD64EAB528BA617B00DA2B1E /* DefaultContributionRepositoryTests.swift */; };
+		CD64EAB628BA617B00DA2B1E /* ContributionRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD64EAB528BA617B00DA2B1E /* ContributionRepositoryTests.swift */; };
 		CD728B1C2866602300221B6E /* UIColor+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD728B1B2866602300221B6E /* UIColor+Init.swift */; };
 		CD728B1E2866623800221B6E /* Color+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD728B1D2866623800221B6E /* Color+Init.swift */; };
 		CD728B202866625C00221B6E /* View+foregroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD728B1F2866625C00221B6E /* View+foregroundColor.swift */; };
@@ -101,9 +101,9 @@
 		CD602BC628BE196800E1A63C /* ContributionDetailsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionDetailsMapper.swift; sourceTree = "<group>"; };
 		CD602BC828BE1C2200E1A63C /* ContributionNoteMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionNoteMapper.swift; sourceTree = "<group>"; };
 		CD602BCA28BE368B00E1A63C /* ViewModelState+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModelState+Equatable.swift"; sourceTree = "<group>"; };
-		CD602BCE28BEB6B800E1A63C /* DefaultContributionDetailsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionDetailsRepositoryTests.swift; sourceTree = "<group>"; };
+		CD602BCE28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionDetailsRepositoryTests.swift; sourceTree = "<group>"; };
 		CD64EAB228BA5D0D00DA2B1E /* GetContributionUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionUseCaseTests.swift; sourceTree = "<group>"; };
-		CD64EAB528BA617B00DA2B1E /* DefaultContributionRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultContributionRepositoryTests.swift; path = ContributionGraphTests/Data/DefaultContributionRepositoryTests.swift; sourceTree = SOURCE_ROOT; };
+		CD64EAB528BA617B00DA2B1E /* ContributionRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContributionRepositoryTests.swift; path = ContributionGraphTests/Data/ContributionRepositoryTests.swift; sourceTree = SOURCE_ROOT; };
 		CD728B1B2866602300221B6E /* UIColor+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Init.swift"; sourceTree = "<group>"; };
 		CD728B1D2866623800221B6E /* Color+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Init.swift"; sourceTree = "<group>"; };
 		CD728B1F2866625C00221B6E /* View+foregroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+foregroundColor.swift"; sourceTree = "<group>"; };
@@ -273,8 +273,8 @@
 		CD64EAB428BA610800DA2B1E /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CD64EAB528BA617B00DA2B1E /* DefaultContributionRepositoryTests.swift */,
-				CD602BCE28BEB6B800E1A63C /* DefaultContributionDetailsRepositoryTests.swift */,
+				CD64EAB528BA617B00DA2B1E /* ContributionRepositoryTests.swift */,
+				CD602BCE28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -726,9 +726,9 @@
 				CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */,
 				CD64EAB328BA5D0D00DA2B1E /* GetContributionUseCaseTests.swift in Sources */,
 				CD9BF704289C231700F75DE6 /* ContributionViewModelTests.swift in Sources */,
-				CD64EAB628BA617B00DA2B1E /* DefaultContributionRepositoryTests.swift in Sources */,
+				CD64EAB628BA617B00DA2B1E /* ContributionRepositoryTests.swift in Sources */,
 				CD9BF728289EB2D200F75DE6 /* ContributionSettings+Equatable.swift in Sources */,
-				CD602BCF28BEB6B800E1A63C /* DefaultContributionDetailsRepositoryTests.swift in Sources */,
+				CD602BCF28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift in Sources */,
 				CD9BF72A289EB34600F75DE6 /* ContributionViewModelData+Equatable.swift in Sources */,
 				CD9BF726289EB2BA00F75DE6 /* ContributionItem+Equatable.swift in Sources */,
 				CD53601028A3049100B4EEE6 /* AddEditContributionViewModelTests.swift in Sources */,
