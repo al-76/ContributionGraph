@@ -11,11 +11,11 @@ import Combine
 final class DefaultContributionDetailsRepository: ContributionDetailsRepository {
     private let storage: Storage
     private let mapper: ContributionDetailsMapper
-    private let dtoMapper: DefaultDtoContributionNoteMapper
+    private let dtoMapper: DtoContributionNoteMapper
 
     init(storage: Storage,
          mapper: ContributionDetailsMapper,
-         dtoMapper: DefaultDtoContributionNoteMapper) {
+         dtoMapper: DtoContributionNoteMapper) {
         self.storage = storage
         self.mapper = mapper
         self.dtoMapper = dtoMapper

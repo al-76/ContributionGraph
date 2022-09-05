@@ -1,102 +1,105 @@
-////
-////  DefaultContributionDetailsRepositoryTests.swift
-////  ContributionGraphTests
-////
-////  Created by Vyacheslav Konopkin on 31.08.2022.
-////
 //
-//import XCTest
-//import Cuckoo
+//  ContributionDetailsRepositoryTests.swift
+//  ContributionGraphTests
 //
-//@testable import ContributionGraph
+//  Created by Vyacheslav Konopkin on 31.08.2022.
 //
-//extension ContributionDetails: Equatable {
-//    public static func == (lhs: ContributionDetails, rhs: ContributionDetails) -> Bool {
-//        lhs.date == rhs.date && lhs.notes == rhs.notes
-//    }
-//}
-//
-//// swiftlint:disable type_name
-//class DefaultContributionDetailsRepositoryTests: XCTestCase {
+
+import XCTest
+
+@testable import ContributionGraph
+
+extension ContributionDetails: Equatable {
+    public static func == (lhs: ContributionDetails, rhs: ContributionDetails) -> Bool {
+        lhs.date == rhs.date && lhs.notes == rhs.notes
+    }
+}
+
+class ContributionDetailsRepositoryTests: XCTestCase {
+    typealias OnCompletion = StorageMock.OnCompletion<CDContribution>
+
+    private var storage: StorageMock!
+    private var mapper: ContributionDetailsMapperMock!
+    private var dtoMapper: DtoContributionNoteMapperMock!
+    private var repository: ContributionDetailsRepository!
+
 //    typealias DtoMockMapperInput = (Date, ContributionNote, CDContribution?, StorageContext)
 //    typealias DtoMockMapper = MockMapper<DtoMockMapperInput,
 //                                     Result<CDContributionNote, Error>>
 //    typealias StorageResult = Result<(context: StorageContext, items: [CDContribution]), Error>
-//
-//    func testRead() throws {
-//        // Arrange
-//        let test = (dto: CDContribution(),
-//                    details: ContributionDetails(date: Date.neutral,
-//                                                 notes: [ContributionNote("test")]))
-//        let storage = MockStorage()
-//        stub(storage) { stub in
-//            when(stub).fetch(predicate: any(), any(), onCompletion: any()).then { args in
-//                args.2(.success((context: MockStorageContext(), items: [test.dto])))
-//            }
-//        }
-//        let mapper = MockMapper<CDContribution, ContributionDetails?>()
-//        stub(mapper) { stub in
-//            when(stub).map(input: test.dto)
-//                .thenReturn(test.details)
-//        }
-//        let repository = DefaultContributionDetailsRepository(storage: storage,
-//                                                              mapper: mockAnyMapper(mapper),
-//                                                              dtoMapper: mockAnyMapper())
-//
-//        // Act
-//        let result = try awaitPublisher(repository.read(date: Date.neutral))
-//
-//        // Assert
-//        XCTAssertEqual(result, test.details)
-//        verify(mapper).map(input: test.dto)
-//    }
-//
-//    func testReadNoDetails() throws {
-//        // Arrange
-//        let testDto = CDContribution()
-//        let storage = MockStorage()
-//        stub(storage) { stub in
-//            when(stub).fetch(predicate: any(), any(), onCompletion: any()).then { args in
-//                args.2(.success((context: MockStorageContext(), items: [testDto])))
-//            }
-//        }
-//        let mapper = MockMapper<CDContribution, ContributionDetails?>()
-//        stub(mapper) { stub in
-//            when(stub).map(input: testDto)
-//                .thenReturn(nil)
-//        }
-//        let repository = DefaultContributionDetailsRepository(storage: storage,
-//                                                              mapper: mockAnyMapper(mapper),
-//                                                              dtoMapper: mockAnyMapper())
-//
-//        // Act
-//        let result = try awaitPublisher(repository.read(date: Date.neutral))
-//
-//        // Assert
-//        XCTAssertNil(result)
-//        verify(mapper).map(input: testDto)
-//    }
-//
-//    func testReadError() throws {
-//        // Arrange
-//        let testError = TestError.someError
-//        let storage = MockStorage()
-//        stub(storage) { stub in
-//            when(stub).fetch(predicate: any(), any(), onCompletion: any()).then { args in
-//                args.2(StorageResult.failure(testError))
-//            }
-//        }
-//        let repository = DefaultContributionDetailsRepository(storage: storage,
-//                                                              mapper: mockAnyMapper(),
-//                                                              dtoMapper: mockAnyMapper())
-//
-//        // Act
-//        let result = try awaitError(repository.read(date: Date.neutral))
-//
-//        // Assert
-//        XCTAssertEqual(result as? TestError, testError)
-//    }
-//
+
+    override func setUp() {
+        super.setUp()
+
+        storage = StorageMock()
+        mapper = ContributionDetailsMapperMock()
+        dtoMapper = DtoContributionNoteMapperMock()
+        repository = DefaultContributionDetailsRepository(storage: storage,
+                                                          mapper: mapper, dtoMapper: dtoMapper)
+    }
+
+    func testRead() throws {
+        // Arrange
+        let test = (dto: CDContribution(),
+                    details: ContributionDetails(date: Date.neutral,
+                                                 notes: [ContributionNote("test")]))
+        storage.fetchHandler = { _, _, completion in
+            guard let completion = completion as? OnCompletion else {
+                return
+            }
+            completion(.success((context: StorageContextMock(),
+                                     items: [test.dto])))
+        }
+        mapper.mapHandler = { _ in test.details }
+
+        // Act
+        let result = try awaitPublisher(repository.read(date: Date.neutral))
+
+        // Assert
+        XCTAssertEqual(result, test.details)
+        XCTAssertEqual(storage.fetchCallCount, 1)
+        XCTAssertEqual(mapper.mapCallCount, 1)
+    }
+
+    func testReadNoDetails() throws {
+        // Arrange
+        let testDto = CDContribution()
+        storage.fetchHandler = { _, _, completion in
+            guard let completion = completion as? OnCompletion else {
+                return
+            }
+            completion(.success((context: StorageContextMock(),
+                                     items: [testDto])))
+        }
+        mapper.mapHandler = { _ in nil }
+
+        // Act
+        let result = try awaitPublisher(repository.read(date: Date.neutral))
+
+        // Assert
+        XCTAssertNil(result)
+        XCTAssertEqual(storage.fetchCallCount, 1)
+        XCTAssertEqual(mapper.mapCallCount, 1)
+    }
+
+    func testReadError() throws {
+        // Arrange
+        let testError = TestError.someError
+        storage.fetchHandler = { _, _, completion in
+            guard let completion = completion as? OnCompletion else {
+                return
+            }
+            completion(.failure(testError))
+        }
+        mapper.mapHandler = { _ in nil }
+
+        // Act
+        let result = try awaitError(repository.read(date: Date.neutral))
+
+        // Assert
+        XCTAssertEqual(result as? TestError, testError)
+    }
+
 //    func testWrite() throws {
 //        // Arrange
 //        let test = (date: Date.neutral,
@@ -212,4 +215,4 @@
 //        XCTAssertEqual(result as? TestError, testError)
 //        verify(context).save()
 //    }
-//}
+}
