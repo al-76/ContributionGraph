@@ -8,7 +8,12 @@
 import Foundation
 import Combine
 
-final class GetContributionDetailsUseCase: UseCase {
+/// @mockable
+protocol GetContributionDetailsUseCase {
+    func callAsFunction(_ input: Date) -> AnyPublisher<ContributionDetails?, Error>
+}
+
+final class DefaultGetContributionDetailsUseCase: GetContributionDetailsUseCase {
     private let repository: ContributionDetailsRepository
 
     init(repository: ContributionDetailsRepository) {

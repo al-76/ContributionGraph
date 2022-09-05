@@ -7,7 +7,12 @@
 
 import Combine
 
-final class SetContributionSettingsUseCase: UseCase {
+/// @mockable
+protocol SetContributionSettingsUseCase {
+    func callAsFunction(_ input: ContributionSettings) -> AnyPublisher<ContributionSettings, Error>
+}
+
+final class DefaultSetContributionSettingsUseCase: SetContributionSettingsUseCase {
     func callAsFunction(_ input: ContributionSettings) -> AnyPublisher<ContributionSettings, Error> {
         Just(input)
             .setFailureType(to: Error.self)

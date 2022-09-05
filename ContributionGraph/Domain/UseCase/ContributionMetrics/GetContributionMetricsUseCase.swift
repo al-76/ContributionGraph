@@ -7,8 +7,13 @@
 
 import Combine
 
-final class GetContributionMetricsUseCase: UseCase {
-    func callAsFunction(_ input: Void) -> AnyPublisher<ContributionMetrics, Error> {
+/// @mockable
+protocol GetContributionMetricsUseCase {
+    func callAsFunction() -> AnyPublisher<ContributionMetrics, Error>
+}
+
+final class DefaultGetContributionMetricsUseCase: GetContributionMetricsUseCase {
+    func callAsFunction() -> AnyPublisher<ContributionMetrics, Error> {
         Just(ContributionMetrics(totalWeekCount: 15, totalContributionCount: 30))
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()

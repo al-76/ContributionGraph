@@ -66,18 +66,18 @@ final class ContributionViewModel: ObservableObject {
 
     @Published var state = State.loading
 
-    private let getItems: AnyUseCase<Void, [Int: Contribution]>
-    private let getDetails: AnyUseCase<Date, ContributionDetails?>
-    private let getSettings: AnyUseCase<Void, ContributionSettings>
-    private let setSettings: AnyUseCase<ContributionSettings, ContributionSettings>
-    private let getMetrics: AnyUseCase<Void, ContributionMetrics>
+    private let getItems: GetContributionUseCase
+    private let getDetails: GetContributionDetailsUseCase
+    private let getSettings: GetContributionSettingsUseCase
+    private let setSettings: SetContributionSettingsUseCase
+    private let getMetrics: GetContributionMetricsUseCase
 
     // TODO: add ContributionUseCase Factory
-    init(getItems: AnyUseCase<Void, [Int: Contribution]>,
-         getDetails: AnyUseCase<Date, ContributionDetails?>,
-         getSettings: AnyUseCase<Void, ContributionSettings>,
-         setSettings: AnyUseCase<ContributionSettings, ContributionSettings>,
-         getMetrics: AnyUseCase<Void, ContributionMetrics>) {
+    init(getItems: GetContributionUseCase,
+         getDetails: GetContributionDetailsUseCase,
+         getSettings: GetContributionSettingsUseCase,
+         setSettings: SetContributionSettingsUseCase,
+         getMetrics: GetContributionMetricsUseCase) {
         self.getItems = getItems
         self.getDetails = getDetails
         self.getSettings = getSettings

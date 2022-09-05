@@ -7,45 +7,42 @@
 
 import XCTest
 import Combine
-import Cuckoo
 
 @testable import ContributionGraph
 
-extension ContributionNote: Matchable {}
-extension Date: Matchable {}
-
-class UpdateNoteUseCaseTests: XCTestCase {
+class DefaultUpdateNoteUseCaseTests: XCTestCase {
     private let testDate = Date.now
     private let testNote = ContributionNote(id: UUID(), title: "", changed: Date.now, note: "test")
+    private var useCase: DefaultUpdateNoteUseCase!
+    private var repository: ContributionDetailsRepositoryMock!
+
+    override func setUp() {
+        super.setUp()
+
+        repository = ContributionDetailsRepositoryMock()
+        useCase = DefaultUpdateNoteUseCase(repository: repository)
+    }
 
     func testExecute() throws {
         // Arrange
-        let repository = MockContributionDetailsRepository()
-        stub(repository) { stub in
-            when(stub.write(testNote, at: testDate)).thenReturn(successAnswer(()))
-        }
-        let addNote = UpdateNoteUseCase(repository: repository)
+        repository.writeHandler = { _, _ in successAnswer(()) }
 
         // Act
-        try awaitPublisher(addNote((testDate, testNote)))
+        try awaitPublisher(useCase((testDate, testNote)))
 
         // Assert
-        verify(repository).write(testNote, at: testDate)
+        XCTAssertEqual(repository.writeCallCount, 1)
     }
 
     func testExecuteError() throws {
         // Arrange
-        let repository = MockContributionDetailsRepository()
-        stub(repository) { stub in
-            when(stub.write(testNote, at: testDate)).thenReturn(failAnswer())
-        }
-        let addNote = UpdateNoteUseCase(repository: repository)
+        repository.writeHandler = { _, _ in failAnswer() }
 
         // Act
-        let result = try awaitError(addNote((testDate, testNote)))
+        let result = try awaitError(useCase((testDate, testNote)))
 
         // Assert
         XCTAssertEqual(result as? TestError, TestError.someError)
-        verify(repository).write(testNote, at: testDate)
+        XCTAssertEqual(repository.writeCallCount, 1)
     }
 }

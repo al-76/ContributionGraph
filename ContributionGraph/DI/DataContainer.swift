@@ -16,15 +16,15 @@ final class DataContainer: SharedContainer {
     }
 
     static let contributionMapper = Factory(scope: .singleton) {
-        AnyMapper(wrapped: ContributionMapper())
+        DefaultContributionMapper()
     }
 
     static let contributionDetailsMapper = Factory(scope: .singleton) {
-        AnyMapper(wrapped: ContributionDetailsMapper())
+        DefaultContributionDetailsMapper()
     }
 
     static let dtoContributionNoteMapper = Factory(scope: .singleton) {
-        AnyMapper(wrapped: DtoContributionNoteMapper())
+        DefaultDtoContributionNoteMapper()
     }
 
     static let contributionDetailsRepository =  Factory<ContributionDetailsRepository>(scope: .singleton) {

@@ -7,6 +7,7 @@
 
 import Combine
 
+/// @mockable
 protocol ContributionRepository {
     func read() -> AnyPublisher<[Contribution], Error>
 }

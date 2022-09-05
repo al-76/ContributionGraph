@@ -7,44 +7,45 @@
 
 import XCTest
 import Combine
-import Cuckoo
 
 @testable import ContributionGraph
 
 class GetContributionUseCaseTests: XCTestCase {
+    private var repository: ContributionRepositoryMock!
+    private var useCase: DefaultGetContributionUseCase!
+
+    override func setUp() {
+        super.setUp()
+
+        repository = ContributionRepositoryMock()
+        useCase = DefaultGetContributionUseCase(repository: repository)
+    }
+
     func testExecute() throws {
         // Arrange
         let testData = [Contribution(days: 0),
                         Contribution(days: 1),
                         Contribution(days: 2)]
-        let repository = MockContributionRepository()
-        stub(repository) { stub in
-            when(stub).read().thenReturn(successAnswer(testData))
-        }
-        let getContrubtion = GetContributionUseCase(repository: repository)
+        repository.readHandler = { successAnswer(testData) }
 
         // Act
-        let result = try awaitPublisher(getContrubtion(()))
+        let result = try awaitPublisher(useCase())
 
         // Assert
         XCTAssertEqual(result.map { $0.value }.sorted { $0.date > $1.date },
                        testData)
-        verify(repository).read()
+        XCTAssertEqual(repository.readCallCount, 1)
     }
 
     func testExecuteError() throws {
         // Arrange
-        let repository = MockContributionRepository()
-        stub(repository) { stub in
-            when(stub).read().thenReturn(failAnswer())
-        }
-        let getContrubtion = GetContributionUseCase(repository: repository)
+        repository.readHandler = { failAnswer() }
 
         // Act
-        let result = try awaitError(getContrubtion(()))
+        let result = try awaitError(useCase())
 
         // Assert
         XCTAssertEqual(result as? TestError, TestError.someError)
-        verify(repository).read()
+        XCTAssertEqual(repository.readCallCount, 1)
     }
 }

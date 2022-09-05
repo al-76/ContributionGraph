@@ -7,7 +7,6 @@
 
 import XCTest
 import Combine
-import Cuckoo
 
 @testable import ContributionGraph
 
@@ -24,10 +23,17 @@ class AddEditContributionViewModelTests: XCTestCase {
                                                                          title: "test",
                                                                          changed: Date.now,
                                                                          note: "old_note"))
+    var updateNote: UpdateNoteUseCaseMock!
+
+    override func setUp() {
+        super.setUp()
+
+        updateNote = UpdateNoteUseCaseMock()
+    }
 
     func testInitState() throws {
         // Arrange
-        let viewModel = AddEditContributionViewModel(updateNote: mockAnyUseCase())
+        let viewModel = AddEditContributionViewModel(updateNote: updateNote)
 
         // Act
         let result = try awaitPublisher(viewModel.$state)
@@ -38,8 +44,8 @@ class AddEditContributionViewModelTests: XCTestCase {
 
     func testSetData() {
         // Arrange
-        let answer = successAnswer(())
-        let viewModel = AddEditContributionViewModel(updateNote: mockAnyUseCase(answer))
+        updateNote.callAsFunctionHandler = { _ in successAnswer(()) }
+        let viewModel = AddEditContributionViewModel(updateNote: updateNote)
 
         // Act
         viewModel.set(data: testData)
@@ -51,8 +57,8 @@ class AddEditContributionViewModelTests: XCTestCase {
 
     func testSetDataNew() {
         // Arrange
-        let answer = successAnswer(())
-        let viewModel = AddEditContributionViewModel(updateNote: mockAnyUseCase(answer))
+        updateNote.callAsFunctionHandler = { _ in successAnswer(()) }
+        let viewModel = AddEditContributionViewModel(updateNote: updateNote)
 
         // Act
         viewModel.set(data: testDataNew)
@@ -64,7 +70,8 @@ class AddEditContributionViewModelTests: XCTestCase {
 
     func testSetDataError() {
         // Arrange
-        let viewModel = AddEditContributionViewModel(updateNote: mockAnyUseCase(failAnswer()))
+        updateNote.callAsFunctionHandler = { _ in failAnswer() }
+        let viewModel = AddEditContributionViewModel(updateNote: updateNote)
 
         // Act
         viewModel.set(data: testData)
