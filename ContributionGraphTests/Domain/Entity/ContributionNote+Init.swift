@@ -7,8 +7,6 @@
 
 import Foundation
 
-@testable import ContributionGraph
-
 extension ContributionNote {
     init(_ data: String) {
         self.init(id: UUID(), title: data, changed: Date.now, note: data)

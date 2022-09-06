@@ -8,8 +8,6 @@
 import XCTest
 import Combine
 
-@testable import ContributionGraph
-
 class GetContributionUseCaseTests: XCTestCase {
     private var repository: ContributionRepositoryMock!
     private var useCase: DefaultGetContributionUseCase!

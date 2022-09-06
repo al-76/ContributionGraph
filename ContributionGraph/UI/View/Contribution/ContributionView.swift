@@ -32,8 +32,8 @@ struct ContributionView: View {
                 .onTapCell { day in
                     viewModel.set(selectedDay: day)
                 }
-                .onChange(of: data.selectedDay) { newDay in
-                    viewModel.fetchContribtuionDetails(at: newDay)
+                .onChange(of: data.selectedDay) { _ in
+                    viewModel.fetchContribtuionDetails()
                 }
 
                 settingsView(data)
@@ -56,7 +56,7 @@ struct ContributionView: View {
                                 addEditContribution = true
                             }
                         }
-                        .onDelete { _ in }
+                        .onDelete { $0.forEach(viewModel.deleteNote) }
                         .onTapGesture { addEditContribution = true }
                     }
                     .toolbar {

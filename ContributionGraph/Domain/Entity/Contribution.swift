@@ -7,22 +7,19 @@
 
 import Foundation
 
-struct Contribution {
+struct Contribution: Equatable {
     let date: Date
     let count: Int
 }
 
-struct ContributionDetails {
+struct ContributionDetails: Equatable {
     let date: Date
     let notes: [ContributionNote]
 }
 
-struct ContributionNote {
+struct ContributionNote: Hashable, Identifiable, Equatable {
     let id: UUID
     let title: String
     let changed: Date
     let note: String
 }
-
-extension ContributionNote: Hashable {}
-extension ContributionNote: Identifiable {}

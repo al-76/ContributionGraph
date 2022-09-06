@@ -7,14 +7,6 @@
 
 import XCTest
 
-@testable import ContributionGraph
-
-extension ContributionDetails: Equatable {
-    public static func == (lhs: ContributionDetails, rhs: ContributionDetails) -> Bool {
-        lhs.date == rhs.date && lhs.notes == rhs.notes
-    }
-}
-
 class ContributionDetailsRepositoryTests: XCTestCase {
     private var storage: StorageMock!
     private var mapper: ContributionDetailsMapperMock!

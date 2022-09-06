@@ -7,8 +7,6 @@
 
 import Foundation
 
-@testable import ContributionGraph
-
 typealias StorageMockResult<T> = Result<(context: StorageContext, items: [T]), Error>
 
 func storageMockHandler<T>(_ completion: Any,

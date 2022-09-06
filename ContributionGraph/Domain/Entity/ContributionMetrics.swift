@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ContributionMetrics {
+struct ContributionMetrics: Equatable {
     let totalWeekCount: Int
     let totalContributionCount: Int
 }

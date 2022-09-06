@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ContributionSettings {
+struct ContributionSettings: Equatable {
     let weekCount: Int
 }

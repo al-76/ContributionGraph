@@ -8,8 +8,6 @@
 import XCTest
 import Combine
 
-@testable import ContributionGraph
-
 class ContributionViewModelTests: XCTestCase {
     // swiftlint:disable line_length
     private let data = ContributionViewModel.Data(items: [0: Contribution(days: 0)],
@@ -17,7 +15,7 @@ class ContributionViewModelTests: XCTestCase {
                                                   settings: ContributionSettings(weekCount: 15),
                                                   metrics: ContributionMetrics(totalWeekCount: 50, totalContributionCount: 500),
                                                   selectedDay: 0,
-                                                  editingNote: ContributionNote("test"))
+                                                  editingNote: nil)
     private var getItems: GetContributionUseCaseMock!
     private var getDetails: GetContributionDetailsUseCaseMock!
     private var getSettings: GetContributionSettingsUseCaseMock!
@@ -150,20 +148,14 @@ class ContributionViewModelTests: XCTestCase {
     func testSetSettings() throws {
         // Arrange
         let data = data
-        let newData = ContributionViewModel.Data(items: data.items,
-                                                 details: nil,
-                                                 settings: ContributionSettings(weekCount: 400),
-                                                 metrics: data.metrics,
-                                                 selectedDay: 0,
-                                                 editingNote: data.editingNote)
+        let newData = data.copy(settings: ContributionSettings(weekCount: 200))
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
         getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
         setSettings.callAsFunctionHandler = { _ in successAnswer(newData.settings) }
         getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
-
         viewModel.fetchContributionData()
-        try awaitPublisher(viewModel.$state.dropFirst())
+        let result = try awaitPublisher(viewModel.$state.dropFirst())
 
         // Act
         viewModel.set(settings: newData.settings)
@@ -270,46 +262,38 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchContributionDetails() throws {
         // Arrange
-        let testDay = 2
+        let testData = data.copy(details: ContributionDetails(date: Date.now, notes: [ContributionNote("test")]))
         let data = data
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { date in
-            guard date == Date.neutral.days(ago: testDay) else {
-                return successAnswer(nil)
-            }
-            return successAnswer(data.details)
-        }
+        getDetails.callAsFunctionHandler = { _ in successAnswer(nil) }
         getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
         getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
+        getDetails.callAsFunctionHandler = { _ in successAnswer(testData.details) }
 
         // Act
-        viewModel.fetchContribtuionDetails(at: testDay)
+        viewModel.fetchContribtuionDetails()
 
         // Assert
-        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
-                       .success(data))
+        let res = try awaitPublisher(viewModel.$state.dropFirst())
+        XCTAssertEqual(res,
+                       .success(testData))
     }
 
     func testFetchContributionDetailsError() throws {
         // Arrange
-        let testDay = 2
         let data = data
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { date in
-            guard date == Date.neutral.days(ago: testDay) else {
-                return successAnswer(data.details)
-            }
-            return failAnswer()
-        }
+        getDetails.callAsFunctionHandler = { _ in successAnswer(nil)  }
         getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
         getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
+        getDetails.callAsFunctionHandler = { _ in failAnswer() }
 
         // Act
-        viewModel.fetchContribtuionDetails(at: testDay)
+        viewModel.fetchContribtuionDetails()
 
         // Assert
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
@@ -318,14 +302,9 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchContributionDetailsSkipLoading() throws {
         // Arrange
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
 
         // Act
-        viewModel.fetchContribtuionDetails(at: 2)
+        viewModel.fetchContribtuionDetails()
 
         // Assert
         XCTAssertEqual(getDetails.callAsFunctionCallCount, 0)
@@ -344,11 +323,31 @@ class ContributionViewModelTests: XCTestCase {
         try awaitPublisher(viewModel.$state.dropFirst())
 
         // Act
-        viewModel.fetchContribtuionDetails(at: 2)
+        viewModel.fetchContribtuionDetails()
 
         // Assert
         XCTAssertEqual(getDetails.callAsFunctionCallCount, 1)
         XCTAssertEqual(try awaitPublisher(viewModel.$state),
                        .failure(TestError.someError))
+    }
+
+    func testFetchContributionDetailsSetNil() throws {
+        // Arrange
+        let testData = data.copy(details: nil)
+        let data = data
+        getItems.callAsFunctionHandler = { successAnswer(data.items) }
+        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
+        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
+        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
+        viewModel.fetchContributionData()
+        try awaitPublisher(viewModel.$state.dropFirst())
+        getDetails.callAsFunctionHandler = { _ in successAnswer(nil) }
+
+        // Act
+        viewModel.fetchContribtuionDetails()
+
+        // Assert
+        let res = try awaitPublisher(viewModel.$state.dropFirst())
+        XCTAssertEqual(res, .success(testData))
     }
 }

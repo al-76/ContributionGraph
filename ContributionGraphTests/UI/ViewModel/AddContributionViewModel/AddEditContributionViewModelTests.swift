@@ -8,8 +8,6 @@
 import XCTest
 import Combine
 
-@testable import ContributionGraph
-
 class AddEditContributionViewModelTests: XCTestCase {
     let testDataNew = AddEditContributionViewModel.Data(day: 10,
                                                         title: "title",

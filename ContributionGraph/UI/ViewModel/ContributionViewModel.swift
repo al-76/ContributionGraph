@@ -11,7 +11,7 @@ import Foundation
 final class ContributionViewModel: ObservableObject {
     typealias State = ViewModelState<Data>
 
-    struct Data {
+    struct Data: Equatable {
         let items: [Int: Contribution]
         let details: ContributionDetails?
         let settings: ContributionSettings
@@ -49,17 +49,33 @@ final class ContributionViewModel: ObservableObject {
         }
 
         func copy(items: [Int: Contribution]? = nil,
-                  details: ContributionDetails? = nil,
                   settings: ContributionSettings? = nil,
                   metrics: ContributionMetrics? = nil,
-                  selectedDay: Int? = nil,
-                  editingNote: ContributionNote? = nil) -> Data {
+                  selectedDay: Int? = nil) -> Data {
             Data(items: items ?? self.items,
-                 details: details ?? self.details,
+                 details: details,
                  settings: settings ?? self.settings,
                  metrics: metrics ?? self.metrics,
                  selectedDay: selectedDay ?? self.selectedDay,
-                 editingNote: editingNote ?? self.editingNote)
+                 editingNote: editingNote)
+        }
+
+        func copy(details: ContributionDetails?) -> Data {
+            Data(items: items,
+                 details: details,
+                 settings: settings,
+                 metrics: metrics,
+                 selectedDay: selectedDay,
+                 editingNote: editingNote)
+        }
+
+        func copy(editingNote: ContributionNote?) -> Data {
+            Data(items: items,
+                 details: details,
+                 settings: settings,
+                 metrics: metrics,
+                 selectedDay: selectedDay,
+                 editingNote: editingNote)
         }
     }
 
@@ -87,7 +103,6 @@ final class ContributionViewModel: ObservableObject {
     func set(settings: ContributionSettings) {
         switch state {
         case .success(let data):
-            state = .loading
             setSettingsAction(settings, data)
 
         default: // nothing to do here
@@ -115,22 +130,24 @@ final class ContributionViewModel: ObservableObject {
         }
     }
 
+    func deleteNote(at index: Int) {
+
+    }
+
     func fetchContributionData() {
         switch state {
         case .success(let data):
-            state = .loading
             fetchContributionDataAction(data)
 
         default:
-            state = .loading
             fetchContributionDataAction()
         }
     }
 
-    func fetchContribtuionDetails(at day: Int) {
+    func fetchContribtuionDetails() {
         switch state {
         case .success(let data):
-            getDetails(Date.neutral.days(ago: day))
+            getDetails(Date.neutral.days(ago: data.selectedDay))
                 .map { .success(data.copy(details: $0)) }
                 .catch { Just(.failure($0)).eraseToAnyPublisher() }
                 .receive(on: DispatchQueue.main)
@@ -142,6 +159,7 @@ final class ContributionViewModel: ObservableObject {
     }
 
     private func fetchContributionDataAction(_ data: Data? = nil) {
+        state = .loading
         fetch(items: getItems(),
               details: getDetails(Date.neutral.days(ago: data?.selectedDay ?? 0)),
               settings: getSettings(),
@@ -151,6 +169,7 @@ final class ContributionViewModel: ObservableObject {
     }
 
     private func setSettingsAction(_ settings: ContributionSettings, _ data: Data?) {
+        state = .loading
         fetch(items: getItems(),
               details: getDetails(Date.neutral),
               settings: setSettings(settings),
@@ -165,9 +184,12 @@ final class ContributionViewModel: ObservableObject {
                        metrics: AnyPublisher<ContributionMetrics, Error>,
                        data: Data?) -> AnyPublisher<State, Never> {
         items.zip(details, settings, metrics)
-            .map { .success(data?.copy(items: $0, details: $1, settings: $2, metrics: $3) ??
-                            Data(items: $0, details: $1, settings: $2, metrics: $3,
-                                 selectedDay: 0, editingNote: nil)) }
+            .map { .success(Data(items: $0,
+                                 details: $1,
+                                 settings: $2,
+                                 metrics: $3,
+                                 selectedDay: data?.selectedDay ?? 0,
+                                 editingNote: data?.editingNote)) }
             .catch { Just(.failure($0)).eraseToAnyPublisher() }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
