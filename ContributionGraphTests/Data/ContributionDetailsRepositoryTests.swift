@@ -49,6 +49,22 @@ class ContributionDetailsRepositoryTests: XCTestCase {
 
     func testReadNoDetails() throws {
         // Arrange
+        storage.fetchHandler = { _, _, completion in
+            storageMockHandler(completion,
+                               .success((context: StorageContextMock(),
+                                         items: [CDContribution]())))
+        }
+
+        // Act
+        let result = try awaitPublisher(repository.read(date: Date.neutral))
+
+        // Assert
+        XCTAssertNil(result)
+        XCTAssertEqual(storage.fetchCallCount, 1)
+    }
+
+    func testReadNoDetailsInContribution() throws {
+        // Arrange
         let testDto = CDContribution()
         storage.fetchHandler = { _, _, completion in
             storageMockHandler(completion,
