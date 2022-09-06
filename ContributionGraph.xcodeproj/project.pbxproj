@@ -64,6 +64,7 @@
 		CDD8EC3E28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */; };
 		CDD8EC4028C67D1D000BB47B /* StorageMockHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */; };
 		CDFB38CE28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */; };
+		CDFB38D128C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCaseTests.swift; sourceTree = "<group>"; };
 		CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMockHandler.swift; sourceTree = "<group>"; };
 		CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionDetailsUseCaseTests.swift; sourceTree = "<group>"; };
+		CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionSettingsUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +239,7 @@
 		CD64EAAE28BA55AD00DA2B1E /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				CDFB38CF28C7A24700D1D3D6 /* ContributionSettings */,
 				CD64EAAF28BA566400DA2B1E /* Contribution */,
 				CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */,
 			);
@@ -524,6 +527,15 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		CDFB38CF28C7A24700D1D3D6 /* ContributionSettings */ = {
+			isa = PBXGroup;
+			children = (
+				CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */,
+				CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */,
+			);
+			path = ContributionSettings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -720,6 +732,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9BF715289D6F5A00F75DE6 /* TestError.swift in Sources */,
+				CDFB38D128C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift in Sources */,
 				CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */,
 				CD64EAB328BA5D0D00DA2B1E /* GetContributionUseCaseTests.swift in Sources */,
 				CD9BF704289C231700F75DE6 /* ContributionViewModelTests.swift in Sources */,
