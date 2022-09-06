@@ -65,6 +65,7 @@
 		CDD8EC4028C67D1D000BB47B /* StorageMockHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */; };
 		CDFB38CE28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */; };
 		CDFB38D128C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */; };
+		CDFB38D328C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,7 @@
 		CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMockHandler.swift; sourceTree = "<group>"; };
 		CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionDetailsUseCaseTests.swift; sourceTree = "<group>"; };
 		CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionSettingsUseCaseTests.swift; sourceTree = "<group>"; };
+		CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetContributionSettingsUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -731,6 +733,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDFB38D328C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift in Sources */,
 				CD9BF715289D6F5A00F75DE6 /* TestError.swift in Sources */,
 				CDFB38D128C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift in Sources */,
 				CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */,
