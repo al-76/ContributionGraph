@@ -151,7 +151,7 @@ class ContributionViewModelTests: XCTestCase {
     func testSetSettings() throws {
         // Arrange
         let data = data
-        let newData = data.copy(settings: ContributionSettings(weekCount: 200))
+        let newData = data.copy { $0.settings = ContributionSettings(weekCount: 200) }
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
         getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
@@ -222,7 +222,7 @@ class ContributionViewModelTests: XCTestCase {
     func testSetSelectedDay() throws {
         // Arrange
         let testDay = 10
-        let testData = data.copy(selectedDay: testDay)
+        let testData = data.copy { $0.selectedDay = testDay }
         let data = data
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
@@ -240,7 +240,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testSetEditingNote() throws {
         let testNote = ContributionNote("editingTest")
-        let testData = data.copy(editingNote: testNote)
+        let testData = data.copy { $0.editingNote = testNote }
         let data = data
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
@@ -258,7 +258,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchContributionDetails() throws {
         // Arrange
-        let testData = data.copy(details: ContributionDetails(date: Date.now, notes: [ContributionNote("test")]))
+        let testData = data.copy { $0.details = ContributionDetails(date: Date.now, notes: [ContributionNote("test")]) }
         let data = data
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(nil) }
@@ -329,7 +329,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchContributionDetailsSetNil() throws {
         // Arrange
-        let testData = data.copy(details: nil)
+        let testData = data.copy { $0.details = nil }
         let data = data
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }

@@ -47,36 +47,6 @@ final class ContributionViewModel: ObservableObject {
             (items[day]?.date ?? Date.neutral.days(ago: day))
                 .format()
         }
-
-        func copy(items: [Int: Contribution]? = nil,
-                  settings: ContributionSettings? = nil,
-                  metrics: ContributionMetrics? = nil,
-                  selectedDay: Int? = nil) -> Data {
-            Data(items: items ?? self.items,
-                 details: details,
-                 settings: settings ?? self.settings,
-                 metrics: metrics ?? self.metrics,
-                 selectedDay: selectedDay ?? self.selectedDay,
-                 editingNote: editingNote)
-        }
-
-        func copy(details: ContributionDetails?) -> Data {
-            Data(items: items,
-                 details: details,
-                 settings: settings,
-                 metrics: metrics,
-                 selectedDay: selectedDay,
-                 editingNote: editingNote)
-        }
-
-        func copy(editingNote: ContributionNote?) -> Data {
-            Data(items: items,
-                 details: details,
-                 settings: settings,
-                 metrics: metrics,
-                 selectedDay: selectedDay,
-                 editingNote: editingNote)
-        }
     }
 
     @Published var state = State.loading
@@ -113,7 +83,7 @@ final class ContributionViewModel: ObservableObject {
     func set(selectedDay day: Int) {
         switch state {
         case .success(let data):
-            state = .success(data.copy(selectedDay: day))
+            state = .success(data.copy { $0.selectedDay = day })
 
         default: // nothing to do here
             break
@@ -123,7 +93,7 @@ final class ContributionViewModel: ObservableObject {
     func set(editingNote note: ContributionNote?) {
         switch state {
         case .success(let data):
-            state = .success(data.copy(editingNote: note))
+            state = .success(data.copy { $0.editingNote = note })
 
         default: // nothing to do here
             break
@@ -148,7 +118,10 @@ final class ContributionViewModel: ObservableObject {
         switch state {
         case .success(let data):
             getDetails(Date.neutral.days(ago: data.selectedDay))
-                .map { .success(data.copy(details: $0)) }
+                .map { details in
+                    .success(data.copy {
+                        $0.details = details
+                    }) }
                 .catch { Just(.failure($0)).eraseToAnyPublisher() }
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$state)
@@ -193,5 +166,39 @@ final class ContributionViewModel: ObservableObject {
             .catch { Just(.failure($0)).eraseToAnyPublisher() }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
+    }
+}
+
+// MARK: - Data copy
+extension ContributionViewModel.Data {
+    typealias OnCopy = (inout Builder) -> Void
+
+    func copy(onCopy: OnCopy) -> ContributionViewModel.Data {
+        var builder = Builder(items: items,
+                              details: details,
+                              settings: settings,
+                              metrics: metrics,
+                              selectedDay: selectedDay,
+                              editingNote: editingNote)
+        onCopy(&builder)
+        return builder.object()
+    }
+
+    struct Builder {
+        var items: [Int: Contribution]
+        var details: ContributionDetails?
+        var settings: ContributionSettings
+        var metrics: ContributionMetrics
+        var selectedDay: Int
+        var editingNote: ContributionNote?
+
+        fileprivate func object() -> ContributionViewModel.Data {
+            ContributionViewModel.Data(items: items,
+                                       details: details,
+                                       settings: settings,
+                                       metrics: metrics,
+                                       selectedDay: selectedDay,
+                                       editingNote: editingNote)
+        }
     }
 }
