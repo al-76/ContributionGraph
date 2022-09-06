@@ -14,6 +14,8 @@ class GetContributionDetailsUseCaseTests: XCTestCase {
     private var repository: ContributionDetailsRepositoryMock!
 
     override func setUp() {
+        super.setUp()
+
         repository = ContributionDetailsRepositoryMock()
         useCase = DefaultGetContributionDetailsUseCase(repository: repository)
     }
