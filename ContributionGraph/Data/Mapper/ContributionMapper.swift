@@ -1,11 +1,16 @@
 //
-//  DefaultContributionMapper.swift
+//  ContributionMapper.swift
 //  ContributionGraph
 //
-//  Created by Vyacheslav Konopkin on 06.09.2022.
+//  Created by Vyacheslav Konopkin on 17.08.2022.
 //
 
 import Foundation
+
+/// @mockable
+protocol ContributionMapper {
+    func map(input: CDContribution) -> Contribution
+}
 
 struct DefaultContributionMapper: ContributionMapper {
     func map(input: CDContribution) -> Contribution {

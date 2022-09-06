@@ -63,9 +63,7 @@
 		CDD3A0F7286906E400878A09 /* View+isHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD3A0F6286906E400878A09 /* View+isHidden.swift */; };
 		CDD8EC3E28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */; };
 		CDD8EC4028C67D1D000BB47B /* StorageMockHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */; };
-		CDFB38BF28C775A600D1D3D6 /* DefaultContributionNoteMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38BE28C775A600D1D3D6 /* DefaultContributionNoteMapper.swift */; };
-		CDFB38C128C775CC00D1D3D6 /* DefaultContributionDetailsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38C028C775CC00D1D3D6 /* DefaultContributionDetailsMapper.swift */; };
-		CDFB38C328C775EF00D1D3D6 /* DefaultContributionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38C228C775EF00D1D3D6 /* DefaultContributionMapper.swift */; };
+		CDFB38CE28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,9 +134,7 @@
 		CDD3A0F6286906E400878A09 /* View+isHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+isHidden.swift"; sourceTree = "<group>"; };
 		CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCaseTests.swift; sourceTree = "<group>"; };
 		CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMockHandler.swift; sourceTree = "<group>"; };
-		CDFB38BE28C775A600D1D3D6 /* DefaultContributionNoteMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionNoteMapper.swift; sourceTree = "<group>"; };
-		CDFB38C028C775CC00D1D3D6 /* DefaultContributionDetailsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionDetailsMapper.swift; sourceTree = "<group>"; };
-		CDFB38C228C775EF00D1D3D6 /* DefaultContributionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionMapper.swift; sourceTree = "<group>"; };
+		CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionDetailsUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,22 +165,6 @@
 				CD9D1D5728B92CEB0023A8D1 /* PlatformContainer.swift */,
 			);
 			path = DI;
-			sourceTree = "<group>";
-		};
-		CD2FC9E228A03D4300F1424F /* ContributionMetrics */ = {
-			isa = PBXGroup;
-			children = (
-				CD2FC9E328A03D5200F1424F /* GetContributionMetricsUseCase.swift */,
-			);
-			path = ContributionMetrics;
-			sourceTree = "<group>";
-		};
-		CD51271B28BCC58500E93508 /* ContributionDetails */ = {
-			isa = PBXGroup;
-			children = (
-				CD49109228BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift */,
-			);
-			path = ContributionDetails;
 			sourceTree = "<group>";
 		};
 		CD53600B28A2AF9C00B4EEE6 /* Common */ = {
@@ -258,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				CD64EAAF28BA566400DA2B1E /* Contribution */,
+				CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -339,8 +320,7 @@
 		CD9BF70C289C23F100F75DE6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */,
-				CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */,
+				CDFB38CB28C79E8E00D1D3D6 /* Repository */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -358,10 +338,10 @@
 		CD9BF716289D9C2900F75DE6 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				CD51271B28BCC58500E93508 /* ContributionDetails */,
-				CD2FC9E228A03D4300F1424F /* ContributionMetrics */,
 				CD9BF722289EAA1200F75DE6 /* ContributionSettings */,
 				CD9BF721289EAA0A00F75DE6 /* Contribution */,
+				CD49109228BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift */,
+				CD2FC9E328A03D5200F1424F /* GetContributionMetricsUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -421,9 +401,9 @@
 		CDBC5B4A28AC5CFC006CD13D /* Mapper */ = {
 			isa = PBXGroup;
 			children = (
-				CDFB38BD28C7757D00D1D3D6 /* ContributionNoteMapper */,
-				CDFB38BC28C7757400D1D3D6 /* ContributionDetailsMapper */,
-				CDFB38BB28C7756600D1D3D6 /* ContributionMapper */,
+				CD602BC828BE1C2200E1A63C /* ContributionNoteMapper.swift */,
+				CD602BC628BE196800E1A63C /* ContributionDetailsMapper.swift */,
+				CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */,
 			);
 			path = Mapper;
 			sourceTree = "<group>";
@@ -473,10 +453,9 @@
 		CDC5BE692869DA6200D035FA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CDFB38CA28C79E7D00D1D3D6 /* Repository */,
 				CDBC5B4A28AC5CFC006CD13D /* Mapper */,
 				CDBC5B3528AC314F006CD13D /* Platform */,
-				CDC5BE6A2869DA8900D035FA /* DefaultContributionRepository.swift */,
-				CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -527,31 +506,22 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		CDFB38BB28C7756600D1D3D6 /* ContributionMapper */ = {
+		CDFB38CA28C79E7D00D1D3D6 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */,
-				CDFB38C228C775EF00D1D3D6 /* DefaultContributionMapper.swift */,
+				CDC5BE6A2869DA8900D035FA /* DefaultContributionRepository.swift */,
+				CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */,
 			);
-			path = ContributionMapper;
+			path = Repository;
 			sourceTree = "<group>";
 		};
-		CDFB38BC28C7757400D1D3D6 /* ContributionDetailsMapper */ = {
+		CDFB38CB28C79E8E00D1D3D6 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				CD602BC628BE196800E1A63C /* ContributionDetailsMapper.swift */,
-				CDFB38C028C775CC00D1D3D6 /* DefaultContributionDetailsMapper.swift */,
+				CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */,
+				CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */,
 			);
-			path = ContributionDetailsMapper;
-			sourceTree = "<group>";
-		};
-		CDFB38BD28C7757D00D1D3D6 /* ContributionNoteMapper */ = {
-			isa = PBXGroup;
-			children = (
-				CD602BC828BE1C2200E1A63C /* ContributionNoteMapper.swift */,
-				CDFB38BE28C775A600D1D3D6 /* DefaultContributionNoteMapper.swift */,
-			);
-			path = ContributionNoteMapper;
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -731,9 +701,7 @@
 				CD53600828A18DFD00B4EEE6 /* AddEditContributionViewModel.swift in Sources */,
 				CD538B4C2860C5C0004BA280 /* ContributionGraphApp.swift in Sources */,
 				CD2FC9E428A03D5200F1424F /* GetContributionMetricsUseCase.swift in Sources */,
-				CDFB38C128C775CC00D1D3D6 /* DefaultContributionDetailsMapper.swift in Sources */,
 				CD49109128BCDA1E00D1A421 /* ViewModelState.swift in Sources */,
-				CDFB38C328C775EF00D1D3D6 /* DefaultContributionMapper.swift in Sources */,
 				CD49109528BCDECA00D1A421 /* ContributionDetailsRepository.swift in Sources */,
 				CDBC5B4E28AC5D46006CD13D /* ContributionMapper.swift in Sources */,
 				CD9D1D5828B92CEB0023A8D1 /* PlatformContainer.swift in Sources */,
@@ -743,7 +711,6 @@
 				CDC5BE6E2869EECF00D035FA /* ContributionViewModel.swift in Sources */,
 				CDD3A0F52868BA3500878A09 /* ContributionModel.xcdatamodeld in Sources */,
 				CDC48E5B2891B7360062ADE7 /* AddEditContributionView.swift in Sources */,
-				CDFB38BF28C775A600D1D3D6 /* DefaultContributionNoteMapper.swift in Sources */,
 				CDBC5B3728AC3159006CD13D /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -761,6 +728,7 @@
 				CD53601028A3049100B4EEE6 /* AddEditContributionViewModelTests.swift in Sources */,
 				CD8D9DA828C5320C00DF9A6E /* GeneratedMocks.swift in Sources */,
 				CD3052D928B59306000BE787 /* Answer.swift in Sources */,
+				CDFB38CE28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift in Sources */,
 				CDD8EC3E28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift in Sources */,
 				CD9BF714289D6F5000F75DE6 /* XCTestCase+Await.swift in Sources */,
 				CD602BCB28BE368B00E1A63C /* ViewModelState+Equatable.swift in Sources */,
