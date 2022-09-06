@@ -10,6 +10,7 @@ import Combine
 
 @testable import ContributionGraph
 
+// swiftlint:disable type_body_length
 class ContributionViewModelTests: XCTestCase {
     // swiftlint:disable line_length
     private let data = ContributionViewModel.Data(items: [0: Contribution(days: 0)],
@@ -188,12 +189,6 @@ class ContributionViewModelTests: XCTestCase {
 
     func testSetSettingsSkipLoading() throws {
         // Arrange
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        setSettings.callAsFunctionHandler = { _ in successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
 
         // Act
         viewModel.set(settings: ContributionSettings(weekCount: 100))
@@ -210,7 +205,6 @@ class ContributionViewModelTests: XCTestCase {
         getItems.callAsFunctionHandler = { successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
         getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        setSettings.callAsFunctionHandler = { _ in successAnswer(data.settings) }
         getMetrics.callAsFunctionHandler = { failAnswer() }
 
         viewModel.fetchContributionData()
