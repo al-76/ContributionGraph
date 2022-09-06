@@ -5,8 +5,10 @@
 //  Created by Vyacheslav Konopkin on 30.08.2022.
 //
 
+@testable import ContributionGraph
+
 extension ViewModelState: Equatable where T: Equatable {
-    internal static func == (lhs: ViewModelState, rhs: ViewModelState) -> Bool {
+    public static func == (lhs: ViewModelState, rhs: ViewModelState) -> Bool {
         switch (lhs, rhs) {
         case (.loading, .loading):
             return true

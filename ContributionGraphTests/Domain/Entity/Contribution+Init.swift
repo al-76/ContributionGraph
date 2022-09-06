@@ -7,6 +7,8 @@
 
 import Foundation
 
+@testable import ContributionGraph
+
 extension Contribution {
     init(days: Int) {
         self.init(date: Date.neutral.days(ago: days), count: 2)

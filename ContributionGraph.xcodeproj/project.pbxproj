@@ -63,32 +63,9 @@
 		CDD3A0F7286906E400878A09 /* View+isHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD3A0F6286906E400878A09 /* View+isHidden.swift */; };
 		CDD8EC3E28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */; };
 		CDD8EC4028C67D1D000BB47B /* StorageMockHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */; };
-		CDFB38A528C773CE00D1D3D6 /* ViewModelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109028BCDA1E00D1A421 /* ViewModelState.swift */; };
-		CDFB38A628C773CE00D1D3D6 /* AddEditContributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600728A18DFD00B4EEE6 /* AddEditContributionViewModel.swift */; };
-		CDFB38A828C773DF00D1D3D6 /* DefaultContributionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */; };
-		CDFB38A928C773DF00D1D3D6 /* DefaultContributionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE6A2869DA8900D035FA /* DefaultContributionRepository.swift */; };
-		CDFB38AA28C773F900D1D3D6 /* ContributionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */; };
-		CDFB38AB28C773F900D1D3D6 /* ContributionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */; };
-		CDFB38AC28C7740D00D1D3D6 /* ContributionDetailsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD602BC628BE196800E1A63C /* ContributionDetailsMapper.swift */; };
-		CDFB38AD28C7740D00D1D3D6 /* ContributionNoteMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD602BC828BE1C2200E1A63C /* ContributionNoteMapper.swift */; };
-		CDFB38AE28C7740D00D1D3D6 /* ContributionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */; };
-		CDFB38AF28C7742300D1D3D6 /* Contribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE712869F0AB00D035FA /* Contribution.swift */; };
-		CDFB38B028C7742300D1D3D6 /* ContributionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF71D289DA11400F75DE6 /* ContributionSettings.swift */; };
-		CDFB38B128C7742300D1D3D6 /* ContributionMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FC9E028A03CA600F1424F /* ContributionMetrics.swift */; };
-		CDFB38B228C7743F00D1D3D6 /* GetContributionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF719289D9F2D00F75DE6 /* GetContributionUseCase.swift */; };
-		CDFB38B328C7743F00D1D3D6 /* UpdateNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600928A196AD00B4EEE6 /* UpdateNoteUseCase.swift */; };
-		CDFB38B428C7744600D1D3D6 /* GetContributionSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF71B289D9F5000F75DE6 /* GetContributionSettingsUseCase.swift */; };
-		CDFB38B528C7744600D1D3D6 /* SetContributionSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF71F289DA1AB00F75DE6 /* SetContributionSettingsUseCase.swift */; };
-		CDFB38B628C7744B00D1D3D6 /* GetContributionMetricsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FC9E328A03D5200F1424F /* GetContributionMetricsUseCase.swift */; };
-		CDFB38B728C7745000D1D3D6 /* GetContributionDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109228BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift */; };
-		CDFB38B828C7749100D1D3D6 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE672869DA3E00D035FA /* Date+Utils.swift */; };
-		CDFB38BA28C774F600D1D3D6 /* CDContribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38B928C774F600D1D3D6 /* CDContribution.swift */; };
 		CDFB38BF28C775A600D1D3D6 /* DefaultContributionNoteMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38BE28C775A600D1D3D6 /* DefaultContributionNoteMapper.swift */; };
 		CDFB38C128C775CC00D1D3D6 /* DefaultContributionDetailsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38C028C775CC00D1D3D6 /* DefaultContributionDetailsMapper.swift */; };
 		CDFB38C328C775EF00D1D3D6 /* DefaultContributionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38C228C775EF00D1D3D6 /* DefaultContributionMapper.swift */; };
-		CDFB38C428C7760700D1D3D6 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC5B3628AC3159006CD13D /* Storage.swift */; };
-		CDFB38C828C7764400D1D3D6 /* CDContributionNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38C728C7764400D1D3D6 /* CDContributionNote.swift */; };
-		CDFB38C928C77B7100D1D3D6 /* ContributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE6D2869EECF00D035FA /* ContributionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,11 +136,9 @@
 		CDD3A0F6286906E400878A09 /* View+isHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+isHidden.swift"; sourceTree = "<group>"; };
 		CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCaseTests.swift; sourceTree = "<group>"; };
 		CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMockHandler.swift; sourceTree = "<group>"; };
-		CDFB38B928C774F600D1D3D6 /* CDContribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDContribution.swift; sourceTree = "<group>"; };
 		CDFB38BE28C775A600D1D3D6 /* DefaultContributionNoteMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionNoteMapper.swift; sourceTree = "<group>"; };
 		CDFB38C028C775CC00D1D3D6 /* DefaultContributionDetailsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionDetailsMapper.swift; sourceTree = "<group>"; };
 		CDFB38C228C775EF00D1D3D6 /* DefaultContributionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionMapper.swift; sourceTree = "<group>"; };
-		CDFB38C728C7764400D1D3D6 /* CDContributionNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDContributionNote.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,7 +309,6 @@
 		CD9BF702289C231700F75DE6 /* ContributionGraphTests */ = {
 			isa = PBXGroup;
 			children = (
-				CDFB38C528C7761C00D1D3D6 /* CoreDataStub */,
 				CD8D9DA728C5320C00DF9A6E /* GeneratedMocks.swift */,
 				CD64EAB428BA610800DA2B1E /* Data */,
 				CD9BF723289EB27400F75DE6 /* Domain */,
@@ -580,15 +554,6 @@
 			path = ContributionNoteMapper;
 			sourceTree = "<group>";
 		};
-		CDFB38C528C7761C00D1D3D6 /* CoreDataStub */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB38B928C774F600D1D3D6 /* CDContribution.swift */,
-				CDFB38C728C7764400D1D3D6 /* CDContributionNote.swift */,
-			);
-			path = CoreDataStub;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -649,6 +614,7 @@
 					};
 					CD9BF700289C231700F75DE6 = {
 						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = CD538B472860C5C0004BA280;
 					};
 				};
 			};
@@ -786,43 +752,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDFB38B228C7743F00D1D3D6 /* GetContributionUseCase.swift in Sources */,
-				CDFB38B028C7742300D1D3D6 /* ContributionSettings.swift in Sources */,
 				CD9BF715289D6F5A00F75DE6 /* TestError.swift in Sources */,
-				CDFB38C828C7764400D1D3D6 /* CDContributionNote.swift in Sources */,
 				CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */,
 				CD64EAB328BA5D0D00DA2B1E /* GetContributionUseCaseTests.swift in Sources */,
-				CDFB38C428C7760700D1D3D6 /* Storage.swift in Sources */,
-				CDFB38AA28C773F900D1D3D6 /* ContributionRepository.swift in Sources */,
-				CDFB38B128C7742300D1D3D6 /* ContributionMetrics.swift in Sources */,
-				CDFB38AB28C773F900D1D3D6 /* ContributionDetailsRepository.swift in Sources */,
 				CD9BF704289C231700F75DE6 /* ContributionViewModelTests.swift in Sources */,
-				CDFB38A928C773DF00D1D3D6 /* DefaultContributionRepository.swift in Sources */,
-				CDFB38A828C773DF00D1D3D6 /* DefaultContributionDetailsRepository.swift in Sources */,
 				CD64EAB628BA617B00DA2B1E /* ContributionRepositoryTests.swift in Sources */,
-				CDFB38A528C773CE00D1D3D6 /* ViewModelState.swift in Sources */,
 				CD602BCF28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift in Sources */,
-				CDFB38B628C7744B00D1D3D6 /* GetContributionMetricsUseCase.swift in Sources */,
-				CDFB38BA28C774F600D1D3D6 /* CDContribution.swift in Sources */,
 				CD53601028A3049100B4EEE6 /* AddEditContributionViewModelTests.swift in Sources */,
-				CDFB38A628C773CE00D1D3D6 /* AddEditContributionViewModel.swift in Sources */,
 				CD8D9DA828C5320C00DF9A6E /* GeneratedMocks.swift in Sources */,
-				CDFB38AF28C7742300D1D3D6 /* Contribution.swift in Sources */,
 				CD3052D928B59306000BE787 /* Answer.swift in Sources */,
 				CDD8EC3E28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift in Sources */,
-				CDFB38B328C7743F00D1D3D6 /* UpdateNoteUseCase.swift in Sources */,
-				CDFB38B428C7744600D1D3D6 /* GetContributionSettingsUseCase.swift in Sources */,
-				CDFB38C928C77B7100D1D3D6 /* ContributionViewModel.swift in Sources */,
-				CDFB38B828C7749100D1D3D6 /* Date+Utils.swift in Sources */,
-				CDFB38AE28C7740D00D1D3D6 /* ContributionMapper.swift in Sources */,
-				CDFB38B728C7745000D1D3D6 /* GetContributionDetailsUseCase.swift in Sources */,
 				CD9BF714289D6F5000F75DE6 /* XCTestCase+Await.swift in Sources */,
 				CD602BCB28BE368B00E1A63C /* ViewModelState+Equatable.swift in Sources */,
 				CD84C1EA28C258C100165C0F /* ContributionNote+Init.swift in Sources */,
-				CDFB38AD28C7740D00D1D3D6 /* ContributionNoteMapper.swift in Sources */,
 				CDD8EC4028C67D1D000BB47B /* StorageMockHandler.swift in Sources */,
-				CDFB38B528C7744600D1D3D6 /* SetContributionSettingsUseCase.swift in Sources */,
-				CDFB38AC28C7740D00D1D3D6 /* ContributionDetailsMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,6 +955,7 @@
 		CD9BF707289C231700F75DE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6894A8BA33;
@@ -1022,12 +966,14 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ContributionGraph.app/ContributionGraph";
 			};
 			name = Debug;
 		};
 		CD9BF708289C231700F75DE6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6894A8BA33;
@@ -1038,6 +984,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ContributionGraph.app/ContributionGraph";
 			};
 			name = Release;
 		};

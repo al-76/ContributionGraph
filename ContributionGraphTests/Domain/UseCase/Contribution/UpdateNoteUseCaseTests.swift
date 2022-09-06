@@ -8,6 +8,8 @@
 import XCTest
 import Combine
 
+@testable import ContributionGraph
+
 class DefaultUpdateNoteUseCaseTests: XCTestCase {
     private let testDate = Date.now
     private let testNote = ContributionNote(id: UUID(), title: "", changed: Date.now, note: "test")

@@ -8,6 +8,8 @@
 import XCTest
 import Combine
 
+@testable import ContributionGraph
+
 class ContributionViewModelTests: XCTestCase {
     // swiftlint:disable line_length
     private let data = ContributionViewModel.Data(items: [0: Contribution(days: 0)],
@@ -155,7 +157,7 @@ class ContributionViewModelTests: XCTestCase {
         setSettings.callAsFunctionHandler = { _ in successAnswer(newData.settings) }
         getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
-        let result = try awaitPublisher(viewModel.$state.dropFirst())
+        try awaitPublisher(viewModel.$state.dropFirst())
 
         // Act
         viewModel.set(settings: newData.settings)

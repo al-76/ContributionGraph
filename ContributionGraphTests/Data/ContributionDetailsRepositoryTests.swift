@@ -7,6 +7,8 @@
 
 import XCTest
 
+@testable import ContributionGraph
+
 class ContributionDetailsRepositoryTests: XCTestCase {
     private var storage: StorageMock!
     private var mapper: ContributionDetailsMapperMock!
