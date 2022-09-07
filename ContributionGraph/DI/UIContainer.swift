@@ -14,7 +14,8 @@ final class UIContainer: SharedContainer {
                               getDetails: DomainContainer.getContributionDetailsUseCase(),
                               getSettings: DomainContainer.getContributionSettingsUseCase(),
                               setSettings: DomainContainer.setContributionSettingsUseCase(),
-                              getMetrics: DomainContainer.getContributionMetricsUseCase())
+                              getMetrics: DomainContainer.getContributionMetricsUseCase(),
+                              deleteNote: DomainContainer.getDeleteNoteUseCase())
     }
 
     static let addEditContributionViewModel = Factory(scope: .shared) {

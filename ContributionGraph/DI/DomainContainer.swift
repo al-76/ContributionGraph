@@ -9,18 +9,7 @@ import Foundation
 import Factory
 
 final class DomainContainer: SharedContainer {
-    static let getContributionMetricsUseCase = Factory {
-        DefaultGetContributionMetricsUseCase()
-    }
-
-    static let getContributionSettingsUseCase = Factory {
-        DefaultGetContributionSettingsUseCase()
-    }
-
-    static let setContributionSettingsUseCase = Factory {
-        DefaultSetContributionSettingsUseCase()
-    }
-
+    // MARK: - Contribution
     static let getContributionUseCase = Factory {
         DefaultGetContributionUseCase(repository: DataContainer.contributionRepository())
     }
@@ -29,7 +18,26 @@ final class DomainContainer: SharedContainer {
         DefaultUpdateNoteUseCase(repository: DataContainer.contributionDetailsRepository())
     }
 
+    static let getDeleteNoteUseCase = Factory {
+        DefaultDeleteNoteUseCase()
+    }
+
+    // MARK: - Contribution Details
     static let getContributionDetailsUseCase = Factory {
         DefaultGetContributionDetailsUseCase(repository: DataContainer.contributionDetailsRepository())
+    }
+
+    // MARK: - Contribution Settings
+    static let getContributionSettingsUseCase = Factory {
+        DefaultGetContributionSettingsUseCase()
+    }
+
+    static let setContributionSettingsUseCase = Factory {
+        DefaultSetContributionSettingsUseCase()
+    }
+
+    // MARK: - Metrics
+    static let getContributionMetricsUseCase = Factory {
+        DefaultGetContributionMetricsUseCase()
     }
 }

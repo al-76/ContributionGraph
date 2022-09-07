@@ -11,6 +11,11 @@ import Foundation
 final class ContributionViewModel: ObservableObject {
     typealias State = ViewModelState<Data>
 
+    enum ViewModelError: Error {
+        case noDetails
+        case wrongIndex(index: Int)
+    }
+
     struct Data: Equatable {
         let items: [Int: Contribution]
         let details: ContributionDetails?
@@ -56,18 +61,21 @@ final class ContributionViewModel: ObservableObject {
     private let getSettings: GetContributionSettingsUseCase
     private let setSettings: SetContributionSettingsUseCase
     private let getMetrics: GetContributionMetricsUseCase
+    private let deleteNote: DeleteNoteUseCase
 
     // TODO: add ContributionUseCase Factory
     init(getItems: GetContributionUseCase,
          getDetails: GetContributionDetailsUseCase,
          getSettings: GetContributionSettingsUseCase,
          setSettings: SetContributionSettingsUseCase,
-         getMetrics: GetContributionMetricsUseCase) {
+         getMetrics: GetContributionMetricsUseCase,
+         deleteNote: DeleteNoteUseCase) {
         self.getItems = getItems
         self.getDetails = getDetails
         self.getSettings = getSettings
         self.setSettings = setSettings
         self.getMetrics = getMetrics
+        self.deleteNote = deleteNote
     }
 
     func set(settings: ContributionSettings) {
@@ -100,8 +108,28 @@ final class ContributionViewModel: ObservableObject {
         }
     }
 
-    func deleteNote(at index: Int) {
+    func deleteDataNote(at index: Int) {
+        switch state {
+        case .success(let data):
+            guard let details = data.details else {
+                state = .failure(ViewModelError.noDetails)
+                break
+            }
+            guard index >= 0 && index < details.notes.count else {
+                state = .failure(ViewModelError.wrongIndex(index: index))
+                break
+            }
 
+            deleteNote((Date.neutral.days(ago: data.selectedDay),
+                        details.notes[index]))
+            .flatMap { [getDetailsAction] in getDetailsAction(data) }
+            .catch { Just(.failure($0)).eraseToAnyPublisher() }
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$state)
+
+        default: // nothing to do here
+            break
+        }
     }
 
     func fetchContributionData() {
@@ -117,12 +145,7 @@ final class ContributionViewModel: ObservableObject {
     func fetchContribtuionDetails() {
         switch state {
         case .success(let data):
-            getDetails(Date.neutral.days(ago: data.selectedDay))
-                .map { details in
-                    .success(data.copy {
-                        $0.details = details
-                    }) }
-                .catch { Just(.failure($0)).eraseToAnyPublisher() }
+            getDetailsAction(with: data)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$state)
 
@@ -139,6 +162,16 @@ final class ContributionViewModel: ObservableObject {
               metrics: getMetrics(),
               data: data)
             .assign(to: &$state)
+    }
+
+    private func getDetailsAction(with data: Data) -> AnyPublisher<State, Never> {
+        getDetails(Date.neutral.days(ago: data.selectedDay))
+            .map { details in
+                .success(data.copy {
+                    $0.details = details
+                }) }
+            .catch { Just(.failure($0)).eraseToAnyPublisher() }
+            .eraseToAnyPublisher()
     }
 
     private func setSettingsAction(_ settings: ContributionSettings, _ data: Data?) {

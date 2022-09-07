@@ -66,6 +66,7 @@
 		CDFB38CE28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */; };
 		CDFB38D128C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */; };
 		CDFB38D328C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */; };
+		CDFB38D528C810EA00D1D3D6 /* DeleteNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D428C810EA00D1D3D6 /* DeleteNoteUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionDetailsUseCaseTests.swift; sourceTree = "<group>"; };
 		CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionSettingsUseCaseTests.swift; sourceTree = "<group>"; };
 		CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetContributionSettingsUseCaseTests.swift; sourceTree = "<group>"; };
+		CDFB38D428C810EA00D1D3D6 /* DeleteNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNoteUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,22 +179,6 @@
 				CD53600C28A2AFAD00B4EEE6 /* LaunchSideEffect.swift */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		CD53601428A306C500B4EEE6 /* AddContributionViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				CD53600E28A2F24400B4EEE6 /* AddEditContributionViewModelTests.swift */,
-			);
-			path = AddContributionViewModel;
-			sourceTree = "<group>";
-		};
-		CD53601528A306F100B4EEE6 /* ContributionViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				CD9BF703289C231700F75DE6 /* ContributionViewModelTests.swift */,
-			);
-			path = ContributionViewModel;
 			sourceTree = "<group>";
 		};
 		CD538B3F2860C5C0004BA280 = {
@@ -315,8 +301,8 @@
 		CD9BF70B289C235A00F75DE6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CD53601528A306F100B4EEE6 /* ContributionViewModel */,
-				CD53601428A306C500B4EEE6 /* AddContributionViewModel */,
+				CD9BF703289C231700F75DE6 /* ContributionViewModelTests.swift */,
+				CD53600E28A2F24400B4EEE6 /* AddEditContributionViewModelTests.swift */,
 				CD602BCA28BE368B00E1A63C /* ViewModelState+Equatable.swift */,
 			);
 			path = ViewModel;
@@ -343,8 +329,8 @@
 		CD9BF716289D9C2900F75DE6 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				CD9BF722289EAA1200F75DE6 /* ContributionSettings */,
 				CD9BF721289EAA0A00F75DE6 /* Contribution */,
+				CD9BF722289EAA1200F75DE6 /* ContributionSettings */,
 				CD49109228BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift */,
 				CD2FC9E328A03D5200F1424F /* GetContributionMetricsUseCase.swift */,
 			);
@@ -356,6 +342,7 @@
 			children = (
 				CD9BF719289D9F2D00F75DE6 /* GetContributionUseCase.swift */,
 				CD53600928A196AD00B4EEE6 /* UpdateNoteUseCase.swift */,
+				CDFB38D428C810EA00D1D3D6 /* DeleteNoteUseCase.swift */,
 			);
 			path = Contribution;
 			sourceTree = "<group>";
@@ -418,8 +405,8 @@
 			children = (
 				CD53600B28A2AF9C00B4EEE6 /* Common */,
 				CDC5BE6C2869EEA300D035FA /* ViewModel */,
-				CDC5BE642869D9FD00D035FA /* Utils */,
 				CDC5BE632869D50300D035FA /* View */,
+				CDC5BE642869D9FD00D035FA /* Utils */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -699,6 +686,7 @@
 				CDC5BE722869F0AB00D035FA /* Contribution.swift in Sources */,
 				CD0F621D28A67D51001F8CD8 /* DomainContainer.swift in Sources */,
 				CD53600A28A196AD00B4EEE6 /* UpdateNoteUseCase.swift in Sources */,
+				CDFB38D528C810EA00D1D3D6 /* DeleteNoteUseCase.swift in Sources */,
 				CDD3A0F7286906E400878A09 /* View+isHidden.swift in Sources */,
 				CD84C1EF28C28F4E00165C0F /* ErrorView.swift in Sources */,
 				CDC5BE5F2869D4DD00D035FA /* ContributionGraphView.swift in Sources */,

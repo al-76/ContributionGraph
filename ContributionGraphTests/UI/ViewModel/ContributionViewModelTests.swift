@@ -10,7 +10,7 @@ import Combine
 
 @testable import ContributionGraph
 
-// swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class ContributionViewModelTests: XCTestCase {
     // swiftlint:disable line_length
     private let data = ContributionViewModel.Data(items: [0: Contribution(days: 0)],
@@ -24,6 +24,7 @@ class ContributionViewModelTests: XCTestCase {
     private var getSettings: GetContributionSettingsUseCaseMock!
     private var setSettings: SetContributionSettingsUseCaseMock!
     private var getMetrics: GetContributionMetricsUseCaseMock!
+    private var deleteNote: DeleteNoteUseCaseMock!
     private var viewModel: ContributionViewModel!
 
     override func setUp() {
@@ -34,11 +35,14 @@ class ContributionViewModelTests: XCTestCase {
         getSettings = GetContributionSettingsUseCaseMock()
         setSettings = SetContributionSettingsUseCaseMock()
         getMetrics = GetContributionMetricsUseCaseMock()
+        deleteNote = DeleteNoteUseCaseMock()
         viewModel = ContributionViewModel(getItems: getItems,
                                           getDetails: getDetails,
                                           getSettings: getSettings,
                                           setSettings: setSettings,
-                                          getMetrics: getMetrics)
+                                          getMetrics: getMetrics,
+                                          deleteNote: deleteNote)
+        prepareViewModelState()
     }
 
     func testInitState() throws {
@@ -51,12 +55,20 @@ class ContributionViewModelTests: XCTestCase {
         XCTAssertEqual(result, .loading)
     }
 
+    func testFetchData() throws {
+        // Arrange
+
+        // Act
+        viewModel.fetchContributionData()
+
+        // Assert
+        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
+                       .success(data))
+    }
+
     func testFetchDataItemsError() throws {
         // Arrange
         getItems.callAsFunctionHandler = { failAnswer() }
-        getDetails.callAsFunctionHandler = { _ in noAnswer() }
-        getSettings.callAsFunctionHandler = { noAnswer() }
-        getMetrics.callAsFunctionHandler = { noAnswer() }
 
         // Act
         viewModel.fetchContributionData()
@@ -68,11 +80,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchDataSettingsError() throws {
         // Arrange
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(nil) }
         getSettings.callAsFunctionHandler = { failAnswer() }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
 
         // Act
         viewModel.fetchContributionData()
@@ -84,10 +92,6 @@ class ContributionViewModelTests: XCTestCase {
 //
     func testFetchDataMetricsError() throws {
         // Arrange
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(nil) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
         getMetrics.callAsFunctionHandler = { failAnswer() }
 
         // Act
@@ -100,11 +104,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchDataDetailsError() throws {
         // Arrange
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in failAnswer() }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
 
         // Act
         viewModel.fetchContributionData()
@@ -114,29 +114,8 @@ class ContributionViewModelTests: XCTestCase {
                        .failure(TestError.someError))
     }
 
-    func testFetchData() throws {
-        // Arrange
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
-
-        // Act
-        viewModel.fetchContributionData()
-
-        // Assert
-        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
-                       .success(data))
-    }
-
     func testFetchDataDouble() throws {
         // Arrange
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
 
         // Act
         viewModel.fetchContributionData()
@@ -152,11 +131,7 @@ class ContributionViewModelTests: XCTestCase {
         // Arrange
         let data = data
         let newData = data.copy { $0.settings = ContributionSettings(weekCount: 200) }
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
         setSettings.callAsFunctionHandler = { _ in successAnswer(newData.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
 
@@ -170,12 +145,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testSetSettingsError() throws {
         // Arrange
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
         setSettings.callAsFunctionHandler = { _ in failAnswer() }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
 
@@ -201,12 +171,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testSetSettingsSkipError() throws {
         // Arrangee
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
         getMetrics.callAsFunctionHandler = { failAnswer() }
-
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
 
@@ -223,11 +188,6 @@ class ContributionViewModelTests: XCTestCase {
         // Arrange
         let testDay = 10
         let testData = data.copy { $0.selectedDay = testDay }
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
 
@@ -241,11 +201,6 @@ class ContributionViewModelTests: XCTestCase {
     func testSetEditingNote() throws {
         let testNote = ContributionNote("editingTest")
         let testData = data.copy { $0.editingNote = testNote }
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
 
@@ -259,11 +214,6 @@ class ContributionViewModelTests: XCTestCase {
     func testFetchContributionDetails() throws {
         // Arrange
         let testData = data.copy { $0.details = ContributionDetails(date: Date.now, notes: [ContributionNote("test")]) }
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(nil) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
         getDetails.callAsFunctionHandler = { _ in successAnswer(testData.details) }
@@ -279,11 +229,6 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchContributionDetailsError() throws {
         // Arrange
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(nil)  }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
         getDetails.callAsFunctionHandler = { _ in failAnswer() }
@@ -310,10 +255,6 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchContributionDetailsSkipError() throws {
         // Arrange
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
         getMetrics.callAsFunctionHandler = { failAnswer() }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
@@ -330,11 +271,6 @@ class ContributionViewModelTests: XCTestCase {
     func testFetchContributionDetailsSetNil() throws {
         // Arrange
         let testData = data.copy { $0.details = nil }
-        let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
         getDetails.callAsFunctionHandler = { _ in successAnswer(nil) }
@@ -343,7 +279,85 @@ class ContributionViewModelTests: XCTestCase {
         viewModel.fetchContribtuionDetails()
 
         // Assert
-        let res = try awaitPublisher(viewModel.$state.dropFirst())
-        XCTAssertEqual(res, .success(testData))
+        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
+                       .success(testData))
+    }
+
+    func testDeleteDataNote() throws {
+        // Arrange
+        viewModel.fetchContributionData()
+        try awaitPublisher(viewModel.$state.dropFirst())
+
+        // Act
+        viewModel.deleteDataNote(at: 0)
+
+        // Assert
+        XCTAssertEqual(deleteNote.callAsFunctionArgValues.first?.0, Date.neutral.days(ago: data.selectedDay))
+        XCTAssertEqual(deleteNote.callAsFunctionArgValues.first?.1,
+                       data.details?.notes.first)
+        XCTAssertEqual(deleteNote.callAsFunctionCallCount, 1)
+        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
+                       .success(data))
+    }
+
+    func testDeleteDataNoteErrorNoDetails() throws {
+        // Arrange
+        let testError = ContributionViewModel.ViewModelError
+            .noDetails
+        getDetails.callAsFunctionHandler = { _ in successAnswer(nil) }
+        viewModel.fetchContributionData()
+        try awaitPublisher(viewModel.$state.dropFirst())
+
+        // Act
+        viewModel.deleteDataNote(at: 0)
+
+        // Assert
+        XCTAssertEqual(deleteNote.callAsFunctionCallCount, 0)
+        XCTAssertEqual(try awaitPublisher(viewModel.$state),
+                       .failure(testError))
+    }
+
+    func testDeleteDataNoteErrorWrongLargeIndex() throws {
+        // Arrange
+        let testIndex = 500
+        let testError = ContributionViewModel.ViewModelError
+            .wrongIndex(index: testIndex)
+        viewModel.fetchContributionData()
+        try awaitPublisher(viewModel.$state.dropFirst())
+
+        // Act
+        viewModel.deleteDataNote(at: testIndex)
+
+        // Assert
+        XCTAssertEqual(deleteNote.callAsFunctionCallCount, 0)
+        XCTAssertEqual(try awaitPublisher(viewModel.$state),
+                       .failure(testError))
+    }
+
+    func testDeleteDataNoteErrorWrongSmallIndex() throws {
+        // Arrange
+        let testIndex = -500
+        let testError = ContributionViewModel.ViewModelError
+            .wrongIndex(index: testIndex)
+        viewModel.fetchContributionData()
+        try awaitPublisher(viewModel.$state.dropFirst())
+
+        // Act
+        viewModel.deleteDataNote(at: testIndex)
+
+        // Assert
+        XCTAssertEqual(deleteNote.callAsFunctionCallCount, 0)
+        XCTAssertEqual(try awaitPublisher(viewModel.$state),
+                       .failure(testError))
+    }
+
+    private func prepareViewModelState() {
+        let data = data
+        getItems.callAsFunctionHandler = { successAnswer(data.items) }
+        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
+        setSettings.callAsFunctionHandler = { _ in successAnswer(data.settings) }
+        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
+        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
+        deleteNote.callAsFunctionHandler = { _ in successAnswer(()) }
     }
 }

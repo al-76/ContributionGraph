@@ -56,7 +56,7 @@ struct ContributionView: View {
                                 addEditContribution = true
                             }
                         }
-                        .onDelete { $0.forEach(viewModel.deleteNote) }
+                        .onDelete { $0.forEach(viewModel.deleteDataNote) }
                         .onTapGesture { addEditContribution = true }
                     }
                     .toolbar {

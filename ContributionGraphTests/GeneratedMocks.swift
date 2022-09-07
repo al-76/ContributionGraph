@@ -120,6 +120,23 @@ class SetContributionSettingsUseCaseMock: SetContributionSettingsUseCase {
     }
 }
 
+class DeleteNoteUseCaseMock: DeleteNoteUseCase {
+    init() { }
+
+
+    private(set) var callAsFunctionCallCount = 0
+    var callAsFunctionArgValues = [(Date, ContributionNote)]()
+    var callAsFunctionHandler: (((Date, ContributionNote)) -> (AnyPublisher<Void, Error>))?
+    func callAsFunction(_ input: (Date, ContributionNote)) -> AnyPublisher<Void, Error> {
+        callAsFunctionCallCount += 1
+        callAsFunctionArgValues.append(input)
+        if let callAsFunctionHandler = callAsFunctionHandler {
+            return callAsFunctionHandler(input)
+        }
+        fatalError("callAsFunctionHandler returns can't have a default value thus its handler must be set")
+    }
+}
+
 class UpdateNoteUseCaseMock: UpdateNoteUseCase {
     init() { }
 
