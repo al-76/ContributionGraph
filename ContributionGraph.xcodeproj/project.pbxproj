@@ -67,6 +67,7 @@
 		CDFB38D128C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */; };
 		CDFB38D328C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */; };
 		CDFB38D528C810EA00D1D3D6 /* DeleteNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D428C810EA00D1D3D6 /* DeleteNoteUseCase.swift */; };
+		CDFB38D728C8C3A200D1D3D6 /* DeleteNoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D628C8C3A200D1D3D6 /* DeleteNoteUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionSettingsUseCaseTests.swift; sourceTree = "<group>"; };
 		CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetContributionSettingsUseCaseTests.swift; sourceTree = "<group>"; };
 		CDFB38D428C810EA00D1D3D6 /* DeleteNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNoteUseCase.swift; sourceTree = "<group>"; };
+		CDFB38D628C8C3A200D1D3D6 /* DeleteNoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNoteUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 			children = (
 				CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */,
 				CD64EAB228BA5D0D00DA2B1E /* GetContributionUseCaseTests.swift */,
+				CDFB38D628C8C3A200D1D3D6 /* DeleteNoteUseCaseTests.swift */,
 			);
 			path = Contribution;
 			sourceTree = "<group>";
@@ -725,6 +728,7 @@
 				CD9BF715289D6F5A00F75DE6 /* TestError.swift in Sources */,
 				CDFB38D128C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift in Sources */,
 				CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */,
+				CDFB38D728C8C3A200D1D3D6 /* DeleteNoteUseCaseTests.swift in Sources */,
 				CD64EAB328BA5D0D00DA2B1E /* GetContributionUseCaseTests.swift in Sources */,
 				CD9BF704289C231700F75DE6 /* ContributionViewModelTests.swift in Sources */,
 				CD64EAB628BA617B00DA2B1E /* ContributionRepositoryTests.swift in Sources */,
