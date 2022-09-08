@@ -46,7 +46,6 @@ struct DefaultDtoContributionNoteMapper: DtoContributionNoteMapper {
 
                 return .success(dtoNote)
             }
-
         } catch let error {
             return .failure(error)
         }

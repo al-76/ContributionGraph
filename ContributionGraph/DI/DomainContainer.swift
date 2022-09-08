@@ -19,7 +19,7 @@ final class DomainContainer: SharedContainer {
     }
 
     static let getDeleteNoteUseCase = Factory {
-        DefaultDeleteNoteUseCase()
+        DefaultDeleteNoteUseCase(repository: DataContainer.contributionDetailsRepository())
     }
 
     // MARK: - Contribution Details

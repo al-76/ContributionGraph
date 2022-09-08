@@ -10,7 +10,6 @@ import Combine
 
 @testable import ContributionGraph
 
-// swiftlint:disable file_length
 class ContributionViewModelTests: XCTestCase {
     // swiftlint:disable line_length
     private let data = ContributionViewModel.Data(items: [0: Contribution(days: 0)],
@@ -292,19 +291,51 @@ class ContributionViewModelTests: XCTestCase {
         viewModel.deleteDataNote(at: 0)
 
         // Assert
-        XCTAssertEqual(deleteNote.callAsFunctionArgValues.first?.0, Date.neutral.days(ago: data.selectedDay))
-        XCTAssertEqual(deleteNote.callAsFunctionArgValues.first?.1,
-                       data.details?.notes.first)
+        let args = deleteNote.callAsFunctionArgValues.first
+        XCTAssertEqual(args?.0, data.details?.notes.first)
+        XCTAssertEqual(args?.1, data.items[0])
         XCTAssertEqual(deleteNote.callAsFunctionCallCount, 1)
         XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
                        .success(data))
     }
 
+    func testDeleteDataNoteError() throws {
+        // Arrange
+        viewModel.fetchContributionData()
+        try awaitPublisher(viewModel.$state.dropFirst())
+        deleteNote.callAsFunctionHandler = { _ in failAnswer() }
+
+        // Act
+        viewModel.deleteDataNote(at: 0)
+
+        // Assert
+        XCTAssertEqual(deleteNote.callAsFunctionCallCount, 1)
+        XCTAssertEqual(try awaitPublisher(viewModel.$state.dropFirst()),
+                       .failure(TestError.someError))
+    }
+
     func testDeleteDataNoteErrorNoDetails() throws {
         // Arrange
         let testError = ContributionViewModel.ViewModelError
-            .noDetails
+            .noData
         getDetails.callAsFunctionHandler = { _ in successAnswer(nil) }
+        viewModel.fetchContributionData()
+        try awaitPublisher(viewModel.$state.dropFirst())
+
+        // Act
+        viewModel.deleteDataNote(at: 0)
+
+        // Assert
+        XCTAssertEqual(deleteNote.callAsFunctionCallCount, 0)
+        XCTAssertEqual(try awaitPublisher(viewModel.$state),
+                       .failure(testError))
+    }
+
+    func testDeleteDataNoteErrorNoContribution() throws {
+        // Arrange
+        let testError = ContributionViewModel.ViewModelError
+            .noData
+        getItems.callAsFunctionHandler = { successAnswer([:]) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
 

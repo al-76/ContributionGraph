@@ -10,13 +10,17 @@ import Combine
 
 /// @mockable(history: callAsFunction = true)
 protocol DeleteNoteUseCase {
-    func callAsFunction(_ input: (Date, ContributionNote)) -> AnyPublisher<Void, Error>
+    func callAsFunction(_ input: (ContributionNote, Contribution)) -> AnyPublisher<Void, Error>
 }
 
 final class DefaultDeleteNoteUseCase: DeleteNoteUseCase {
-    func callAsFunction(_ input: (Date, ContributionNote)) -> AnyPublisher<Void, Error> {
-        Just(())
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
+    let repository: ContributionDetailsRepository
+
+    init(repository: ContributionDetailsRepository) {
+        self.repository = repository
+    }
+
+    func callAsFunction(_ input: (ContributionNote, Contribution)) -> AnyPublisher<Void, Error> {
+        repository.delete(input.0, to: input.1)
     }
 }

@@ -125,9 +125,9 @@ class DeleteNoteUseCaseMock: DeleteNoteUseCase {
 
 
     private(set) var callAsFunctionCallCount = 0
-    var callAsFunctionArgValues = [(Date, ContributionNote)]()
-    var callAsFunctionHandler: (((Date, ContributionNote)) -> (AnyPublisher<Void, Error>))?
-    func callAsFunction(_ input: (Date, ContributionNote)) -> AnyPublisher<Void, Error> {
+    var callAsFunctionArgValues = [(ContributionNote, Contribution)]()
+    var callAsFunctionHandler: (((ContributionNote, Contribution)) -> (AnyPublisher<Void, Error>))?
+    func callAsFunction(_ input: (ContributionNote, Contribution)) -> AnyPublisher<Void, Error> {
         callAsFunctionCallCount += 1
         callAsFunctionArgValues.append(input)
         if let callAsFunctionHandler = callAsFunctionHandler {
@@ -192,9 +192,11 @@ class StorageContextMock: StorageContext {
     }
 
     private(set) var deleteCallCount = 0
+    var deleteArgValues = [Any]()
     var deleteHandler: ((Any) throws -> ())?
     func delete<T: NSManagedObject>(object: T) throws  {
         deleteCallCount += 1
+        deleteArgValues.append(object)
         if let deleteHandler = deleteHandler {
             try deleteHandler(object)
         }
@@ -207,9 +209,11 @@ class ContributionDetailsRepositoryMock: ContributionDetailsRepository {
 
 
     private(set) var readCallCount = 0
+    var readArgValues = [Date]()
     var readHandler: ((Date) -> (AnyPublisher<ContributionDetails?, Error>))?
     func read(date: Date) -> AnyPublisher<ContributionDetails?, Error> {
         readCallCount += 1
+        readArgValues.append(date)
         if let readHandler = readHandler {
             return readHandler(date)
         }
@@ -217,13 +221,27 @@ class ContributionDetailsRepositoryMock: ContributionDetailsRepository {
     }
 
     private(set) var writeCallCount = 0
+    var writeArgValues = [(ContributionNote, Date)]()
     var writeHandler: ((ContributionNote, Date) -> (AnyPublisher<Void, Error>))?
     func write(_ note: ContributionNote, at date: Date) -> AnyPublisher<Void, Error> {
         writeCallCount += 1
+        writeArgValues.append((note, date))
         if let writeHandler = writeHandler {
             return writeHandler(note, date)
         }
         fatalError("writeHandler returns can't have a default value thus its handler must be set")
+    }
+
+    private(set) var deleteCallCount = 0
+    var deleteArgValues = [(ContributionNote, Contribution)]()
+    var deleteHandler: ((ContributionNote, Contribution) -> (AnyPublisher<Void, Error>))?
+    func delete(_ note: ContributionNote, to contribution: Contribution) -> AnyPublisher<Void, Error> {
+        deleteCallCount += 1
+        deleteArgValues.append((note, contribution))
+        if let deleteHandler = deleteHandler {
+            return deleteHandler(note, contribution)
+        }
+        fatalError("deleteHandler returns can't have a default value thus its handler must be set")
     }
 }
 
@@ -239,6 +257,25 @@ class GetContributionDetailsUseCaseMock: GetContributionDetailsUseCase {
             return callAsFunctionHandler(input)
         }
         fatalError("callAsFunctionHandler returns can't have a default value thus its handler must be set")
+    }
+}
+
+class DtoContributionMapperMock: DtoContributionMapper {
+    init() { }
+
+     typealias Input = (CDContribution,
+                       Contribution)
+
+    private(set) var mapCallCount = 0
+    var mapArgValues = [Input]()
+    var mapHandler: ((Input) -> (CDContribution))?
+    func map(input: Input) -> CDContribution {
+        mapCallCount += 1
+        mapArgValues.append(input)
+        if let mapHandler = mapHandler {
+            return mapHandler(input)
+        }
+        fatalError("mapHandler returns can't have a default value thus its handler must be set")
     }
 }
 

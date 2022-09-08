@@ -12,7 +12,7 @@ final class ContributionViewModel: ObservableObject {
     typealias State = ViewModelState<Data>
 
     enum ViewModelError: Error {
-        case noDetails
+        case noData
         case wrongIndex(index: Int)
     }
 
@@ -81,7 +81,13 @@ final class ContributionViewModel: ObservableObject {
     func set(settings: ContributionSettings) {
         switch state {
         case .success(let data):
-            setSettingsAction(settings, data)
+            fetch(items: getItems(),
+                  details: getDetails(Date.neutral),
+                  settings: setSettings(settings),
+                  metrics: getMetrics(),
+                  data: data)
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$state)
 
         default: // nothing to do here
             break
@@ -111,8 +117,9 @@ final class ContributionViewModel: ObservableObject {
     func deleteDataNote(at index: Int) {
         switch state {
         case .success(let data):
-            guard let details = data.details else {
-                state = .failure(ViewModelError.noDetails)
+            guard let details = data.details,
+                  let contribution = data.items[data.selectedDay] else {
+                state = .failure(ViewModelError.noData)
                 break
             }
             guard index >= 0 && index < details.notes.count else {
@@ -120,12 +127,12 @@ final class ContributionViewModel: ObservableObject {
                 break
             }
 
-            deleteNote((Date.neutral.days(ago: data.selectedDay),
-                        details.notes[index]))
-            .flatMap { [getDetailsAction] in getDetailsAction(data) }
-            .catch { Just(.failure($0)).eraseToAnyPublisher() }
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$state)
+            deleteNote((details.notes[index], contribution))
+                .flatMap { [refreshData] in
+                    refreshData(contribution.date, data) }
+                .catch { Just(.failure($0)).eraseToAnyPublisher() }
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$state)
 
         default: // nothing to do here
             break
@@ -145,7 +152,13 @@ final class ContributionViewModel: ObservableObject {
     func fetchContribtuionDetails() {
         switch state {
         case .success(let data):
-            getDetailsAction(with: data)
+            getDetails(Date.neutral.days(ago: data.selectedDay))
+                .map { details in
+                        .success(data.copy {
+                            $0.details = details
+                        }) }
+                .catch { Just(.failure($0)).eraseToAnyPublisher() }
+                .eraseToAnyPublisher()
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$state)
 
@@ -154,34 +167,22 @@ final class ContributionViewModel: ObservableObject {
         }
     }
 
+    // MARK: - Actions
     private func fetchContributionDataAction(_ data: Data? = nil) {
-        state = .loading
+        refreshData(at: Date.neutral.days(ago: data?.selectedDay ?? 0),
+                    with: data)
+        .receive(on: DispatchQueue.main)
+        .assign(to: &$state)
+    }
+
+    // MARK: - Helpers
+    private func refreshData(at date: Date,
+                             with data: Data?) -> AnyPublisher<State, Never> {
         fetch(items: getItems(),
-              details: getDetails(Date.neutral.days(ago: data?.selectedDay ?? 0)),
+              details: getDetails(date),
               settings: getSettings(),
               metrics: getMetrics(),
               data: data)
-            .assign(to: &$state)
-    }
-
-    private func getDetailsAction(with data: Data) -> AnyPublisher<State, Never> {
-        getDetails(Date.neutral.days(ago: data.selectedDay))
-            .map { details in
-                .success(data.copy {
-                    $0.details = details
-                }) }
-            .catch { Just(.failure($0)).eraseToAnyPublisher() }
-            .eraseToAnyPublisher()
-    }
-
-    private func setSettingsAction(_ settings: ContributionSettings, _ data: Data?) {
-        state = .loading
-        fetch(items: getItems(),
-              details: getDetails(Date.neutral),
-              settings: setSettings(settings),
-              metrics: getMetrics(),
-              data: data)
-            .assign(to: &$state)
     }
 
     private func fetch(items: AnyPublisher<[Int: Contribution], Error>,
@@ -197,7 +198,6 @@ final class ContributionViewModel: ObservableObject {
                                  selectedDay: data?.selectedDay ?? 0,
                                  editingNote: data?.editingNote)) }
             .catch { Just(.failure($0)).eraseToAnyPublisher() }
-            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 }

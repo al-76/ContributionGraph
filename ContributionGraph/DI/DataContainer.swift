@@ -19,6 +19,10 @@ final class DataContainer: SharedContainer {
         DefaultContributionMapper()
     }
 
+    static let dtoContributionMapper = Factory(scope: .singleton) {
+        DefaultDtoContributionMapper()
+    }
+
     static let contributionDetailsMapper = Factory(scope: .singleton) {
         DefaultContributionDetailsMapper()
     }
@@ -29,7 +33,8 @@ final class DataContainer: SharedContainer {
 
     static let contributionDetailsRepository =  Factory<ContributionDetailsRepository>(scope: .singleton) {
         DefaultContributionDetailsRepository(storage: PlatformContainer.storage(),
-                                             mapper: DataContainer.contributionDetailsMapper(),
-                                             dtoMapper: DataContainer.dtoContributionNoteMapper())
+                                             detailsMapper: DataContainer.contributionDetailsMapper(),
+                                             dtoNoteMapper: DataContainer.dtoContributionNoteMapper(),
+                                             dtoContributionMapper: DataContainer.dtoContributionMapper())
     }
 }

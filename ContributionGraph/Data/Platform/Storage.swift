@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import Combine
 
-/// @mockable
+/// @mockable(history: delete = true)
 protocol StorageContext {
     func newData<T: NSManagedObject>(_ type: T.Type) throws -> T
     func save() throws
