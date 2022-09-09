@@ -11,17 +11,21 @@ jobs:
     runs-on: macos-12
     
     env:
-      XCODEBUILD_TEST: "xcodebuild test -scheme ContributionGraph -project ContributionGraph.xcodeproj -destination \"platform=iOS Simulator,name=iPhone 11,OS=15.5\" -enableCodeCoverage YES"  
+      XCODEBUILD_TEST_ARGS: "-scheme ContributionGraph -project ContributionGraph.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.5' -enableCodeCoverage YES"  
 
     name: Build
     steps:
     - uses: actions/checkout@v3
-    - name: Run Unit tests
-      run: $XCODEBUILD_TEST -only-testing:ContributionGraphTests | xcpretty
+    - name: Set vars
+      run: echo $XCODEBUILD_TEST_ARGS
     - name: Run UI tests
-      run: $XCODEBUILD_TEST -only-testing:ContributionGraphUITests | xcpretty
+      run: xcodebuild test $XCODEBUILD_TEST_ARGS -only-testing:ContributionGraphUITests | xcpretty    
+    - name: Run Unit tests
+      run: xcodebuild test-without-building $XCODEBUILD_TEST_ARGS -only-testing:ContributionGraphTests | xcpretty
     - name: Swift Coverage Conversion
       uses: sersoft-gmbh/swift-coverage-action@v3
+      with:
+        target-name-filter: ^ContributionGraphTests$
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0
       with:
