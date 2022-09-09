@@ -11,7 +11,7 @@ jobs:
     runs-on: macos-12
     
     env:
-      XCODEBUILD_TEST: "xcodebuild test -scheme ContributionGraph -project ContributionGraph.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.5' -enableCodeCoverage YES"  
+      XCODEBUILD_TEST: "xcodebuild test -scheme ContributionGraph -project ContributionGraph.xcodeproj -destination \"platform=iOS Simulator,name=iPhone 11,OS=15.5\" -enableCodeCoverage YES"  
 
     name: Build
     steps:
