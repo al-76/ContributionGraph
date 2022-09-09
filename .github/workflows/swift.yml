@@ -19,8 +19,6 @@ jobs:
       run: xcodebuild test-without-building -scheme ContributionGraph -project ContributionGraph.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.5' -only-testing:ContributionGraphTests | xcpretty
     - name: Swift Coverage Conversion
       uses: sersoft-gmbh/swift-coverage-action@v3
-      with:
-        target-name-filter: ^ContributionGraphTests$
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0
       with:
