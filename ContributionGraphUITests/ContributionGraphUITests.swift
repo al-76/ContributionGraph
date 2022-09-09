@@ -64,7 +64,7 @@ class ContributionGraphUITests: XCTestCase {
         noteText.typeText(test.text)
         doneButton.tap()
         var item = app.staticTexts[contributionTitle(test.title)]
-        let itemWasAdded = item.exists
+        let itemWasAdded = item.waitForExistence(timeout: 1)
         // - Edit
         item.tap()
         titleText.tap()
@@ -73,11 +73,11 @@ class ContributionGraphUITests: XCTestCase {
         noteText.typeText(test.edited)
         doneButton.tap()
         item = app.staticTexts[contributionTitle(test.title + test.edited)]
-        let itemWasEdited = item.exists
+        let itemWasEdited = item.waitForExistence(timeout: 1)
         // - Remove
         item.swipeLeft()
         app.buttons["Delete"].tap()
-        let itemWasRemoved = !item.exists
+        let itemWasRemoved = !item.waitForExistence(timeout: 1)
 
         // Assert
         XCTAssertTrue(itemWasAdded)
