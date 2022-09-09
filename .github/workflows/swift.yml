@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  XCODE_DERIVED_DATA: ~/Library/Developer/Xcode/DerivedData/ContributionGraph-*/Build
-  APP_NAME: ContributionGraph
-
 jobs:
   build:
     runs-on: macos-12
@@ -20,8 +16,7 @@ jobs:
     - name: Run tests
       run: xcodebuild test -scheme ContributionGraph -project ContributionGraph.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.5' | xcpretty
     - name: Swift Coverage Conversion
-      run: xcrun llvm-cov export -format=lcov -instr-profile=$XCODE_DERIVED_DATA/ProfileData/*/Coverage.profdata $XCODE_DERIVED_DATA/Products/Debug-iphonesimulator/$APP_NAME.app/$APP_NAME > coverage.lcov
-    #  uses: sersoft-gmbh/swift-coverage-action@v3
+      run: tools/generate_lcov.sh
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0
       with:
