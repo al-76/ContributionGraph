@@ -68,10 +68,19 @@
 		CDFB38D328C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */; };
 		CDFB38D528C810EA00D1D3D6 /* DeleteNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D428C810EA00D1D3D6 /* DeleteNoteUseCase.swift */; };
 		CDFB38D728C8C3A200D1D3D6 /* DeleteNoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D628C8C3A200D1D3D6 /* DeleteNoteUseCaseTests.swift */; };
+		CDFB38DF28CA530200D1D3D6 /* ContributionGraphUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38DE28CA530200D1D3D6 /* ContributionGraphUITests.swift */; };
+		CDFB38E728CA738C00D1D3D6 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE672869DA3E00D035FA /* Date+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		CD9BF705289C231700F75DE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD538B402860C5C0004BA280 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD538B472860C5C0004BA280;
+			remoteInfo = ContributionGraph;
+		};
+		CDFB38E228CA530200D1D3D6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CD538B402860C5C0004BA280 /* Project object */;
 			proxyType = 1;
@@ -143,6 +152,8 @@
 		CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetContributionSettingsUseCaseTests.swift; sourceTree = "<group>"; };
 		CDFB38D428C810EA00D1D3D6 /* DeleteNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNoteUseCase.swift; sourceTree = "<group>"; };
 		CDFB38D628C8C3A200D1D3D6 /* DeleteNoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNoteUseCaseTests.swift; sourceTree = "<group>"; };
+		CDFB38DC28CA530200D1D3D6 /* ContributionGraphUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContributionGraphUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDFB38DE28CA530200D1D3D6 /* ContributionGraphUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +166,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CD9BF6FE289C231700F75DE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDFB38D928CA530200D1D3D6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -188,6 +206,7 @@
 			children = (
 				CD538B4A2860C5C0004BA280 /* ContributionGraph */,
 				CD9BF702289C231700F75DE6 /* ContributionGraphTests */,
+				CDFB38DD28CA530200D1D3D6 /* ContributionGraphUITests */,
 				CD538B492860C5C0004BA280 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -197,6 +216,7 @@
 			children = (
 				CD538B482860C5C0004BA280 /* ContributionGraph.app */,
 				CD9BF701289C231700F75DE6 /* ContributionGraphTests.xctest */,
+				CDFB38DC28CA530200D1D3D6 /* ContributionGraphUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -528,6 +548,14 @@
 			path = ContributionSettings;
 			sourceTree = "<group>";
 		};
+		CDFB38DD28CA530200D1D3D6 /* ContributionGraphUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CDFB38DE28CA530200D1D3D6 /* ContributionGraphUITests.swift */,
+			);
+			path = ContributionGraphUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -573,6 +601,24 @@
 			productReference = CD9BF701289C231700F75DE6 /* ContributionGraphTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		CDFB38DB28CA530200D1D3D6 /* ContributionGraphUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDFB38E428CA530200D1D3D6 /* Build configuration list for PBXNativeTarget "ContributionGraphUITests" */;
+			buildPhases = (
+				CDFB38D828CA530200D1D3D6 /* Sources */,
+				CDFB38D928CA530200D1D3D6 /* Frameworks */,
+				CDFB38DA28CA530200D1D3D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDFB38E328CA530200D1D3D6 /* PBXTargetDependency */,
+			);
+			name = ContributionGraphUITests;
+			productName = ContributionGraphUITests;
+			productReference = CDFB38DC28CA530200D1D3D6 /* ContributionGraphUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -587,6 +633,10 @@
 						CreatedOnToolsVersion = 13.4.1;
 					};
 					CD9BF700289C231700F75DE6 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = CD538B472860C5C0004BA280;
+					};
+					CDFB38DB28CA530200D1D3D6 = {
 						CreatedOnToolsVersion = 13.4.1;
 						TestTargetID = CD538B472860C5C0004BA280;
 					};
@@ -610,6 +660,7 @@
 			targets = (
 				CD538B472860C5C0004BA280 /* ContributionGraph */,
 				CD9BF700289C231700F75DE6 /* ContributionGraphTests */,
+				CDFB38DB28CA530200D1D3D6 /* ContributionGraphUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -625,6 +676,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CD9BF6FF289C231700F75DE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDFB38DA28CA530200D1D3D6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -745,6 +803,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDFB38D828CA530200D1D3D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDFB38DF28CA530200D1D3D6 /* ContributionGraphUITests.swift in Sources */,
+				CDFB38E728CA738C00D1D3D6 /* Date+Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -752,6 +819,11 @@
 			isa = PBXTargetDependency;
 			target = CD538B472860C5C0004BA280 /* ContributionGraph */;
 			targetProxy = CD9BF705289C231700F75DE6 /* PBXContainerItemProxy */;
+		};
+		CDFB38E328CA530200D1D3D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD538B472860C5C0004BA280 /* ContributionGraph */;
+			targetProxy = CDFB38E228CA530200D1D3D6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -964,6 +1036,40 @@
 			};
 			name = Release;
 		};
+		CDFB38E528CA530200D1D3D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6894A8BA33;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = company.ContributionGraphUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ContributionGraph;
+			};
+			name = Debug;
+		};
+		CDFB38E628CA530200D1D3D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6894A8BA33;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = company.ContributionGraphUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ContributionGraph;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -990,6 +1096,15 @@
 			buildConfigurations = (
 				CD9BF707289C231700F75DE6 /* Debug */,
 				CD9BF708289C231700F75DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDFB38E428CA530200D1D3D6 /* Build configuration list for PBXNativeTarget "ContributionGraphUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDFB38E528CA530200D1D3D6 /* Debug */,
+				CDFB38E628CA530200D1D3D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -39,6 +39,16 @@
                ReferencedContainer = "container:ContributionGraph.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CDFB38DB28CA530200D1D3D6"
+               BuildableName = "ContributionGraphUITests.xctest"
+               BlueprintName = "ContributionGraphUITests"
+               ReferencedContainer = "container:ContributionGraph.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

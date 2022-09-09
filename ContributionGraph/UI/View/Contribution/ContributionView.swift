@@ -41,6 +41,7 @@ struct ContributionView: View {
                 Label {
                     Text(data.date(at: data.selectedDay))
                         .font(.headline)
+                        .accessibilityIdentifier("SelectedDay")
                 } icon: {
                     Image(systemName: "calendar")
                         .foregroundColor(Color.blue)

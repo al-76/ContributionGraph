@@ -48,6 +48,7 @@ struct AddEditContributionView: View {
                 } else {
                     TextField("Title", text: $title)
                     TextEditor(text: $note)
+                        .accessibilityIdentifier("NoteText")
                     Spacer()
                 }
 
