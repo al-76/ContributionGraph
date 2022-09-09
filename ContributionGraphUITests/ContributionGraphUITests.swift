@@ -45,12 +45,11 @@ class ContributionGraphUITests: XCTestCase {
         XCTAssertTrue(selectedDay.isHittable)
     }
 
-    func testAddRemoveContribution() {
+    func testAddEditRemoveContribution() {
         // Arrange
         let test = (title: "Title",
                     text: "TestNote",
-                    editedTitle: "EditedTitle",
-                    editedText: "EditedTestNote")
+                    edited: "Edited")
         let addButton = app.navigationBars["Items"].buttons["Add"]
         let titleText = app.textFields["Title"]
         let doneButton = app.buttons["Done"]
@@ -68,12 +67,12 @@ class ContributionGraphUITests: XCTestCase {
         let itemWasAdded = item.exists
         // - Edit
         item.tap()
-        app.deleteText(titleText)
-        titleText.typeText(test.editedTitle)
-        app.deleteText(noteText)
-        noteText.typeText(test.editedText)
+        titleText.tap()
+        titleText.typeText(test.edited)
+        noteText.tap()
+        noteText.typeText(test.edited)
         doneButton.tap()
-        item = app.staticTexts[contributionTitle(test.editedTitle)]
+        item = app.staticTexts[contributionTitle(test.title + test.edited)]
         let itemWasEdited = item.exists
         // - Remove
         item.swipeLeft()
@@ -88,12 +87,5 @@ class ContributionGraphUITests: XCTestCase {
 
     private func contributionTitle(_ text: String) -> String {
         "\(Date.now.format())\n\(text)"
-    }
-}
-
-extension XCUIApplication {
-    func deleteText(_ element: XCUIElement) {
-        element.doubleTap()
-        menuItems["Cut"].tap()
     }
 }
