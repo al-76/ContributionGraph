@@ -116,12 +116,12 @@ final class DefaultContributionDetailsRepository: ContributionDetailsRepository 
 
         let contribution = Contribution(date: contribution.date,
                                         count: contribution.count - 1)
-        let newDtoContribution = dtoContributionMapper
+        let modDtoContribution = dtoContributionMapper
             .map(input: (dtoContribution, contribution))
         let result = dtoNoteMapper
             .map(input: (contribution.date,
                          note,
-                         newDtoContribution,
+                         modDtoContribution,
                          context))
         switch result {
         case .success(let dtoNote):
@@ -129,6 +129,10 @@ final class DefaultContributionDetailsRepository: ContributionDetailsRepository 
 
         case .failure(let error):
             throw error
+        }
+
+        if contribution.count == 0 {
+            try context.delete(object: modDtoContribution)
         }
 
         try context.save()

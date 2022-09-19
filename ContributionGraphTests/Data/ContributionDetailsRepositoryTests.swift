@@ -223,6 +223,36 @@ class ContributionDetailsRepositoryTests: XCTestCase {
         XCTAssertEqual(context.saveCallCount, 1)
     }
 
+    func testDeleteLastContribution() throws {
+        // Arrange
+        let test = (contribution: Contribution(date: Date.neutral, count: 1),
+                    note: ContributionNote("test"),
+                    dto: CDContribution(),
+                    dtoNote: CDContributionNote())
+        let context = StorageContextMock()
+        storage.fetchHandler = { _, _, completion in
+            storageMockHandler(completion,
+                               .success((context: context,
+                                         items: [test.dto])))
+        }
+        dtoContributionMapper.mapHandler = { _ in test.dto }
+        dtoNoteMapper.mapHandler = { _ in .success(test.dtoNote) }
+        context.deleteHandler = { _ in }
+        context.saveHandler = {}
+
+        // Act
+        try awaitPublisher(repository.delete(test.note, to: test.contribution))
+
+        // Assert
+        XCTAssertEqual(storage.fetchCallCount, 1)
+        XCTAssertEqual(context.deleteCallCount, 2)
+        XCTAssertEqual(context.deleteArgValues.first as? CDContributionNote,
+                       test.dtoNote)
+        XCTAssertEqual(context.deleteArgValues.last as? CDContribution,
+                       test.dto)
+        XCTAssertEqual(context.saveCallCount, 1)
+    }
+
     func testDeleteErrorNoContribution() throws {
         // Arrange
         let testError = DefaultContributionDetailsRepository
