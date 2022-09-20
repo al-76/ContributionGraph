@@ -19,7 +19,7 @@ final class DefaultContributionRepository: ContributionRepository {
 
     func read() -> AnyPublisher<[Contribution], Error> {
         Future { [weak self] promise in
-            guard let self = self else {
+            guard let self else {
                 promise(.success([]))
                 return
             }

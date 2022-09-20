@@ -70,7 +70,7 @@ final class DefaultContributionDetailsRepository: ContributionDetailsRepository 
                           defaultValue: T,
                           onCompletion: @escaping FetchOnCompletion<T>) -> AnyPublisher<T, Error> {
         Future { [weak self] promise in
-            guard let self = self else {
+            guard let self else {
                 promise(.success(defaultValue))
                 return
             }

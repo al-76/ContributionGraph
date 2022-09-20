@@ -70,7 +70,7 @@ final class DefaultStorage: Storage {
                                    _ type: T.Type,
                                    onCompletion: @escaping OnFetchCompletion<T>) {
         context().perform { [weak self] in
-            guard let self = self else {
+            guard let self else {
                 onCompletion(.failure(StorageError.noContext))
                 return
             }
@@ -95,7 +95,7 @@ final class DefaultStorage: Storage {
                                    _ type: T.Type,
                                    onCompletion: @escaping OnCountCompletion) {
         context().perform { [weak self] in
-            guard let self = self else {
+            guard let self else {
                 onCompletion(.failure(StorageError.noContext))
                 return
             }
