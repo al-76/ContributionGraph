@@ -22,6 +22,9 @@ struct ContributionView: View {
 
             case .success(let data):
                 contributionsCountLabel(data.totalContributionCount())
+                    .padding([.top, .trailing])
+                totalWeekCountLabel(data.totalWeekCount())
+                    .padding([.bottom, .trailing])
 
                 ContributionGraphView(weeksCount: data.weekCount(),
                                       cellSize: 40.0,
@@ -41,7 +44,7 @@ struct ContributionView: View {
                 Label {
                     Text(data.date(at: data.selectedDay))
                         .font(.headline)
-                        .accessibilityIdentifier("SelectedDay")
+                        .accessibilityIdentifier("SelectedDayText")
                 } icon: {
                     Image(systemName: "calendar")
                         .foregroundColor(Color.blue)
@@ -97,11 +100,22 @@ extension ContributionView {
         Label {
             Text("Contributions: \(count)")
                 .font(.headline)
+                .accessibilityIdentifier("ContributionsCountText")
         } icon: {
             Image(systemName: "flame")
                 .foregroundColor(Color.red)
         }
-        .padding()
+    }
+
+    private func totalWeekCountLabel(_ count: Int) -> some View {
+        Label {
+            Text("Weeks: \(count)")
+                .font(.headline)
+                .accessibilityIdentifier("TotalWeekCountText")
+        } icon: {
+            Image(systemName: "timer")
+                .foregroundColor(Color.green)
+        }
     }
 
     private func settingsView(_ data: ContributionViewModel.Data) -> some View {

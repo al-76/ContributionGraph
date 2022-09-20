@@ -18,9 +18,13 @@ protocol StorageContext {
 
 /// @mockable
 protocol Storage {
-    typealias OnCompletion<T> = (Result<(context: StorageContext, items: [T]), Error>) -> Void
+    typealias OnFetchCompletion<T> = (Result<(context: StorageContext, items: [T]), Error>) -> Void
+    typealias OnCountCompletion = (Result<Int, Error>) -> Void
 
     func fetch<T: NSManagedObject>(predicate: NSPredicate?,
                                    _ type: T.Type,
-                                   onCompletion: @escaping OnCompletion<T>)
+                                   onCompletion: @escaping OnFetchCompletion<T>)
+    func count<T: NSManagedObject>(predicate: NSPredicate?,
+                                   _ type: T.Type,
+                                   onCompletion: @escaping OnCountCompletion)
 }

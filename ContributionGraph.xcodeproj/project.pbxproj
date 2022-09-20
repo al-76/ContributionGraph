@@ -18,6 +18,7 @@
 		CD49109328BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109228BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift */; };
 		CD49109528BCDECA00D1A421 /* ContributionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */; };
 		CD49109728BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */; };
+		CD4CFE2528DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CFE2428DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift */; };
 		CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD51271928BC108100E93508 /* Contribution+Init.swift */; };
 		CD53600828A18DFD00B4EEE6 /* AddEditContributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600728A18DFD00B4EEE6 /* AddEditContributionViewModel.swift */; };
 		CD53600A28A196AD00B4EEE6 /* UpdateNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600928A196AD00B4EEE6 /* UpdateNoteUseCase.swift */; };
@@ -63,6 +64,9 @@
 		CDD3A0F7286906E400878A09 /* View+isHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD3A0F6286906E400878A09 /* View+isHidden.swift */; };
 		CDD8EC3E28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */; };
 		CDD8EC4028C67D1D000BB47B /* StorageMockHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */; };
+		CDF1ED0A28D203E200844B2F /* ContributionMetricsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1ED0928D203E200844B2F /* ContributionMetricsMapper.swift */; };
+		CDF1ED0C28D20D8900844B2F /* DefaultContributionMetricsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1ED0B28D20D8900844B2F /* DefaultContributionMetricsRepository.swift */; };
+		CDF1ED0E28D20FC400844B2F /* ContributionMetricsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1ED0D28D20FC400844B2F /* ContributionMetricsRepository.swift */; };
 		CDFB38CE28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */; };
 		CDFB38D128C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */; };
 		CDFB38D328C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */; };
@@ -100,6 +104,7 @@
 		CD49109228BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionDetailsUseCase.swift; sourceTree = "<group>"; };
 		CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionDetailsRepository.swift; sourceTree = "<group>"; };
 		CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionDetailsRepository.swift; sourceTree = "<group>"; };
+		CD4CFE2428DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionMetricsRepositoryTests.swift; sourceTree = "<group>"; };
 		CD51271928BC108100E93508 /* Contribution+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+Init.swift"; sourceTree = "<group>"; };
 		CD53600728A18DFD00B4EEE6 /* AddEditContributionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditContributionViewModel.swift; sourceTree = "<group>"; };
 		CD53600928A196AD00B4EEE6 /* UpdateNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCase.swift; sourceTree = "<group>"; };
@@ -147,6 +152,9 @@
 		CDD3A0F6286906E400878A09 /* View+isHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+isHidden.swift"; sourceTree = "<group>"; };
 		CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCaseTests.swift; sourceTree = "<group>"; };
 		CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMockHandler.swift; sourceTree = "<group>"; };
+		CDF1ED0928D203E200844B2F /* ContributionMetricsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionMetricsMapper.swift; sourceTree = "<group>"; };
+		CDF1ED0B28D20D8900844B2F /* DefaultContributionMetricsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionMetricsRepository.swift; sourceTree = "<group>"; };
+		CDF1ED0D28D20FC400844B2F /* ContributionMetricsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionMetricsRepository.swift; sourceTree = "<group>"; };
 		CDFB38CD28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionDetailsUseCaseTests.swift; sourceTree = "<group>"; };
 		CDFB38D028C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributionSettingsUseCaseTests.swift; sourceTree = "<group>"; };
 		CDFB38D228C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetContributionSettingsUseCaseTests.swift; sourceTree = "<group>"; };
@@ -272,6 +280,7 @@
 				CD64EAB528BA617B00DA2B1E /* ContributionRepositoryTests.swift */,
 				CD602BCE28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift */,
 				CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */,
+				CD4CFE2428DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -419,6 +428,7 @@
 				CD602BC828BE1C2200E1A63C /* ContributionNoteMapper.swift */,
 				CD602BC628BE196800E1A63C /* ContributionDetailsMapper.swift */,
 				CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */,
+				CDF1ED0928D203E200844B2F /* ContributionMetricsMapper.swift */,
 			);
 			path = Mapper;
 			sourceTree = "<group>";
@@ -526,6 +536,7 @@
 			children = (
 				CDC5BE6A2869DA8900D035FA /* DefaultContributionRepository.swift */,
 				CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */,
+				CDF1ED0B28D20D8900844B2F /* DefaultContributionMetricsRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -535,6 +546,7 @@
 			children = (
 				CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */,
 				CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */,
+				CDF1ED0D28D20FC400844B2F /* ContributionMetricsRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -708,7 +720,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which mockolo > /dev/null; then\n  mockolo -s ${PROJECT_NAME} -d ContributionGraphTests/GeneratedMocks.swift --header \"@testable import ${PROJECT_NAME}\"\nfi\n";
+			shellScript = "#if which mockolo > /dev/null; then\n#mockolo -s ${PROJECT_NAME} -d ContributionGraphTests/GeneratedMocks.swift --header \"@testable import ${PROJECT_NAME}\"\n#fi\n";
 		};
 		CDD950A728C0127F0071516B /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -740,6 +752,7 @@
 				CD49109328BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift in Sources */,
 				CDBC5B3428AC3146006CD13D /* DefaultStorage.swift in Sources */,
 				CDC5BE682869DA3E00D035FA /* Date+Utils.swift in Sources */,
+				CDF1ED0C28D20D8900844B2F /* DefaultContributionMetricsRepository.swift in Sources */,
 				CD728B1E2866623800221B6E /* Color+Init.swift in Sources */,
 				CD9BF71A289D9F2D00F75DE6 /* GetContributionUseCase.swift in Sources */,
 				CDC5BE6B2869DA8900D035FA /* DefaultContributionRepository.swift in Sources */,
@@ -752,6 +765,7 @@
 				CD84C1EF28C28F4E00165C0F /* ErrorView.swift in Sources */,
 				CDC5BE5F2869D4DD00D035FA /* ContributionGraphView.swift in Sources */,
 				CD9BF71C289D9F5000F75DE6 /* GetContributionSettingsUseCase.swift in Sources */,
+				CDF1ED0A28D203E200844B2F /* ContributionMetricsMapper.swift in Sources */,
 				CD728B1C2866602300221B6E /* UIColor+Init.swift in Sources */,
 				CD9BF70E289C262600F75DE6 /* ContributionRepository.swift in Sources */,
 				CD602BC728BE196800E1A63C /* ContributionDetailsMapper.swift in Sources */,
@@ -774,6 +788,7 @@
 				CDC5BE6E2869EECF00D035FA /* ContributionViewModel.swift in Sources */,
 				CDD3A0F52868BA3500878A09 /* ContributionModel.xcdatamodeld in Sources */,
 				CDC48E5B2891B7360062ADE7 /* AddEditContributionView.swift in Sources */,
+				CDF1ED0E28D20FC400844B2F /* ContributionMetricsRepository.swift in Sources */,
 				CDBC5B3728AC3159006CD13D /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -783,6 +798,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDFB38D328C7A35D00D1D3D6 /* SetContributionSettingsUseCaseTests.swift in Sources */,
+				CD4CFE2528DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift in Sources */,
 				CD9BF715289D6F5A00F75DE6 /* TestError.swift in Sources */,
 				CDFB38D128C7A27B00D1D3D6 /* GetContributionSettingsUseCaseTests.swift in Sources */,
 				CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */,

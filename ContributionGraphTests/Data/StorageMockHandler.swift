@@ -19,7 +19,7 @@ func storageMockHandler<T>(_ completion: Any,
 func storageMockHandler<T>(_ completion: Any,
                            _ result: StorageMockResult<T>,
                            _ type: T.Type) {
-    guard let completion = completion as? StorageMock.OnCompletion<T> else {
+    guard let completion = completion as? StorageMock.OnFetchCompletion<T> else {
         return
     }
     completion(result)

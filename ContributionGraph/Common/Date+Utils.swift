@@ -9,7 +9,7 @@ import Foundation
 
 extension Date {
     func days(to date: Date) -> Int {
-        Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
+        abs(Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0)
     }
 }
 
@@ -20,6 +20,10 @@ extension Date {
 
     func weekOfMonth() -> Int {
         (Calendar.current.dateComponents([.weekOfMonth], from: self).weekOfMonth ?? 1)
+    }
+
+    func weeks(to date: Date) -> Int {
+        days(to: date) / 7
     }
 }
 

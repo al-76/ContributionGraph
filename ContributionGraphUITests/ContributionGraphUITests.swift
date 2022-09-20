@@ -26,16 +26,16 @@ class ContributionGraphUITests: XCTestCase {
         selectedDay.tap()
 
         // Assert
-        XCTAssertEqual(app.staticTexts["SelectedDay"].label,
+        XCTAssertEqual(app.staticTexts["SelectedDayText"].label,
                         Date.neutral.days(ago: testDay).format())
         XCTAssertTrue(initialHittable)
     }
 
     func testScrollGraph() {
         // Arrange
-        let selectedDay = app.otherElements["Day100"]
+        let selectedDay = app.otherElements["Day80"]
         let initialHittable = selectedDay.isHittable
-        let graphGrid = app.otherElements["ContributionGraphGrid"]
+        let graphGrid = app.scrollViews["ContributionGraphGrid"]
 
         // Act
         graphGrid.swipeRight()
@@ -74,7 +74,7 @@ class ContributionGraphUITests: XCTestCase {
         doneButton.tap()
         item = app.staticTexts[contributionTitle(test.title + test.edited)]
         let itemWasEdited = item.waitForExistence(timeout: 1)
-        // - Remove
+        // - Delete
         item.swipeLeft()
         app.buttons["Delete"].tap()
         let itemWasRemoved = !item.waitForExistence(timeout: 1)
@@ -85,7 +85,74 @@ class ContributionGraphUITests: XCTestCase {
         XCTAssertTrue(itemWasRemoved)
     }
 
+    func testContributionCount() {
+        // Arrange
+        let testTitle = "Test"
+        let addButton = app.navigationBars["Items"].buttons["Add"]
+        let titleText = app.textFields["Title"]
+        let doneButton = app.buttons["Done"]
+        let contributionText = app.staticTexts["ContributionsCountText"]
+        let initialContributions = contributionText.label.parseInt()
+
+        // Act
+        // - Add
+        addButton.tap()
+        titleText.tap()
+        titleText.typeText(testTitle)
+        doneButton.tap()
+        let afterAddContributions = contributionText.label.parseInt()
+        // - Delete
+        let item = app.staticTexts[contributionTitle(testTitle)]
+        item.swipeLeft()
+        app.buttons["Delete"].tap()
+        let afterDeleteContributions = contributionText.label.parseInt()
+
+        // Assert
+        XCTAssertEqual(afterAddContributions, initialContributions + 1)
+        XCTAssertEqual(afterDeleteContributions, initialContributions)
+    }
+
+    func testWeeksCount() {
+        // Arrange
+        let test = (day: 14,
+                    weeks: 2,
+                    title: "Test")
+        let addButton = app.navigationBars["Items"].buttons["Add"]
+        let titleText = app.textFields["Title"]
+        let doneButton = app.buttons["Done"]
+        let weeksText = app.staticTexts["TotalWeekCountText"]
+        let initialWeeks = weeksText.label.parseInt()
+
+        // Act
+        app.otherElements["Day14"].tap()
+        // - Add
+        addButton.tap()
+        titleText.tap()
+        titleText.typeText(test.title)
+        doneButton.tap()
+        let afterAddWeeks = weeksText.label.parseInt()
+        // - Delete
+        let item = app.staticTexts[contributionTitle(test.title)]
+        item.swipeLeft()
+        app.buttons["Delete"].tap()
+        let afterDeleteWeeks = weeksText.label.parseInt()
+
+        // Assert
+        XCTAssertEqual(initialWeeks, 0)
+        XCTAssertEqual(afterAddWeeks, test.weeks)
+        XCTAssertEqual(afterDeleteWeeks, 0)
+    }
+
     private func contributionTitle(_ text: String) -> String {
         "\(Date.now.format())\n\(text)"
+    }
+}
+
+extension String {
+    func parseInt() -> Int {
+        let value = components(separatedBy:
+                                        CharacterSet.decimalDigits.inverted)
+            .joined() as String
+        return Int(value) ?? -1
     }
 }

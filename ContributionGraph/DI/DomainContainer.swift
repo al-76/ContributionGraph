@@ -38,6 +38,6 @@ final class DomainContainer: SharedContainer {
 
     // MARK: - Metrics
     static let getContributionMetricsUseCase = Factory {
-        DefaultGetContributionMetricsUseCase()
+        DefaultGetContributionMetricsUseCase(repository: DataContainer.contributionMetricsRepository())
     }
 }

@@ -42,9 +42,10 @@ struct ContributionGraphView: View {
                         .onChange(of: weeksCount) { _ in
                             scroll(scrollProxy)
                         }
-                        .accessibilityIdentifier("ContributionGraphGrid")
-                }.fixedSize(horizontal: false, vertical: true)
-                    .padding(.trailing)
+                }
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.trailing)
+                .accessibilityIdentifier("ContributionGraphGrid")
             }
         }
     }

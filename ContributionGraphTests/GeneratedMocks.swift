@@ -75,6 +75,22 @@ class ContributionDetailsMapperMock: ContributionDetailsMapper {
     }
 }
 
+class ContributionMetricsMapperMock: ContributionMetricsMapper {
+    init() { }
+
+     typealias Input = (Int, [CDContribution])
+
+    private(set) var mapCallCount = 0
+    var mapHandler: ((Input) -> (ContributionMetrics))?
+    func map(input: Input) -> ContributionMetrics {
+        mapCallCount += 1
+        if let mapHandler = mapHandler {
+            return mapHandler(input)
+        }
+        fatalError("mapHandler returns can't have a default value thus its handler must be set")
+    }
+}
+
 class GetContributionMetricsUseCaseMock: GetContributionMetricsUseCase {
     init() { }
 
@@ -245,6 +261,21 @@ class ContributionDetailsRepositoryMock: ContributionDetailsRepository {
     }
 }
 
+class ContributionMetricsRepositoryMock: ContributionMetricsRepository {
+    init() { }
+
+
+    private(set) var readCallCount = 0
+    var readHandler: (() -> (AnyPublisher<ContributionMetrics, Error>))?
+    func read() -> AnyPublisher<ContributionMetrics, Error> {
+        readCallCount += 1
+        if let readHandler = readHandler {
+            return readHandler()
+        }
+        fatalError("readHandler returns can't have a default value thus its handler must be set")
+    }
+}
+
 class GetContributionDetailsUseCaseMock: GetContributionDetailsUseCase {
     init() { }
 
@@ -282,14 +313,25 @@ class DtoContributionMapperMock: DtoContributionMapper {
 class StorageMock: Storage {
     init() { }
 
-     typealias OnCompletion<T> = (Result<(context: StorageContext, items: [T]), Error>) -> Void
+     typealias OnFetchCompletion<T> = (Result<(context: StorageContext, items: [T]), Error>) -> Void
+     typealias OnCountCompletion = (Result<Int, Error>) -> Void
 
     private(set) var fetchCallCount = 0
     var fetchHandler: ((NSPredicate?, Any, Any) -> ())?
-    func fetch<T: NSManagedObject>(predicate: NSPredicate?, _ type: T.Type, onCompletion: @escaping OnCompletion<T>)  {
+    func fetch<T: NSManagedObject>(predicate: NSPredicate?, _ type: T.Type, onCompletion: @escaping OnFetchCompletion<T>)  {
         fetchCallCount += 1
         if let fetchHandler = fetchHandler {
             fetchHandler(predicate, type, onCompletion)
+        }
+        
+    }
+
+    private(set) var countCallCount = 0
+    var countHandler: ((NSPredicate?, Any, @escaping OnCountCompletion) -> ())?
+    func count<T: NSManagedObject>(predicate: NSPredicate?, _ type: T.Type, onCompletion: @escaping OnCountCompletion)  {
+        countCallCount += 1
+        if let countHandler = countHandler {
+            countHandler(predicate, type, onCompletion)
         }
         
     }

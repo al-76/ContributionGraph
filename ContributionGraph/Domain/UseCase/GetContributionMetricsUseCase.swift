@@ -13,9 +13,13 @@ protocol GetContributionMetricsUseCase {
 }
 
 final class DefaultGetContributionMetricsUseCase: GetContributionMetricsUseCase {
+    let repository: ContributionMetricsRepository
+
+    init(repository: ContributionMetricsRepository) {
+        self.repository = repository
+    }
+
     func callAsFunction() -> AnyPublisher<ContributionMetrics, Error> {
-        Just(ContributionMetrics(totalWeekCount: 15, totalContributionCount: 30))
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
+        repository.read()
     }
 }

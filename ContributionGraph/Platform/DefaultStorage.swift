@@ -68,7 +68,7 @@ final class DefaultStorage: Storage {
 
     func fetch<T: NSManagedObject>(predicate: NSPredicate?,
                                    _ type: T.Type,
-                                   onCompletion: @escaping OnCompletion<T>) {
+                                   onCompletion: @escaping OnFetchCompletion<T>) {
         context().perform { [weak self] in
             guard let self = self else {
                 onCompletion(.failure(StorageError.noContext))
@@ -85,6 +85,31 @@ final class DefaultStorage: Storage {
             do {
                 let data = try request.execute()
                 onCompletion(.success((self.context, data)))
+            } catch let error {
+                onCompletion(.failure(error))
+            }
+        }
+    }
+
+    func count<T: NSManagedObject>(predicate: NSPredicate?,
+                                   _ type: T.Type,
+                                   onCompletion: @escaping OnCountCompletion) {
+        context().perform { [weak self] in
+            guard let self = self else {
+                onCompletion(.failure(StorageError.noContext))
+                return
+            }
+
+            guard let request = T.fetchRequest() as? NSFetchRequest<T> else {
+                onCompletion(.failure(StorageError.wrongObjectType))
+                return
+            }
+
+            request.predicate = predicate
+
+            do {
+                let count = try self.context().count(for: request)
+                onCompletion(.success(count))
             } catch let error {
                 onCompletion(.failure(error))
             }
