@@ -8,13 +8,13 @@ on:
 
 jobs:
   build:
-    runs-on: macos-12
+    runs-on: macos-13
     
     name: Build
     steps:
     - uses: actions/checkout@v3
     - name: Run tests
-      run: xcodebuild test -scheme ContributionGraph -project ContributionGraph.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.5' | xcpretty
+      run: xcodebuild test -scheme ContributionGraph -project ContributionGraph.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.0' | xcpretty
     - name: Swift Coverage Conversion
       run: tools/generate_lcov.sh
     - name: Codecov
