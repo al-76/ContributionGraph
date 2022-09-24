@@ -10,14 +10,14 @@ import XCTest
 @testable import ContributionGraph
 
 class GetContributionDetailsUseCaseTests: XCTestCase {
-    private var useCase: DefaultGetContributionDetailsUseCase!
+    private var useCase: GetContributionDetailsUseCase!
     private var repository: ContributionDetailsRepositoryMock!
 
     override func setUp() {
         super.setUp()
 
         repository = ContributionDetailsRepositoryMock()
-        useCase = DefaultGetContributionDetailsUseCase(repository: repository)
+        useCase = GetContributionDetailsUseCase(repository: repository)
     }
 
     func testExecute() throws {

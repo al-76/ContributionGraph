@@ -7,7 +7,7 @@
 
 import Combine
 
-final class DefaultGetContributionSettingsUseCase: UseCase {
+final class GetContributionSettingsUseCase: UseCase {
     func callAsFunction(_ input: Void) -> AnyPublisher<ContributionSettings, Error> {
         Just(ContributionSettings(weekCount: 15))
             .setFailureType(to: Error.self)

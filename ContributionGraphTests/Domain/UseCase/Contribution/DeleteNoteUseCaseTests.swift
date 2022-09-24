@@ -13,14 +13,14 @@ import Combine
 class DeleteNoteUseCaseTests: XCTestCase {
     private let testNote = ContributionNote(id: UUID(), title: "", changed: Date.now, note: "test")
     private let testContribution = Contribution(days: 4)
-    private var useCase: DefaultDeleteNoteUseCase!
+    private var useCase: DeleteNoteUseCase!
     private var repository: ContributionDetailsRepositoryMock!
 
     override func setUp() {
         super.setUp()
 
         repository = ContributionDetailsRepositoryMock()
-        useCase = DefaultDeleteNoteUseCase(repository: repository)
+        useCase = DeleteNoteUseCase(repository: repository)
     }
 
     func testExecute() throws {

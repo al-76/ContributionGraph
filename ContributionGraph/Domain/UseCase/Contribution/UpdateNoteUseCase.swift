@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DefaultUpdateNoteUseCase: UseCase {
+final class UpdateNoteUseCase: UseCase {
     let repository: ContributionDetailsRepository
 
     init(repository: ContributionDetailsRepository) {

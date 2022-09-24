@@ -11,33 +11,33 @@ import Factory
 final class DomainContainer: SharedContainer {
     // MARK: - Contribution
     static let getContributionUseCase = Factory {
-        DefaultGetContributionUseCase(repository: DataContainer.contributionRepository())
+        GetContributionUseCase(repository: DataContainer.contributionRepository())
     }
 
     static let updateNoteUseCase = Factory {
-        DefaultUpdateNoteUseCase(repository: DataContainer.contributionDetailsRepository())
+        UpdateNoteUseCase(repository: DataContainer.contributionDetailsRepository())
     }
 
     static let getDeleteNoteUseCase = Factory {
-        DefaultDeleteNoteUseCase(repository: DataContainer.contributionDetailsRepository())
+        DeleteNoteUseCase(repository: DataContainer.contributionDetailsRepository())
     }
 
     // MARK: - Contribution Details
     static let getContributionDetailsUseCase = Factory {
-        DefaultGetContributionDetailsUseCase(repository: DataContainer.contributionDetailsRepository())
+        GetContributionDetailsUseCase(repository: DataContainer.contributionDetailsRepository())
     }
 
     // MARK: - Contribution Settings
     static let getContributionSettingsUseCase = Factory {
-        DefaultGetContributionSettingsUseCase()
+        GetContributionSettingsUseCase()
     }
 
     static let setContributionSettingsUseCase = Factory {
-        DefaultSetContributionSettingsUseCase()
+        SetContributionSettingsUseCase()
     }
 
     // MARK: - Metrics
     static let getContributionMetricsUseCase = Factory {
-        DefaultGetContributionMetricsUseCase(repository: DataContainer.contributionMetricsRepository())
+        GetContributionMetricsUseCase(repository: DataContainer.contributionMetricsRepository())
     }
 }

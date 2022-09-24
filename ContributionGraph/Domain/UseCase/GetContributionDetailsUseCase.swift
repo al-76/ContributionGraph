@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DefaultGetContributionDetailsUseCase: UseCase {
+final class GetContributionDetailsUseCase: UseCase {
     private let repository: ContributionDetailsRepository
 
     init(repository: ContributionDetailsRepository) {

@@ -10,12 +10,12 @@ import XCTest
 @testable import ContributionGraph
 
 class SetContributionSettingsUseCaseTests: XCTestCase {
-    private var useCase: DefaultSetContributionSettingsUseCase!
+    private var useCase: SetContributionSettingsUseCase!
 
     override func setUp() {
         super.setUp()
 
-        useCase = DefaultSetContributionSettingsUseCase()
+        useCase = SetContributionSettingsUseCase()
     }
 
     func testExecute() throws {

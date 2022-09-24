@@ -12,13 +12,13 @@ import Combine
 
 class GetContributionUseCaseTests: XCTestCase {
     private var repository: ContributionRepositoryMock!
-    private var useCase: DefaultGetContributionUseCase!
+    private var useCase: GetContributionUseCase!
 
     override func setUp() {
         super.setUp()
 
         repository = ContributionRepositoryMock()
-        useCase = DefaultGetContributionUseCase(repository: repository)
+        useCase = GetContributionUseCase(repository: repository)
     }
 
     func testExecute() throws {

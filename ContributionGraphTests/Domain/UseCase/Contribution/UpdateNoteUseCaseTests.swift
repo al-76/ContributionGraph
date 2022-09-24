@@ -13,14 +13,14 @@ import Combine
 class DefaultUpdateNoteUseCaseTests: XCTestCase {
     private let testDate = Date.now
     private let testNote = ContributionNote(id: UUID(), title: "", changed: Date.now, note: "test")
-    private var useCase: DefaultUpdateNoteUseCase!
+    private var useCase: UpdateNoteUseCase!
     private var repository: ContributionDetailsRepositoryMock!
 
     override func setUp() {
         super.setUp()
 
         repository = ContributionDetailsRepositoryMock()
-        useCase = DefaultUpdateNoteUseCase(repository: repository)
+        useCase = UpdateNoteUseCase(repository: repository)
     }
 
     func testExecute() throws {

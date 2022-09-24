@@ -7,7 +7,7 @@
 
 import Combine
 
-final class DefaultDeleteNoteUseCase: UseCase {
+final class DeleteNoteUseCase: UseCase {
     let repository: ContributionDetailsRepository
 
     init(repository: ContributionDetailsRepository) {

@@ -7,7 +7,7 @@
 
 import Combine
 
-final class DefaultGetContributionMetricsUseCase: UseCase {
+final class GetContributionMetricsUseCase: UseCase {
     let repository: ContributionMetricsRepository
 
     init(repository: ContributionMetricsRepository) {
