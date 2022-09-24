@@ -23,12 +23,12 @@ class AddEditContributionViewModelTests: XCTestCase {
                                                                          title: "test",
                                                                          changed: Date.now,
                                                                          note: "old_note"))
-    var updateNote: UpdateNoteUseCaseMock!
+    var updateNote: UseCaseMock<(Date, ContributionNote), Void>!
 
     override func setUp() {
         super.setUp()
 
-        updateNote = UpdateNoteUseCaseMock()
+        updateNote = UseCaseMock<(Date, ContributionNote), Void>()
     }
 
     func testInitState() throws {

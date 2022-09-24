@@ -5,8 +5,8 @@
 //  Created by Vyacheslav Konopkin on 05.08.2022.
 //
 
-import Combine
 import Foundation
+import Combine
 
 final class DefaultGetContributionUseCase: UseCase {
     private let repository: ContributionRepository

@@ -9,6 +9,23 @@ import CoreData
 import Foundation
 
 
+class DeleteNoteUseCaseMock: DeleteNoteUseCase {
+    init() { }
+
+
+    private(set) var callAsFunctionCallCount = 0
+    var callAsFunctionArgValues = [(ContributionNote, Contribution)]()
+    var callAsFunctionHandler: (((ContributionNote, Contribution)) -> (AnyPublisher<Void, Error>))?
+    func callAsFunction(_ input: (ContributionNote, Contribution)) -> AnyPublisher<Void, Error> {
+        callAsFunctionCallCount += 1
+        callAsFunctionArgValues.append(input)
+        if let callAsFunctionHandler = callAsFunctionHandler {
+            return callAsFunctionHandler(input)
+        }
+        fatalError("callAsFunctionHandler returns can't have a default value thus its handler must be set")
+    }
+}
+
 class ContributionMapperMock: ContributionMapper {
     init() { }
 
@@ -88,38 +105,6 @@ class ContributionMetricsMapperMock: ContributionMetricsMapper {
             return mapHandler(input)
         }
         fatalError("mapHandler returns can't have a default value thus its handler must be set")
-    }
-}
-
-class DeleteNoteUseCaseMock: DeleteNoteUseCase {
-    init() { }
-
-
-    private(set) var callAsFunctionCallCount = 0
-    var callAsFunctionArgValues = [(ContributionNote, Contribution)]()
-    var callAsFunctionHandler: (((ContributionNote, Contribution)) -> (AnyPublisher<Void, Error>))?
-    func callAsFunction(_ input: (ContributionNote, Contribution)) -> AnyPublisher<Void, Error> {
-        callAsFunctionCallCount += 1
-        callAsFunctionArgValues.append(input)
-        if let callAsFunctionHandler = callAsFunctionHandler {
-            return callAsFunctionHandler(input)
-        }
-        fatalError("callAsFunctionHandler returns can't have a default value thus its handler must be set")
-    }
-}
-
-class UpdateNoteUseCaseMock: UpdateNoteUseCase {
-    init() { }
-
-
-    private(set) var callAsFunctionCallCount = 0
-    var callAsFunctionHandler: (((Date, ContributionNote)) -> (AnyPublisher<Void, Error>))?
-    func callAsFunction(_ input: (Date, ContributionNote)) -> AnyPublisher<Void, Error> {
-        callAsFunctionCallCount += 1
-        if let callAsFunctionHandler = callAsFunctionHandler {
-            return callAsFunctionHandler(input)
-        }
-        fatalError("callAsFunctionHandler returns can't have a default value thus its handler must be set")
     }
 }
 

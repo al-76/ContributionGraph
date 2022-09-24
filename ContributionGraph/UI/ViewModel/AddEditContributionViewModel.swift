@@ -20,9 +20,9 @@ final class AddEditContributionViewModel: ObservableObject {
         let contributionNote: ContributionNote?
     }
 
-    private let updateNote: UpdateNoteUseCase
+    private let updateNote: any UseCase<(Date, ContributionNote), Void>
 
-    init(updateNote: UpdateNoteUseCase) {
+    init(updateNote: some UseCase<(Date, ContributionNote), Void>) {
         self.updateNote = updateNote
     }
 
