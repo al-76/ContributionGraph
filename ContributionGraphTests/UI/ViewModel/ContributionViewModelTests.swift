@@ -22,7 +22,7 @@ class ContributionViewModelTests: XCTestCase {
     private var getItems: UseCaseMock<Void, [Int: Contribution]>!
     private var getDetails: UseCaseMock<Date, ContributionDetails?>!
     private var getSettings: UseCaseMock<Void, ContributionSettings>!
-    private var setSettings: SetContributionSettingsUseCaseMock!
+    private var setSettings: UseCaseMock<ContributionSettings, ContributionSettings>!
     private var getMetrics: UseCaseMock<Void, ContributionMetrics>!
     private var deleteNote: DeleteNoteUseCaseMock!
     private var viewModel: ContributionViewModel!
@@ -33,7 +33,7 @@ class ContributionViewModelTests: XCTestCase {
         getItems = UseCaseMock<Void, [Int: Contribution]>()
         getDetails = UseCaseMock<Date, ContributionDetails?>()
         getSettings = UseCaseMock<Void, ContributionSettings>()
-        setSettings = SetContributionSettingsUseCaseMock()
+        setSettings = UseCaseMock<ContributionSettings, ContributionSettings>()
         getMetrics = UseCaseMock<Void, ContributionMetrics>()
         deleteNote = DeleteNoteUseCaseMock()
         viewModel = ContributionViewModel(getItems: getItems,

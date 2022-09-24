@@ -59,7 +59,7 @@ final class ContributionViewModel: ObservableObject {
     private let getItems: any UseCase<Void, [Int: Contribution]>
     private let getDetails: any UseCase<Date, ContributionDetails?>
     private let getSettings: any UseCase<Void, ContributionSettings>
-    private let setSettings: SetContributionSettingsUseCase
+    private let setSettings: any UseCase<ContributionSettings, ContributionSettings>
     private let getMetrics: any UseCase<Void, ContributionMetrics>
     private let deleteNote: DeleteNoteUseCase
 
@@ -67,7 +67,7 @@ final class ContributionViewModel: ObservableObject {
     init(getItems: some UseCase<Void, [Int: Contribution]>,
          getDetails: some UseCase<Date, ContributionDetails?>,
          getSettings: some UseCase<Void, ContributionSettings>,
-         setSettings: SetContributionSettingsUseCase,
+         setSettings: some UseCase<ContributionSettings, ContributionSettings>,
          getMetrics: some UseCase<Void, ContributionMetrics>,
          deleteNote: DeleteNoteUseCase) {
         self.getItems = getItems
