@@ -103,6 +103,7 @@ struct ContributionGraphView: View {
                         onTapCellAction?(n)
                         selectedCell = n
                     }
+                    .accessibilityElement(children: .contain)
                     .accessibilityIdentifier("Day\(n)")
             }
         }
