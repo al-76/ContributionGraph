@@ -7,19 +7,14 @@
 
 import Combine
 
-/// @mockable
-protocol GetContributionMetricsUseCase {
-    func callAsFunction() -> AnyPublisher<ContributionMetrics, Error>
-}
-
-final class DefaultGetContributionMetricsUseCase: GetContributionMetricsUseCase {
+final class DefaultGetContributionMetricsUseCase: UseCase {
     let repository: ContributionMetricsRepository
 
     init(repository: ContributionMetricsRepository) {
         self.repository = repository
     }
 
-    func callAsFunction() -> AnyPublisher<ContributionMetrics, Error> {
+    func callAsFunction(_ input: Void) -> AnyPublisher<ContributionMetrics, Error> {
         repository.read()
     }
 }

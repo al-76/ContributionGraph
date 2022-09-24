@@ -23,7 +23,7 @@ class ContributionViewModelTests: XCTestCase {
     private var getDetails: UseCaseMock<Date, ContributionDetails?>!
     private var getSettings: GetContributionSettingsUseCaseMock!
     private var setSettings: SetContributionSettingsUseCaseMock!
-    private var getMetrics: GetContributionMetricsUseCaseMock!
+    private var getMetrics: UseCaseMock<Void, ContributionMetrics>!
     private var deleteNote: DeleteNoteUseCaseMock!
     private var viewModel: ContributionViewModel!
 
@@ -34,7 +34,7 @@ class ContributionViewModelTests: XCTestCase {
         getDetails = UseCaseMock<Date, ContributionDetails?>()
         getSettings = GetContributionSettingsUseCaseMock()
         setSettings = SetContributionSettingsUseCaseMock()
-        getMetrics = GetContributionMetricsUseCaseMock()
+        getMetrics = UseCaseMock<Void, ContributionMetrics>()
         deleteNote = DeleteNoteUseCaseMock()
         viewModel = ContributionViewModel(getItems: getItems,
                                           getDetails: getDetails,
@@ -92,7 +92,7 @@ class ContributionViewModelTests: XCTestCase {
 //
     func testFetchDataMetricsError() throws {
         // Arrange
-        getMetrics.callAsFunctionHandler = { failAnswer() }
+        getMetrics.callAsFunctionHandler = { _ in failAnswer() }
 
         // Act
         viewModel.fetchContributionData()
@@ -171,7 +171,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testSetSettingsSkipError() throws {
         // Arrangee
-        getMetrics.callAsFunctionHandler = { failAnswer() }
+        getMetrics.callAsFunctionHandler = { _ in failAnswer() }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
 
@@ -255,7 +255,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchContributionDetailsSkipError() throws {
         // Arrange
-        getMetrics.callAsFunctionHandler = { failAnswer() }
+        getMetrics.callAsFunctionHandler = { _ in failAnswer() }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
 
@@ -389,7 +389,7 @@ class ContributionViewModelTests: XCTestCase {
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
         setSettings.callAsFunctionHandler = { _ in successAnswer(data.settings) }
         getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { successAnswer(data.metrics) }
+        getMetrics.callAsFunctionHandler = { _ in successAnswer(data.metrics) }
         deleteNote.callAsFunctionHandler = { _ in successAnswer(()) }
     }
 }
