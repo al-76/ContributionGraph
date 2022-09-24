@@ -726,7 +726,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#if which mockolo > /dev/null; then\ntools/mockolo/mockolo -s ${PROJECT_NAME} -d ContributionGraphTests/GeneratedMocks.swift --header \"@testable import ${PROJECT_NAME}\"\n#fi\n";
+			shellScript = "if which mockolo > /dev/null; then\nmockolo -s ${PROJECT_NAME} -d ContributionGraphTests/GeneratedMocks.swift --header \"@testable import ${PROJECT_NAME}\"\nfi\n";
 		};
 		CDD950A728C0127F0071516B /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
