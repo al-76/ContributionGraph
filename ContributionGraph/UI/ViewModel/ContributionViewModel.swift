@@ -61,7 +61,7 @@ final class ContributionViewModel: ObservableObject {
     private let getSettings: any UseCase<Void, ContributionSettings>
     private let setSettings: any UseCase<ContributionSettings, ContributionSettings>
     private let getMetrics: any UseCase<Void, ContributionMetrics>
-    private let deleteNote: DeleteNoteUseCase
+    private let deleteNote: any UseCase<(ContributionNote, Contribution), Void>
 
     // TODO: add ContributionUseCase Factory
     init(getItems: some UseCase<Void, [Int: Contribution]>,
@@ -69,7 +69,7 @@ final class ContributionViewModel: ObservableObject {
          getSettings: some UseCase<Void, ContributionSettings>,
          setSettings: some UseCase<ContributionSettings, ContributionSettings>,
          getMetrics: some UseCase<Void, ContributionMetrics>,
-         deleteNote: DeleteNoteUseCase) {
+         deleteNote: some UseCase<(ContributionNote, Contribution), Void>) {
         self.getItems = getItems
         self.getDetails = getDetails
         self.getSettings = getSettings

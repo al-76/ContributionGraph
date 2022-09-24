@@ -15,10 +15,12 @@ final class UseCaseMock<Input, Output>: UseCase {
 
     private(set) var callAsFunctionCallCount = 0
 
+    var callAsFunctionArgValues = [Input]()
     var callAsFunctionHandler: ((Input) -> (AnyPublisher<Output, Error>))?
 
     func callAsFunction(_ input: Input) -> AnyPublisher<Output, Error> {
         callAsFunctionCallCount += 1
+        callAsFunctionArgValues.append(input)
 
         if let callAsFunctionHandler = callAsFunctionHandler {
             return callAsFunctionHandler(input)

@@ -7,12 +7,7 @@
 
 import Combine
 
-/// @mockable(history: callAsFunction = true)
-protocol DeleteNoteUseCase {
-    func callAsFunction(_ input: (ContributionNote, Contribution)) -> AnyPublisher<Void, Error>
-}
-
-final class DefaultDeleteNoteUseCase: DeleteNoteUseCase {
+final class DefaultDeleteNoteUseCase: UseCase {
     let repository: ContributionDetailsRepository
 
     init(repository: ContributionDetailsRepository) {

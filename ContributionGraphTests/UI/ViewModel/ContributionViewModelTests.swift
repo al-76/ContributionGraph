@@ -24,7 +24,7 @@ class ContributionViewModelTests: XCTestCase {
     private var getSettings: UseCaseMock<Void, ContributionSettings>!
     private var setSettings: UseCaseMock<ContributionSettings, ContributionSettings>!
     private var getMetrics: UseCaseMock<Void, ContributionMetrics>!
-    private var deleteNote: DeleteNoteUseCaseMock!
+    private var deleteNote: UseCaseMock<(ContributionNote, Contribution), Void>!
     private var viewModel: ContributionViewModel!
 
     override func setUp() {
@@ -35,7 +35,7 @@ class ContributionViewModelTests: XCTestCase {
         getSettings = UseCaseMock<Void, ContributionSettings>()
         setSettings = UseCaseMock<ContributionSettings, ContributionSettings>()
         getMetrics = UseCaseMock<Void, ContributionMetrics>()
-        deleteNote = DeleteNoteUseCaseMock()
+        deleteNote = UseCaseMock<(ContributionNote, Contribution), Void>()
         viewModel = ContributionViewModel(getItems: getItems,
                                           getDetails: getDetails,
                                           getSettings: getSettings,
