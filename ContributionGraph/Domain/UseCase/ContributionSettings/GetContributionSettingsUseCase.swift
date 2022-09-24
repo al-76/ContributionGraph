@@ -7,13 +7,8 @@
 
 import Combine
 
-/// @mockable
-protocol GetContributionSettingsUseCase {
-    func callAsFunction() -> AnyPublisher<ContributionSettings, Error>
-}
-
-final class DefaultGetContributionSettingsUseCase: GetContributionSettingsUseCase {
-    func callAsFunction() -> AnyPublisher<ContributionSettings, Error> {
+final class DefaultGetContributionSettingsUseCase: UseCase {
+    func callAsFunction(_ input: Void) -> AnyPublisher<ContributionSettings, Error> {
         Just(ContributionSettings(weekCount: 15))
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()

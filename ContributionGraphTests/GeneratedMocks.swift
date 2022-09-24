@@ -91,21 +91,6 @@ class ContributionMetricsMapperMock: ContributionMetricsMapper {
     }
 }
 
-class GetContributionSettingsUseCaseMock: GetContributionSettingsUseCase {
-    init() { }
-
-
-    private(set) var callAsFunctionCallCount = 0
-    var callAsFunctionHandler: (() -> (AnyPublisher<ContributionSettings, Error>))?
-    func callAsFunction() -> AnyPublisher<ContributionSettings, Error> {
-        callAsFunctionCallCount += 1
-        if let callAsFunctionHandler = callAsFunctionHandler {
-            return callAsFunctionHandler()
-        }
-        fatalError("callAsFunctionHandler returns can't have a default value thus its handler must be set")
-    }
-}
-
 class SetContributionSettingsUseCaseMock: SetContributionSettingsUseCase {
     init() { }
 

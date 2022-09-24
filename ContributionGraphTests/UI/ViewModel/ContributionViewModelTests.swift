@@ -21,7 +21,7 @@ class ContributionViewModelTests: XCTestCase {
                                                   editingNote: nil)
     private var getItems: UseCaseMock<Void, [Int: Contribution]>!
     private var getDetails: UseCaseMock<Date, ContributionDetails?>!
-    private var getSettings: GetContributionSettingsUseCaseMock!
+    private var getSettings: UseCaseMock<Void, ContributionSettings>!
     private var setSettings: SetContributionSettingsUseCaseMock!
     private var getMetrics: UseCaseMock<Void, ContributionMetrics>!
     private var deleteNote: DeleteNoteUseCaseMock!
@@ -32,7 +32,7 @@ class ContributionViewModelTests: XCTestCase {
 
         getItems = UseCaseMock<Void, [Int: Contribution]>()
         getDetails = UseCaseMock<Date, ContributionDetails?>()
-        getSettings = GetContributionSettingsUseCaseMock()
+        getSettings = UseCaseMock<Void, ContributionSettings>()
         setSettings = SetContributionSettingsUseCaseMock()
         getMetrics = UseCaseMock<Void, ContributionMetrics>()
         deleteNote = DeleteNoteUseCaseMock()
@@ -80,7 +80,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchDataSettingsError() throws {
         // Arrange
-        getSettings.callAsFunctionHandler = { failAnswer() }
+        getSettings.callAsFunctionHandler = { _ in failAnswer() }
 
         // Act
         viewModel.fetchContributionData()
@@ -388,7 +388,7 @@ class ContributionViewModelTests: XCTestCase {
         getItems.callAsFunctionHandler = { _ in successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
         setSettings.callAsFunctionHandler = { _ in successAnswer(data.settings) }
-        getSettings.callAsFunctionHandler = { successAnswer(data.settings) }
+        getSettings.callAsFunctionHandler = { _ in successAnswer(data.settings) }
         getMetrics.callAsFunctionHandler = { _ in successAnswer(data.metrics) }
         deleteNote.callAsFunctionHandler = { _ in successAnswer(()) }
     }
