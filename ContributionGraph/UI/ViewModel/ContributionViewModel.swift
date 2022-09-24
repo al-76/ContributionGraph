@@ -57,7 +57,7 @@ final class ContributionViewModel: ObservableObject {
     @Published var state = State.loading
 
     private let getItems: GetContributionUseCase
-    private let getDetails: GetContributionDetailsUseCase
+    private let getDetails: any UseCase<Date, ContributionDetails?>
     private let getSettings: GetContributionSettingsUseCase
     private let setSettings: SetContributionSettingsUseCase
     private let getMetrics: GetContributionMetricsUseCase
@@ -65,7 +65,7 @@ final class ContributionViewModel: ObservableObject {
 
     // TODO: add ContributionUseCase Factory
     init(getItems: GetContributionUseCase,
-         getDetails: GetContributionDetailsUseCase,
+         getDetails: some UseCase<Date, ContributionDetails?>,
          getSettings: GetContributionSettingsUseCase,
          setSettings: SetContributionSettingsUseCase,
          getMetrics: GetContributionMetricsUseCase,

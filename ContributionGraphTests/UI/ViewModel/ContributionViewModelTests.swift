@@ -10,6 +10,7 @@ import Combine
 
 @testable import ContributionGraph
 
+// swiftlint:disable type_body_length
 class ContributionViewModelTests: XCTestCase {
     // swiftlint:disable line_length
     private let data = ContributionViewModel.Data(items: [0: Contribution(days: 0)],
@@ -19,7 +20,7 @@ class ContributionViewModelTests: XCTestCase {
                                                   selectedDay: 0,
                                                   editingNote: nil)
     private var getItems: GetContributionUseCaseMock!
-    private var getDetails: GetContributionDetailsUseCaseMock!
+    private var getDetails: UseCaseMock<Date, ContributionDetails?>!
     private var getSettings: GetContributionSettingsUseCaseMock!
     private var setSettings: SetContributionSettingsUseCaseMock!
     private var getMetrics: GetContributionMetricsUseCaseMock!
@@ -30,7 +31,7 @@ class ContributionViewModelTests: XCTestCase {
         super.setUp()
 
         getItems = GetContributionUseCaseMock()
-        getDetails = GetContributionDetailsUseCaseMock()
+        getDetails = UseCaseMock<Date, ContributionDetails?>()
         getSettings = GetContributionSettingsUseCaseMock()
         setSettings = SetContributionSettingsUseCaseMock()
         getMetrics = GetContributionMetricsUseCaseMock()

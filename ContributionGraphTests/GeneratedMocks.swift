@@ -276,21 +276,6 @@ class ContributionMetricsRepositoryMock: ContributionMetricsRepository {
     }
 }
 
-class GetContributionDetailsUseCaseMock: GetContributionDetailsUseCase {
-    init() { }
-
-
-    private(set) var callAsFunctionCallCount = 0
-    var callAsFunctionHandler: ((Date) -> (AnyPublisher<ContributionDetails?, Error>))?
-    func callAsFunction(_ input: Date) -> AnyPublisher<ContributionDetails?, Error> {
-        callAsFunctionCallCount += 1
-        if let callAsFunctionHandler = callAsFunctionHandler {
-            return callAsFunctionHandler(input)
-        }
-        fatalError("callAsFunctionHandler returns can't have a default value thus its handler must be set")
-    }
-}
-
 class DtoContributionMapperMock: DtoContributionMapper {
     init() { }
 

@@ -19,6 +19,8 @@
 		CD49109528BCDECA00D1A421 /* ContributionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */; };
 		CD49109728BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */; };
 		CD4CFE2528DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CFE2428DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift */; };
+		CD4CFE3828DF33A200BC7BA7 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CFE3728DF33A200BC7BA7 /* UseCase.swift */; };
+		CD4CFE3A28DF365000BC7BA7 /* UseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CFE3928DF365000BC7BA7 /* UseCaseMock.swift */; };
 		CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD51271928BC108100E93508 /* Contribution+Init.swift */; };
 		CD53600828A18DFD00B4EEE6 /* AddEditContributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600728A18DFD00B4EEE6 /* AddEditContributionViewModel.swift */; };
 		CD53600A28A196AD00B4EEE6 /* UpdateNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600928A196AD00B4EEE6 /* UpdateNoteUseCase.swift */; };
@@ -105,6 +107,8 @@
 		CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionDetailsRepository.swift; sourceTree = "<group>"; };
 		CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionDetailsRepository.swift; sourceTree = "<group>"; };
 		CD4CFE2428DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionMetricsRepositoryTests.swift; sourceTree = "<group>"; };
+		CD4CFE3728DF33A200BC7BA7 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		CD4CFE3928DF365000BC7BA7 /* UseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseMock.swift; sourceTree = "<group>"; };
 		CD51271928BC108100E93508 /* Contribution+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+Init.swift"; sourceTree = "<group>"; };
 		CD53600728A18DFD00B4EEE6 /* AddEditContributionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditContributionViewModel.swift; sourceTree = "<group>"; };
 		CD53600928A196AD00B4EEE6 /* UpdateNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCase.swift; sourceTree = "<group>"; };
@@ -314,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8D9DA728C5320C00DF9A6E /* GeneratedMocks.swift */,
+				CD4CFE3928DF365000BC7BA7 /* UseCaseMock.swift */,
 				CD64EAB428BA610800DA2B1E /* Data */,
 				CD9BF723289EB27400F75DE6 /* Domain */,
 				CD9BF70A289C234F00F75DE6 /* UI */,
@@ -365,6 +370,7 @@
 				CD9BF722289EAA1200F75DE6 /* ContributionSettings */,
 				CD49109228BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift */,
 				CD2FC9E328A03D5200F1424F /* GetContributionMetricsUseCase.swift */,
+				CD4CFE3728DF33A200BC7BA7 /* UseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -720,7 +726,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#if which mockolo > /dev/null; then\n#mockolo -s ${PROJECT_NAME} -d ContributionGraphTests/GeneratedMocks.swift --header \"@testable import ${PROJECT_NAME}\"\n#fi\n";
+			shellScript = "#if which mockolo > /dev/null; then\ntools/mockolo/mockolo -s ${PROJECT_NAME} -d ContributionGraphTests/GeneratedMocks.swift --header \"@testable import ${PROJECT_NAME}\"\n#fi\n";
 		};
 		CDD950A728C0127F0071516B /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -752,6 +758,7 @@
 				CD49109328BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift in Sources */,
 				CDBC5B3428AC3146006CD13D /* DefaultStorage.swift in Sources */,
 				CDC5BE682869DA3E00D035FA /* Date+Utils.swift in Sources */,
+				CD4CFE3828DF33A200BC7BA7 /* UseCase.swift in Sources */,
 				CDF1ED0C28D20D8900844B2F /* DefaultContributionMetricsRepository.swift in Sources */,
 				CD728B1E2866623800221B6E /* Color+Init.swift in Sources */,
 				CD9BF71A289D9F2D00F75DE6 /* GetContributionUseCase.swift in Sources */,
@@ -808,6 +815,7 @@
 				CD64EAB628BA617B00DA2B1E /* ContributionRepositoryTests.swift in Sources */,
 				CD602BCF28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift in Sources */,
 				CD53601028A3049100B4EEE6 /* AddEditContributionViewModelTests.swift in Sources */,
+				CD4CFE3A28DF365000BC7BA7 /* UseCaseMock.swift in Sources */,
 				CD8D9DA828C5320C00DF9A6E /* GeneratedMocks.swift in Sources */,
 				CD3052D928B59306000BE787 /* Answer.swift in Sources */,
 				CDFB38CE28C79ED300D1D3D6 /* GetContributionDetailsUseCaseTests.swift in Sources */,
