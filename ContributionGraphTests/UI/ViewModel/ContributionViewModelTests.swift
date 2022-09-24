@@ -19,7 +19,7 @@ class ContributionViewModelTests: XCTestCase {
                                                   metrics: ContributionMetrics(totalWeekCount: 50, totalContributionCount: 500),
                                                   selectedDay: 0,
                                                   editingNote: nil)
-    private var getItems: GetContributionUseCaseMock!
+    private var getItems: UseCaseMock<Void, [Int: Contribution]>!
     private var getDetails: UseCaseMock<Date, ContributionDetails?>!
     private var getSettings: GetContributionSettingsUseCaseMock!
     private var setSettings: SetContributionSettingsUseCaseMock!
@@ -30,7 +30,7 @@ class ContributionViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        getItems = GetContributionUseCaseMock()
+        getItems = UseCaseMock<Void, [Int: Contribution]>()
         getDetails = UseCaseMock<Date, ContributionDetails?>()
         getSettings = GetContributionSettingsUseCaseMock()
         setSettings = SetContributionSettingsUseCaseMock()
@@ -68,7 +68,7 @@ class ContributionViewModelTests: XCTestCase {
 
     func testFetchDataItemsError() throws {
         // Arrange
-        getItems.callAsFunctionHandler = { failAnswer() }
+        getItems.callAsFunctionHandler = { _ in failAnswer() }
 
         // Act
         viewModel.fetchContributionData()
@@ -336,7 +336,7 @@ class ContributionViewModelTests: XCTestCase {
         // Arrange
         let testError = ContributionViewModel.ViewModelError
             .noData
-        getItems.callAsFunctionHandler = { successAnswer([:]) }
+        getItems.callAsFunctionHandler = { _ in successAnswer([:]) }
         viewModel.fetchContributionData()
         try awaitPublisher(viewModel.$state.dropFirst())
 
@@ -385,7 +385,7 @@ class ContributionViewModelTests: XCTestCase {
 
     private func prepareViewModelState() {
         let data = data
-        getItems.callAsFunctionHandler = { successAnswer(data.items) }
+        getItems.callAsFunctionHandler = { _ in successAnswer(data.items) }
         getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
         setSettings.callAsFunctionHandler = { _ in successAnswer(data.settings) }
         getSettings.callAsFunctionHandler = { successAnswer(data.settings) }

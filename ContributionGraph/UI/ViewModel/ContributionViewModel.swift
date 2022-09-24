@@ -56,7 +56,7 @@ final class ContributionViewModel: ObservableObject {
 
     @Published var state = State.loading
 
-    private let getItems: GetContributionUseCase
+    private let getItems: any UseCase<Void, [Int: Contribution]>
     private let getDetails: any UseCase<Date, ContributionDetails?>
     private let getSettings: GetContributionSettingsUseCase
     private let setSettings: SetContributionSettingsUseCase
@@ -64,7 +64,7 @@ final class ContributionViewModel: ObservableObject {
     private let deleteNote: DeleteNoteUseCase
 
     // TODO: add ContributionUseCase Factory
-    init(getItems: GetContributionUseCase,
+    init(getItems: some UseCase<Void, [Int: Contribution]>,
          getDetails: some UseCase<Date, ContributionDetails?>,
          getSettings: GetContributionSettingsUseCase,
          setSettings: SetContributionSettingsUseCase,

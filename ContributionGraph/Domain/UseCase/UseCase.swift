@@ -14,3 +14,9 @@ protocol UseCase<Input, Output> {
 
     func callAsFunction(_ input: Input) -> AnyPublisher<Output, Error>
 }
+
+extension UseCase where Input == Void {
+    func callAsFunction() -> AnyPublisher<Output, Error> {
+        callAsFunction(())
+    }
+}

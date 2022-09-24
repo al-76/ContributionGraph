@@ -168,21 +168,6 @@ class UpdateNoteUseCaseMock: UpdateNoteUseCase {
     }
 }
 
-class GetContributionUseCaseMock: GetContributionUseCase {
-    init() { }
-
-
-    private(set) var callAsFunctionCallCount = 0
-    var callAsFunctionHandler: (() -> (AnyPublisher<[Int: Contribution], Error>))?
-    func callAsFunction() -> AnyPublisher<[Int: Contribution], Error> {
-        callAsFunctionCallCount += 1
-        if let callAsFunctionHandler = callAsFunctionHandler {
-            return callAsFunctionHandler()
-        }
-        fatalError("callAsFunctionHandler returns can't have a default value thus its handler must be set")
-    }
-}
-
 class StorageContextMock: StorageContext {
     init() { }
 

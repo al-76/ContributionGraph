@@ -10,7 +10,7 @@ import Combine
 
 @testable import ContributionGraph
 
-class UseCaseMock<Input, Output>: UseCase {
+final class UseCaseMock<Input, Output>: UseCase {
     init() { }
 
     private(set) var callAsFunctionCallCount = 0
@@ -25,5 +25,11 @@ class UseCaseMock<Input, Output>: UseCase {
         }
 
         fatalError("callAsFunctionHandler returns can't have a default value thus its handler must be set")
+    }
+}
+
+extension UseCaseMock where Input == Void {
+    func callAsFunction() -> AnyPublisher<Output, Error> {
+        callAsFunction(())
     }
 }
