@@ -18,14 +18,16 @@ final class DefaultContributionDetailsRepository: ContributionDetailsRepository 
                                                   CDContribution?,
                                                   StorageContext),
                                                     Result<CDContributionNote, Error>>
+    typealias ContributionDetailsMapper = Mapper<CDContribution,
+                                                 ContributionDetails?>
 
     private let storage: Storage
-    private let detailsMapper: ContributionDetailsMapper
+    private let detailsMapper: any ContributionDetailsMapper
     private let dtoNoteMapper: any DtoContributionNoteMapper
     private let dtoContributionMapper: DtoContributionMapper
 
     init(storage: Storage,
-         detailsMapper: ContributionDetailsMapper,
+         detailsMapper: some ContributionDetailsMapper,
          dtoNoteMapper: some DtoContributionNoteMapper,
          dtoContributionMapper: DtoContributionMapper) {
         self.storage = storage

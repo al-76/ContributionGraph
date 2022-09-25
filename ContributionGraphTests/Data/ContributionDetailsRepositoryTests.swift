@@ -15,6 +15,8 @@ class ContributionDetailsRepositoryTests: XCTestCase {
                                                           CDContribution?,
                                                           StorageContext),
                                                             Result<CDContributionNote, Error>>
+    typealias ContributionDetailsMapperMock = MapperMock<CDContribution,
+                                                         ContributionDetails?>
 
     private var storage: StorageMock!
     private var detailsMapper: ContributionDetailsMapperMock!

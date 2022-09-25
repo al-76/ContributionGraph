@@ -39,21 +39,6 @@ class ContributionRepositoryMock: ContributionRepository {
     }
 }
 
-class ContributionDetailsMapperMock: ContributionDetailsMapper {
-    init() { }
-
-
-    private(set) var mapCallCount = 0
-    var mapHandler: ((CDContribution) -> (ContributionDetails?))?
-    func map(input: CDContribution) -> ContributionDetails? {
-        mapCallCount += 1
-        if let mapHandler = mapHandler {
-            return mapHandler(input)
-        }
-        return nil
-    }
-}
-
 class ContributionMetricsMapperMock: ContributionMetricsMapper {
     init() { }
 

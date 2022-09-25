@@ -23,7 +23,7 @@ final class MapperMock<Input, Output>: Mapper {
         if let mapHandler = mapHandler {
             return mapHandler(input)
         }
-        
+
         fatalError("mapHandler returns can't have a default value thus its handler must be set")
     }
 }
