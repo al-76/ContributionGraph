@@ -12,14 +12,14 @@ import Combine
 
 class ContributionRepositoryTests: XCTestCase {
     private var storage: StorageMock!
-    private var mapper: ContributionMapperMock!
+    private var mapper: MapperMock<CDContribution, Contribution>!
     private var repository: ContributionRepository!
 
     override func setUp() {
         super.setUp()
 
         storage = StorageMock()
-        mapper = ContributionMapperMock()
+        mapper = MapperMock<CDContribution, Contribution>()
         repository = DefaultContributionRepository(storage: storage,
                                                    mapper: mapper)
     }

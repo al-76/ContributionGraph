@@ -11,7 +11,7 @@ import Factory
 final class DataContainer: SharedContainer {
     // MARK: - Contribution Repository
     static let contributionMapper = Factory(scope: .singleton) {
-        DefaultContributionMapper()
+        ContributionMapper()
     }
 
     static let contributionRepository = Factory<ContributionRepository>(scope: .singleton) {
@@ -22,7 +22,7 @@ final class DataContainer: SharedContainer {
 
     // MARK: - Contribution Details Repository
     static let contributionDetailsMapper = Factory(scope: .singleton) {
-        DefaultContributionDetailsMapper()
+        ContributionDetailsMapper()
     }
 
     static let dtoContributionNoteMapper = Factory(scope: .singleton) {
@@ -30,7 +30,7 @@ final class DataContainer: SharedContainer {
     }
 
     static let dtoContributionMapper = Factory(scope: .singleton) {
-        DefaultDtoContributionMapper()
+        DtoContributionMapper()
     }
 
     static let contributionDetailsRepository =  Factory<ContributionDetailsRepository>(scope: .singleton) {

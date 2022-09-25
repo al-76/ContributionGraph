@@ -10,9 +10,10 @@ import Foundation
 
 final class DefaultContributionRepository: ContributionRepository {
     private let storage: Storage
-    private let mapper: ContributionMapper
+    private let mapper: any Mapper<CDContribution, Contribution>
 
-    init(storage: Storage, mapper: ContributionMapper) {
+    init(storage: Storage,
+         mapper: some Mapper<CDContribution, Contribution>) {
         self.storage = storage
         self.mapper = mapper
     }

@@ -7,27 +7,16 @@
 
 import Foundation
 
-/// @mockable
-protocol ContributionMapper {
-    func map(input: CDContribution) -> Contribution
-}
-
-/// @mockable(history: map = true)
-protocol DtoContributionMapper {
-    typealias Input = (CDContribution,
-                       Contribution)
-
-    func map(input: Input) -> CDContribution
-}
-
-struct DefaultContributionMapper: ContributionMapper {
+struct ContributionMapper: Mapper {
     func map(input: CDContribution) -> Contribution {
         Contribution(date: input.date ?? Date.neutral,
                      count: Int(input.count))
     }
 }
 
-struct DefaultDtoContributionMapper: DtoContributionMapper {
+struct DtoContributionMapper: Mapper {
+    typealias Input = (CDContribution, Contribution)
+
     func map(input: Input) -> CDContribution {
         let dtoContribution = input.0
         let contribution = input.1

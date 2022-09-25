@@ -9,6 +9,7 @@ import XCTest
 
 @testable import ContributionGraph
 
+// swiftlint:disable type_body_length
 class ContributionDetailsRepositoryTests: XCTestCase {
     typealias DtoContributionNoteMapperMock = MapperMock<(Date,
                                                           ContributionNote,
@@ -17,6 +18,9 @@ class ContributionDetailsRepositoryTests: XCTestCase {
                                                             Result<CDContributionNote, Error>>
     typealias ContributionDetailsMapperMock = MapperMock<CDContribution,
                                                          ContributionDetails?>
+    typealias DtoContributionMapperMock = MapperMock<(CDContribution,
+                                                      Contribution),
+                                                     CDContribution>
 
     private var storage: StorageMock!
     private var detailsMapper: ContributionDetailsMapperMock!

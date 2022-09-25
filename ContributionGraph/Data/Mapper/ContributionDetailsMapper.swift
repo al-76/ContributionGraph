@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DefaultContributionDetailsMapper: Mapper {
+struct ContributionDetailsMapper: Mapper {
     func map(input: CDContribution) -> ContributionDetails? {
         let notes = input.contributionNotesArray
         guard let date = input.date, !notes.isEmpty else { return nil }

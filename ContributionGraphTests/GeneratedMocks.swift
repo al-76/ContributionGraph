@@ -9,21 +9,6 @@ import CoreData
 import Foundation
 
 
-class ContributionMapperMock: ContributionMapper {
-    init() { }
-
-
-    private(set) var mapCallCount = 0
-    var mapHandler: ((CDContribution) -> (Contribution))?
-    func map(input: CDContribution) -> Contribution {
-        mapCallCount += 1
-        if let mapHandler = mapHandler {
-            return mapHandler(input)
-        }
-        fatalError("mapHandler returns can't have a default value thus its handler must be set")
-    }
-}
-
 class ContributionRepositoryMock: ContributionRepository {
     init() { }
 
@@ -145,25 +130,6 @@ class ContributionMetricsRepositoryMock: ContributionMetricsRepository {
             return readHandler()
         }
         fatalError("readHandler returns can't have a default value thus its handler must be set")
-    }
-}
-
-class DtoContributionMapperMock: DtoContributionMapper {
-    init() { }
-
-     typealias Input = (CDContribution,
-                       Contribution)
-
-    private(set) var mapCallCount = 0
-    var mapArgValues = [Input]()
-    var mapHandler: ((Input) -> (CDContribution))?
-    func map(input: Input) -> CDContribution {
-        mapCallCount += 1
-        mapArgValues.append(input)
-        if let mapHandler = mapHandler {
-            return mapHandler(input)
-        }
-        fatalError("mapHandler returns can't have a default value thus its handler must be set")
     }
 }
 
