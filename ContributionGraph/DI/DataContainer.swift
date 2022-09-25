@@ -26,7 +26,7 @@ final class DataContainer: SharedContainer {
     }
 
     static let dtoContributionNoteMapper = Factory(scope: .singleton) {
-        DefaultDtoContributionNoteMapper()
+        DtoContributionNoteMapper()
     }
 
     static let dtoContributionMapper = Factory(scope: .singleton) {

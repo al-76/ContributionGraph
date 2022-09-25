@@ -7,17 +7,12 @@
 
 import Foundation
 
-/// @mockable(history: map = true)
-protocol DtoContributionNoteMapper {
+struct DtoContributionNoteMapper: Mapper {
     typealias Input = (Date,
                        ContributionNote,
                        CDContribution?,
                        StorageContext)
 
-    func map(input: Input) -> Result<CDContributionNote, Error>
-}
-
-struct DefaultDtoContributionNoteMapper: DtoContributionNoteMapper {
     func map(input: Input) -> Result<CDContributionNote, Error> {
         do {
             // Create DTO note

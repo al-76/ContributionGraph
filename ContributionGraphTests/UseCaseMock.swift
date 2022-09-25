@@ -11,7 +11,7 @@ import Combine
 @testable import ContributionGraph
 
 final class UseCaseMock<Input, Output>: UseCase {
-    init() { }
+    init() {}
 
     private(set) var callAsFunctionCallCount = 0
 

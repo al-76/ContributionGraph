@@ -39,27 +39,6 @@ class ContributionRepositoryMock: ContributionRepository {
     }
 }
 
-class DtoContributionNoteMapperMock: DtoContributionNoteMapper {
-    init() { }
-
-     typealias Input = (Date,
-                       ContributionNote,
-                       CDContribution?,
-                       StorageContext)
-
-    private(set) var mapCallCount = 0
-    var mapArgValues = [Input]()
-    var mapHandler: ((Input) -> (Result<CDContributionNote, Error>))?
-    func map(input: Input) -> Result<CDContributionNote, Error> {
-        mapCallCount += 1
-        mapArgValues.append(input)
-        if let mapHandler = mapHandler {
-            return mapHandler(input)
-        }
-        fatalError("mapHandler returns can't have a default value thus its handler must be set")
-    }
-}
-
 class ContributionDetailsMapperMock: ContributionDetailsMapper {
     init() { }
 

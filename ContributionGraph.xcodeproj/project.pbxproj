@@ -21,6 +21,8 @@
 		CD4CFE2528DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CFE2428DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift */; };
 		CD4CFE3828DF33A200BC7BA7 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CFE3728DF33A200BC7BA7 /* UseCase.swift */; };
 		CD4CFE3A28DF365000BC7BA7 /* UseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CFE3928DF365000BC7BA7 /* UseCaseMock.swift */; };
+		CD4CFE3C28E0882300BC7BA7 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CFE3B28E0882300BC7BA7 /* Mapper.swift */; };
+		CD4CFE3E28E08B4400BC7BA7 /* MapperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CFE3D28E08B4400BC7BA7 /* MapperMock.swift */; };
 		CD51271A28BC108100E93508 /* Contribution+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD51271928BC108100E93508 /* Contribution+Init.swift */; };
 		CD53600828A18DFD00B4EEE6 /* AddEditContributionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600728A18DFD00B4EEE6 /* AddEditContributionViewModel.swift */; };
 		CD53600A28A196AD00B4EEE6 /* UpdateNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD53600928A196AD00B4EEE6 /* UpdateNoteUseCase.swift */; };
@@ -109,6 +111,8 @@
 		CD4CFE2428DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionMetricsRepositoryTests.swift; sourceTree = "<group>"; };
 		CD4CFE3728DF33A200BC7BA7 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		CD4CFE3928DF365000BC7BA7 /* UseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseMock.swift; sourceTree = "<group>"; };
+		CD4CFE3B28E0882300BC7BA7 /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
+		CD4CFE3D28E08B4400BC7BA7 /* MapperMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapperMock.swift; sourceTree = "<group>"; };
 		CD51271928BC108100E93508 /* Contribution+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+Init.swift"; sourceTree = "<group>"; };
 		CD53600728A18DFD00B4EEE6 /* AddEditContributionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditContributionViewModel.swift; sourceTree = "<group>"; };
 		CD53600928A196AD00B4EEE6 /* UpdateNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCase.swift; sourceTree = "<group>"; };
@@ -319,6 +323,7 @@
 			children = (
 				CD8D9DA728C5320C00DF9A6E /* GeneratedMocks.swift */,
 				CD4CFE3928DF365000BC7BA7 /* UseCaseMock.swift */,
+				CD4CFE3D28E08B4400BC7BA7 /* MapperMock.swift */,
 				CD64EAB428BA610800DA2B1E /* Data */,
 				CD9BF723289EB27400F75DE6 /* Domain */,
 				CD9BF70A289C234F00F75DE6 /* UI */,
@@ -435,6 +440,7 @@
 				CD602BC628BE196800E1A63C /* ContributionDetailsMapper.swift */,
 				CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */,
 				CDF1ED0928D203E200844B2F /* ContributionMetricsMapper.swift */,
+				CD4CFE3B28E0882300BC7BA7 /* Mapper.swift */,
 			);
 			path = Mapper;
 			sourceTree = "<group>";
@@ -757,6 +763,7 @@
 				CD538B4E2860C5C0004BA280 /* ContentView.swift in Sources */,
 				CD49109328BCDDBE00D1A421 /* GetContributionDetailsUseCase.swift in Sources */,
 				CDBC5B3428AC3146006CD13D /* DefaultStorage.swift in Sources */,
+				CD4CFE3C28E0882300BC7BA7 /* Mapper.swift in Sources */,
 				CDC5BE682869DA3E00D035FA /* Date+Utils.swift in Sources */,
 				CD4CFE3828DF33A200BC7BA7 /* UseCase.swift in Sources */,
 				CDF1ED0C28D20D8900844B2F /* DefaultContributionMetricsRepository.swift in Sources */,
@@ -824,6 +831,7 @@
 				CD602BCB28BE368B00E1A63C /* ViewModelState+Equatable.swift in Sources */,
 				CD84C1EA28C258C100165C0F /* ContributionNote+Init.swift in Sources */,
 				CDD8EC4028C67D1D000BB47B /* StorageMockHandler.swift in Sources */,
+				CD4CFE3E28E08B4400BC7BA7 /* MapperMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

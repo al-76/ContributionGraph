@@ -10,6 +10,12 @@ import XCTest
 @testable import ContributionGraph
 
 class ContributionDetailsRepositoryTests: XCTestCase {
+    typealias DtoContributionNoteMapperMock = MapperMock<(Date,
+                                                          ContributionNote,
+                                                          CDContribution?,
+                                                          StorageContext),
+                                                            Result<CDContributionNote, Error>>
+
     private var storage: StorageMock!
     private var detailsMapper: ContributionDetailsMapperMock!
     private var dtoNoteMapper: DtoContributionNoteMapperMock!
