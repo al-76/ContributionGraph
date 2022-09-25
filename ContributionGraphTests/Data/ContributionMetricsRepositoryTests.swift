@@ -11,6 +11,9 @@ import Combine
 @testable import ContributionGraph
 
 class ContributionMetricsRepositoryTests: XCTestCase {
+    typealias ContributionMetricsMapperMock = MapperMock<(Int, [CDContribution]),
+                                                            ContributionMetrics>
+
     private var storage: StorageMock!
     private var mapper: ContributionMetricsMapperMock!
     private var repository: ContributionMetricsRepository!

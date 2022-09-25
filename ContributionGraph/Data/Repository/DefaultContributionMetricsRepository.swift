@@ -9,10 +9,13 @@ import Foundation
 import Combine
 
 final class DefaultContributionMetricsRepository: ContributionMetricsRepository {
-    private let storage: Storage
-    private let mapper: ContributionMetricsMapper
+    typealias ContributionMetricsMapper = Mapper<(Int, [CDContribution]),
+                                                 ContributionMetrics>
 
-    init(storage: Storage, mapper: ContributionMetricsMapper) {
+    private let storage: Storage
+    private let mapper: any ContributionMetricsMapper
+
+    init(storage: Storage, mapper: some ContributionMetricsMapper) {
         self.storage = storage
         self.mapper = mapper
     }

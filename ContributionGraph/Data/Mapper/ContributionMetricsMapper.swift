@@ -7,14 +7,9 @@
 
 import Foundation
 
-/// @mockable
-protocol ContributionMetricsMapper {
+struct ContributionMetricsMapper: Mapper {
     typealias Input = (Int, [CDContribution])
 
-    func map(input: Input) -> ContributionMetrics
-}
-
-struct DefaultContributionMetricsMapper: ContributionMetricsMapper {
     func map(input: Input) -> ContributionMetrics {
         let contributionCount = input.0
         let dtoContributions = input.1

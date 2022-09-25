@@ -24,22 +24,6 @@ class ContributionRepositoryMock: ContributionRepository {
     }
 }
 
-class ContributionMetricsMapperMock: ContributionMetricsMapper {
-    init() { }
-
-     typealias Input = (Int, [CDContribution])
-
-    private(set) var mapCallCount = 0
-    var mapHandler: ((Input) -> (ContributionMetrics))?
-    func map(input: Input) -> ContributionMetrics {
-        mapCallCount += 1
-        if let mapHandler = mapHandler {
-            return mapHandler(input)
-        }
-        fatalError("mapHandler returns can't have a default value thus its handler must be set")
-    }
-}
-
 class StorageContextMock: StorageContext {
     init() { }
 

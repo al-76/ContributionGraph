@@ -42,7 +42,7 @@ final class DataContainer: SharedContainer {
 
     // MARK: - Contribution Metrics Repository
     static let contributionMetricsMapper = Factory(scope: .singleton) {
-        DefaultContributionMetricsMapper()
+        ContributionMetricsMapper()
     }
 
     static let contributionMetricsRepository = Factory<ContributionMetricsRepository>(scope: .singleton) {
