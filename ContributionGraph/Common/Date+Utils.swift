@@ -23,7 +23,8 @@ extension Date {
     }
 
     func weeks(to date: Date) -> Int {
-        days(to: date) / 7
+        let days = days(to: date)
+        return (days / 7) + (days % 7 == 0 ? 0 : 1)
     }
 }
 
