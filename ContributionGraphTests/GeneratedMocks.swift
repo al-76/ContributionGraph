@@ -24,6 +24,31 @@ class ContributionRepositoryMock: ContributionRepository {
     }
 }
 
+class ContributionSettingsRepositoryMock: ContributionSettingsRepository {
+    init() { }
+
+
+    private(set) var readCallCount = 0
+    var readHandler: (() -> (AnyPublisher<ContributionSettings, Error>))?
+    func read() -> AnyPublisher<ContributionSettings, Error> {
+        readCallCount += 1
+        if let readHandler = readHandler {
+            return readHandler()
+        }
+        fatalError("readHandler returns can't have a default value thus its handler must be set")
+    }
+
+    private(set) var writeCallCount = 0
+    var writeHandler: ((ContributionSettings) -> (AnyPublisher<Void, Error>))?
+    func write(settings: ContributionSettings) -> AnyPublisher<Void, Error> {
+        writeCallCount += 1
+        if let writeHandler = writeHandler {
+            return writeHandler(settings)
+        }
+        fatalError("writeHandler returns can't have a default value thus its handler must be set")
+    }
+}
+
 class StorageContextMock: StorageContext {
     init() { }
 

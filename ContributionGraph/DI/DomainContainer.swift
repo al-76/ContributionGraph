@@ -29,11 +29,11 @@ final class DomainContainer: SharedContainer {
 
     // MARK: - Contribution Settings
     static let getContributionSettingsUseCase = Factory {
-        GetContributionSettingsUseCase()
+        GetContributionSettingsUseCase(repository: DataContainer.contributionSettingsRepository())
     }
 
     static let setContributionSettingsUseCase = Factory {
-        SetContributionSettingsUseCase()
+        SetContributionSettingsUseCase(repository: DataContainer.contributionSettingsRepository())
     }
 
     // MARK: - Metrics

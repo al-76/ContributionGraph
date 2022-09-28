@@ -8,9 +8,13 @@
 import Combine
 
 final class GetContributionSettingsUseCase: UseCase {
+    let repository: ContributionSettingsRepository
+
+    init(repository: ContributionSettingsRepository) {
+        self.repository = repository
+    }
+
     func callAsFunction(_ input: Void) -> AnyPublisher<ContributionSettings, Error> {
-        Just(ContributionSettings(weekCount: 15))
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
+        repository.read()
     }
 }

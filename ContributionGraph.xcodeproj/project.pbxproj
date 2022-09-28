@@ -45,6 +45,7 @@
 		CD84C1EF28C28F4E00165C0F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD84C1EE28C28F4E00165C0F /* ErrorView.swift */; };
 		CD84C1F228C290F000165C0F /* ContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD84C1F128C290F000165C0F /* ContributionView.swift */; };
 		CD8D9DA828C5320C00DF9A6E /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8D9DA728C5320C00DF9A6E /* GeneratedMocks.swift */; };
+		CD9128FB28E4B94F0056B9C4 /* ContributionSettingsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9128FA28E4B94F0056B9C4 /* ContributionSettingsRepositoryTests.swift */; };
 		CD9BF704289C231700F75DE6 /* ContributionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF703289C231700F75DE6 /* ContributionViewModelTests.swift */; };
 		CD9BF70E289C262600F75DE6 /* ContributionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */; };
 		CD9BF714289D6F5000F75DE6 /* XCTestCase+Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF712289D6E6E00F75DE6 /* XCTestCase+Await.swift */; };
@@ -66,6 +67,10 @@
 		CDC5BE742869F45400D035FA /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC5BE732869F45400D035FA /* View+Alert.swift */; };
 		CDD3A0F52868BA3500878A09 /* ContributionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDD3A0F32868BA3500878A09 /* ContributionModel.xcdatamodeld */; };
 		CDD3A0F7286906E400878A09 /* View+isHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD3A0F6286906E400878A09 /* View+isHidden.swift */; };
+		CDD5376C28E36C0C00B09626 /* SettingsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDD5376A28E36C0C00B09626 /* SettingsModel.xcdatamodeld */; };
+		CDD5376E28E36D1600B09626 /* ContributionSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5376D28E36D1600B09626 /* ContributionSettingsRepository.swift */; };
+		CDD5377028E3709600B09626 /* DefaultContributionSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5376F28E3709600B09626 /* DefaultContributionSettingsRepository.swift */; };
+		CDD5377228E378E300B09626 /* ContributionSettingsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD5377128E378E300B09626 /* ContributionSettingsMapper.swift */; };
 		CDD8EC3E28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */; };
 		CDD8EC4028C67D1D000BB47B /* StorageMockHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */; };
 		CDF1ED0A28D203E200844B2F /* ContributionMetricsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1ED0928D203E200844B2F /* ContributionMetricsMapper.swift */; };
@@ -136,6 +141,7 @@
 		CD84C1EE28C28F4E00165C0F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		CD84C1F128C290F000165C0F /* ContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionView.swift; sourceTree = "<group>"; };
 		CD8D9DA728C5320C00DF9A6E /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
+		CD9128FA28E4B94F0056B9C4 /* ContributionSettingsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionSettingsRepositoryTests.swift; sourceTree = "<group>"; };
 		CD9BF701289C231700F75DE6 /* ContributionGraphTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContributionGraphTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9BF703289C231700F75DE6 /* ContributionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionViewModelTests.swift; sourceTree = "<group>"; };
 		CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionRepository.swift; sourceTree = "<group>"; };
@@ -158,6 +164,10 @@
 		CDC5BE732869F45400D035FA /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		CDD3A0F42868BA3500878A09 /* ContributionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContributionModel.xcdatamodel; sourceTree = "<group>"; };
 		CDD3A0F6286906E400878A09 /* View+isHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+isHidden.swift"; sourceTree = "<group>"; };
+		CDD5376B28E36C0C00B09626 /* SettingsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SettingsModel.xcdatamodel; sourceTree = "<group>"; };
+		CDD5376D28E36D1600B09626 /* ContributionSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionSettingsRepository.swift; sourceTree = "<group>"; };
+		CDD5376F28E3709600B09626 /* DefaultContributionSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContributionSettingsRepository.swift; sourceTree = "<group>"; };
+		CDD5377128E378E300B09626 /* ContributionSettingsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionSettingsMapper.swift; sourceTree = "<group>"; };
 		CDD8EC3D28C64B6E000BB47B /* UpdateNoteUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCaseTests.swift; sourceTree = "<group>"; };
 		CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMockHandler.swift; sourceTree = "<group>"; };
 		CDF1ED0928D203E200844B2F /* ContributionMetricsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionMetricsMapper.swift; sourceTree = "<group>"; };
@@ -289,6 +299,7 @@
 				CD602BCE28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift */,
 				CDD8EC3F28C67D1D000BB47B /* StorageMockHandler.swift */,
 				CD4CFE2428DA3F7B00BC7BA7 /* ContributionMetricsRepositoryTests.swift */,
+				CD9128FA28E4B94F0056B9C4 /* ContributionSettingsRepositoryTests.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -436,10 +447,11 @@
 		CDBC5B4A28AC5CFC006CD13D /* Mapper */ = {
 			isa = PBXGroup;
 			children = (
-				CD602BC828BE1C2200E1A63C /* ContributionNoteMapper.swift */,
 				CD602BC628BE196800E1A63C /* ContributionDetailsMapper.swift */,
 				CDBC5B4D28AC5D46006CD13D /* ContributionMapper.swift */,
 				CDF1ED0928D203E200844B2F /* ContributionMetricsMapper.swift */,
+				CD602BC828BE1C2200E1A63C /* ContributionNoteMapper.swift */,
+				CDD5377128E378E300B09626 /* ContributionSettingsMapper.swift */,
 				CD4CFE3B28E0882300BC7BA7 /* Mapper.swift */,
 			);
 			path = Mapper;
@@ -539,6 +551,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD3A0F32868BA3500878A09 /* ContributionModel.xcdatamodeld */,
+				CDD5376A28E36C0C00B09626 /* SettingsModel.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -549,6 +562,7 @@
 				CDC5BE6A2869DA8900D035FA /* DefaultContributionRepository.swift */,
 				CD49109628BCDF0100D1A421 /* DefaultContributionDetailsRepository.swift */,
 				CDF1ED0B28D20D8900844B2F /* DefaultContributionMetricsRepository.swift */,
+				CDD5376F28E3709600B09626 /* DefaultContributionSettingsRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -559,6 +573,7 @@
 				CD9BF70D289C262600F75DE6 /* ContributionRepository.swift */,
 				CD49109428BCDECA00D1A421 /* ContributionDetailsRepository.swift */,
 				CDF1ED0D28D20FC400844B2F /* ContributionMetricsRepository.swift */,
+				CDD5376D28E36D1600B09626 /* ContributionSettingsRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -773,6 +788,7 @@
 				CD9BF71A289D9F2D00F75DE6 /* GetContributionUseCase.swift in Sources */,
 				CDC5BE6B2869DA8900D035FA /* DefaultContributionRepository.swift in Sources */,
 				CD602BC928BE1C2200E1A63C /* ContributionNoteMapper.swift in Sources */,
+				CDD5377028E3709600B09626 /* DefaultContributionSettingsRepository.swift in Sources */,
 				CDC5BE722869F0AB00D035FA /* Contribution.swift in Sources */,
 				CD0F621D28A67D51001F8CD8 /* DomainContainer.swift in Sources */,
 				CD53600A28A196AD00B4EEE6 /* UpdateNoteUseCase.swift in Sources */,
@@ -789,10 +805,12 @@
 				CD53600D28A2AFAD00B4EEE6 /* LaunchSideEffect.swift in Sources */,
 				CD9BF71E289DA11400F75DE6 /* ContributionSettings.swift in Sources */,
 				CD9BF720289DA1AB00F75DE6 /* SetContributionSettingsUseCase.swift in Sources */,
+				CDD5376C28E36C0C00B09626 /* SettingsModel.xcdatamodeld in Sources */,
 				CDC5BE742869F45400D035FA /* View+Alert.swift in Sources */,
 				CD0F621B28A67CDA001F8CD8 /* UIContainer.swift in Sources */,
 				CD53600828A18DFD00B4EEE6 /* AddEditContributionViewModel.swift in Sources */,
 				CD538B4C2860C5C0004BA280 /* ContributionGraphApp.swift in Sources */,
+				CDD5377228E378E300B09626 /* ContributionSettingsMapper.swift in Sources */,
 				CD2FC9E428A03D5200F1424F /* GetContributionMetricsUseCase.swift in Sources */,
 				CD49109128BCDA1E00D1A421 /* ViewModelState.swift in Sources */,
 				CD49109528BCDECA00D1A421 /* ContributionDetailsRepository.swift in Sources */,
@@ -805,6 +823,7 @@
 				CDD3A0F52868BA3500878A09 /* ContributionModel.xcdatamodeld in Sources */,
 				CDC48E5B2891B7360062ADE7 /* AddEditContributionView.swift in Sources */,
 				CDF1ED0E28D20FC400844B2F /* ContributionMetricsRepository.swift in Sources */,
+				CDD5376E28E36D1600B09626 /* ContributionSettingsRepository.swift in Sources */,
 				CDBC5B3728AC3159006CD13D /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -823,6 +842,7 @@
 				CD9BF704289C231700F75DE6 /* ContributionViewModelTests.swift in Sources */,
 				CD64EAB628BA617B00DA2B1E /* ContributionRepositoryTests.swift in Sources */,
 				CD602BCF28BEB6B800E1A63C /* ContributionDetailsRepositoryTests.swift in Sources */,
+				CD9128FB28E4B94F0056B9C4 /* ContributionSettingsRepositoryTests.swift in Sources */,
 				CD53601028A3049100B4EEE6 /* AddEditContributionViewModelTests.swift in Sources */,
 				CD4CFE3A28DF365000BC7BA7 /* UseCaseMock.swift in Sources */,
 				CD8D9DA828C5320C00DF9A6E /* GeneratedMocks.swift in Sources */,
@@ -1176,6 +1196,16 @@
 			);
 			currentVersion = CDD3A0F42868BA3500878A09 /* ContributionModel.xcdatamodel */;
 			path = ContributionModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		CDD5376A28E36C0C00B09626 /* SettingsModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CDD5376B28E36C0C00B09626 /* SettingsModel.xcdatamodel */,
+			);
+			currentVersion = CDD5376B28E36C0C00B09626 /* SettingsModel.xcdatamodel */;
+			path = SettingsModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -11,21 +11,37 @@ import XCTest
 
 class GetContributionSettingsUseCaseTests: XCTestCase {
     private var useCase: GetContributionSettingsUseCase!
+    private var repository: ContributionSettingsRepositoryMock!
 
     override func setUp() {
         super.setUp()
 
-        useCase = GetContributionSettingsUseCase()
+        repository = ContributionSettingsRepositoryMock()
+        useCase = GetContributionSettingsUseCase(repository: repository)
     }
 
     func testExecute() throws {
         // Arrange
         let testData = ContributionSettings(weekCount: 15)
+        repository.readHandler = { successAnswer(testData) }
 
         // Act
         let result = try awaitPublisher(useCase())
 
         // Assert
         XCTAssertEqual(result, testData)
+        XCTAssertEqual(repository.readCallCount, 1)
+    }
+
+    func testExecuteError() throws {
+        // Arrange
+        repository.readHandler = { failAnswer() }
+
+        // Act
+        let result = try awaitError(useCase())
+
+        // Assert
+        XCTAssertEqual(result as? TestError, TestError.someError)
+        XCTAssertEqual(repository.readCallCount, 1)
     }
 }
