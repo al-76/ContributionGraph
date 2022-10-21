@@ -383,11 +383,11 @@ class ContributionViewModelTests: XCTestCase {
     }
 
     private func prepareViewModelState() {
-        getItems.callAsFunctionHandler = { _ in successAnswer(self.data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(self.data.details) }
-        setSettings.callAsFunctionHandler = { _ in successAnswer(self.data.settings) }
-        getSettings.callAsFunctionHandler = { _ in successAnswer(self.data.settings) }
-        getMetrics.callAsFunctionHandler = { _ in successAnswer(self.data.metrics) }
+        getItems.callAsFunctionHandler = { [unowned self] _ in successAnswer(self.data.items) }
+        getDetails.callAsFunctionHandler = { [unowned self] _ in successAnswer(self.data.details) }
+        setSettings.callAsFunctionHandler = { [unowned self] _ in successAnswer(self.data.settings) }
+        getSettings.callAsFunctionHandler = { [unowned self] _ in successAnswer(self.data.settings) }
+        getMetrics.callAsFunctionHandler = { [unowned self] _ in successAnswer(self.data.metrics) }
         deleteNote.callAsFunctionHandler = { _ in successAnswer(()) }
     }
 }
