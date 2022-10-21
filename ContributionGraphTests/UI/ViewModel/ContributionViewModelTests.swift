@@ -129,7 +129,6 @@ class ContributionViewModelTests: XCTestCase {
 
     func testSetSettings() throws {
         // Arrange
-        let data = data
         let newData = data.copy { $0.settings = ContributionSettings(weekCount: 200) }
         setSettings.callAsFunctionHandler = { _ in successAnswer(newData.settings) }
         viewModel.fetchContributionData()
@@ -384,12 +383,11 @@ class ContributionViewModelTests: XCTestCase {
     }
 
     private func prepareViewModelState() {
-        let data = data
-        getItems.callAsFunctionHandler = { _ in successAnswer(data.items) }
-        getDetails.callAsFunctionHandler = { _ in successAnswer(data.details) }
-        setSettings.callAsFunctionHandler = { _ in successAnswer(data.settings) }
-        getSettings.callAsFunctionHandler = { _ in successAnswer(data.settings) }
-        getMetrics.callAsFunctionHandler = { _ in successAnswer(data.metrics) }
+        getItems.callAsFunctionHandler = { _ in successAnswer(self.data.items) }
+        getDetails.callAsFunctionHandler = { _ in successAnswer(self.data.details) }
+        setSettings.callAsFunctionHandler = { _ in successAnswer(self.data.settings) }
+        getSettings.callAsFunctionHandler = { _ in successAnswer(self.data.settings) }
+        getMetrics.callAsFunctionHandler = { _ in successAnswer(self.data.metrics) }
         deleteNote.callAsFunctionHandler = { _ in successAnswer(()) }
     }
 }
